@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
@@ -26,8 +27,21 @@ public class Brootherhood extends Actor {
 	private Date				establishmentDate;
 	private Collection<String>	photos;
 
+	// Atributos Públicos
+
+	public Collection<Float>	floats;
+
 
 	// Getters y Setters
+
+	@OneToMany
+	public Collection<Float> getFloats() {
+		return this.floats;
+	}
+
+	public void setFloats(final Collection<Float> floats) {
+		this.floats = floats;
+	}
 
 	@NotBlank
 	public String getTitle() {

@@ -1,13 +1,16 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,13 +21,27 @@ public class Procession extends DomainEntity {
 
 	// Atributos Privados
 
-	private String	title;
-	private String	description;
-	private Date	moment;
-	private String	ticker;
+	private String				title;
+	private String				description;
+	private Date				moment;
+	private String				ticker;
+	private String				mode;
+
+	// Atributos Públicos
+
+	public Collection<Float>	floats;
 
 
 	// Getters y Setters
+
+	@ManyToMany
+	public Collection<Float> getFloats() {
+		return this.floats;
+	}
+
+	public void setFloats(final Collection<Float> floats) {
+		this.floats = floats;
+	}
 
 	@NotBlank
 	public String getTitle() {
@@ -61,6 +78,16 @@ public class Procession extends DomainEntity {
 
 	public void setTicker(final String ticker) {
 		this.ticker = ticker;
+	}
+
+	@NotBlank
+	@Pattern(regexp = "^DRAFT|FINAL$")
+	public String getMode() {
+		return this.mode;
+	}
+
+	public void setMode(final String mode) {
+		this.mode = mode;
 	}
 
 }

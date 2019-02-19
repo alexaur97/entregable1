@@ -1,0 +1,37 @@
+
+package domain;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Position extends DomainEntity {
+
+	// Atributos Privados
+
+	private String	name;
+	private String	nameEs;
+	
+	
+	// Getters y Setters
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getNameEs() {
+		return nameEs;
+	}
+	
+	public void setNameEs(String nameEs) {
+		this.nameEs = nameEs;
+	}
+	
+	
+}

@@ -1,0 +1,45 @@
+
+package domain;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Request extends DomainEntity {
+
+	// Atributos Privados
+
+	private String	status;
+	private Integer	row;
+	private Integer	column;
+	
+	// Getters y Setters
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public Integer getRow() {
+		return row;
+	}
+	
+	public void setRow(Integer row) {
+		this.row = row;
+	}
+	
+	public Integer getColumn() {
+		return column;
+	}
+	
+	public void setColumn(Integer column) {
+		this.column = column;
+	}
+	
+	
+}
