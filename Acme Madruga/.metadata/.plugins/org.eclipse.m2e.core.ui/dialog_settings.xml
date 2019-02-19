@@ -52,6 +52,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="E:\DP2\Proyecto1\entregable1\Acme Madruga\Acme-Madruga"/>
 			<item value="C:\Documents and Settings\Student\Desktop"/>
 			<item value="C:\Documents and Settings\Student\Desktop\Sample-Project-1.18.2"/>
 			<item value="C:\Documents and Settings\Student\Desktop\Acme-Shout-1.18.2"/>
@@ -66,7 +67,6 @@
 			<item value="E:\Templates\Templates-1.11\Sample-Project-1.11"/>
 			<item value="E:\Templates\Templates-1.10\Sample-Project-1.10"/>
 			<item value="E:\Templates\Templates-1.9\Sample-Project-1.9"/>
-			<item value="E:\Acme Certifications Workspace"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="Share"/>

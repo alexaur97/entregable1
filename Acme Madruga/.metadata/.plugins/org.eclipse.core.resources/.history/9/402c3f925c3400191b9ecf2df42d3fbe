@@ -1,0 +1,23 @@
+
+package domain;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public abstract class Actor extends DomainEntity {
+
+	//Atributos privados
+
+	private String	name;
+	private String middleName;
+	private String surname;
+	private String photo;
+	private String email;
+	private String phoneNumber;
+	private String address;
+	
+	
+}

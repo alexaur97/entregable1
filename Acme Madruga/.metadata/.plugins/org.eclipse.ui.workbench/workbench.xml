@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="75" version="2.0">
+<workbench progressCount="56" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="951" x="320" y="75">
 <fastViewData fastViewLocation="1024"/>
@@ -94,10 +94,6 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors (1 item)"/>
-<category IMemento.internal.id="Warnings"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="219" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -308,6 +304,39 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.datatools.sqltools.sqlscrapbook.SQLScrapbookEditor" name="grant-privileges.sql" tooltip="Scrapbook/grant-privileges.sql">
+<persistable path="/Scrapbook/grant-privileges.sql"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.datatools.sqltools.sqlscrapbook.SQLScrapbookEditor" name="create-users.sql" tooltip="Scrapbook/create-users.sql">
+<persistable path="/Scrapbook/create-users.sql"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.datatools.sqltools.sqlscrapbook.SQLScrapbookEditor" name="create-database.sql" tooltip="Scrapbook/create-database.sql">
+<persistable path="/Scrapbook/create-database.sql"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="logo.png" tooltip="Acme-Madruga/src/main/webapp/images/logo.png">
+<persistable path="/Acme-Madruga/src/main/webapp/images/logo.png"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" name="header.jsp" tooltip="Acme-Madruga/src/main/webapp/views/master-page/header.jsp">
+<persistable path="/Acme-Madruga/src/main/webapp/views/master-page/header.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jst.jsp.core.jspsource.source" name="footer.jsp" tooltip="Acme-Madruga/src/main/webapp/views/master-page/footer.jsp">
+<persistable path="/Acme-Madruga/src/main/webapp/views/master-page/footer.jsp"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="data.xml" tooltip="Acme-Madruga/src/main/resources/spring/config/data.xml">
+<persistable path="/Acme-Madruga/src/main/resources/spring/config/data.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DatabaseConfig.java" tooltip="Acme-Madruga/src/main/java/utilities/DatabaseConfig.java">
+<persistable path="/Acme-Madruga/src/main/java/utilities/DatabaseConfig.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jpt.jpa.ui.internal.editors.PersistenceEditor" name="persistence.xml" tooltip="Acme-Madruga/src/main/resources/META-INF/persistence.xml">
+<persistable path="/Acme-Madruga/src/main/resources/META-INF/persistence.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="web.xml" tooltip="Acme-Madruga/src/main/webapp/WEB-INF/web.xml">
+<persistable path="/Acme-Madruga/src/main/webapp/WEB-INF/web.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.m2e.editor.MavenPomEditor" name="pom.xml" tooltip="Acme-Madruga/pom.xml">
+<persistable path="/Acme-Madruga/pom.xml"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnnouncementAdministratorController.java" tooltip="Acme-Certifications/src/main/java/controllers/administrator/AnnouncementAdministratorController.java">
 <persistable path="/Acme-Certifications/src/main/java/controllers/administrator/AnnouncementAdministratorController.java"/>
 </file>
@@ -319,33 +348,6 @@
 </file>
 <file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="SLF4JLocationAwareLog.class" tooltip="org.apache.commons.logging.impl.SLF4JLocationAwareLog">
 <persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Acme-Certifications/C:\/Documents and Settings\/Student\/.m2\/repository\/org\/slf4j\/jcl-over-slf4j\/1.7.1\/jcl-over-slf4j-1.7.1.jar&lt;org.apache.commons.logging.impl(SLF4JLocationAwareLog.class"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name="PopulateDatabase.xml" tooltip="Acme-Certifications/src/main/resources/PopulateDatabase.xml">
-<persistable path="/Acme-Certifications/src/main/resources/PopulateDatabase.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PopulateDatabase.java" tooltip="Acme-Certifications/src/main/java/utilities/PopulateDatabase.java">
-<persistable path="/Acme-Certifications/src/main/java/utilities/PopulateDatabase.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CertificationRepository.java" tooltip="Acme-Certifications/src/main/java/repositories/CertificationRepository.java">
-<persistable path="/Acme-Certifications/src/main/java/repositories/CertificationRepository.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CertificationService.java" tooltip="Acme-Certifications/src/main/java/services/CertificationService.java">
-<persistable path="/Acme-Certifications/src/main/java/services/CertificationService.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Certification.java" tooltip="Acme-Certifications/src/main/java/domain/Certification.java">
-<persistable path="/Acme-Certifications/src/main/java/domain/Certification.java"/>
-</file>
-<file factoryID="org.eclipse.wst.server.ui.editor.input.factory" id="org.eclipse.wst.server.ui.editor" name="Tomcat v7.0 Server at localhost" tooltip="Tomcat v7.0 Server at localhost">
-<persistable server-id="Tomcat v7.0 Server at localhost"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PopulateDatabase.java" tooltip="Sample-Project/src/main/java/utilities/PopulateDatabase.java">
-<persistable path="/Sample-Project/src/main/java/utilities/PopulateDatabase.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PopulateDatabase.java" tooltip="Acme-Shout/src/main/java/utilities/PopulateDatabase.java">
-<persistable path="/Acme-Shout/src/main/java/utilities/PopulateDatabase.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="InitialiseDatabase.java" tooltip="Sample-Project/src/main/java/utilities/InitialiseDatabase.java">
-<persistable path="/Sample-Project/src/main/java/utilities/InitialiseDatabase.java"/>
 </file>
 </mruList>
 </workbench>

@@ -1,0 +1,13 @@
+package domain;
+
+import javax.persistence.Access;
+import javax.persistence.Entity;
+
+import org.hibernate.cfg.AccessType;
+
+
+@Entity
+@Access(AccessType.PROPERTY)
+public abstract class Actor extends DomainEntity {
+
+}
