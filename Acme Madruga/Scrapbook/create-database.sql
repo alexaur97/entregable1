@@ -1,2 +1,2 @@
-drop database if exists `Sample`;
-create database `Sample`;
+drop database if exists `Acme-Madruga`;
+create database `Acme-Madruga`;
