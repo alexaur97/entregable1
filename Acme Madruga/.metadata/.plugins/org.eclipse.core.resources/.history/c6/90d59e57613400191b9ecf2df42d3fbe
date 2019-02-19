@@ -1,0 +1,51 @@
+
+package domain;
+
+import java.util.Collection;
+import java.util.Date;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Brootherhood extends Actor {
+
+	// Atributos Privados
+
+	private String				title;
+	private Date				establishmentDate;
+	private Collection<String>	photos;
+
+
+	// Getters y Setters
+
+	@NotBlank
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(final String title) {
+		this.title = title;
+	}
+
+	public Date getEstablishmentDate() {
+		return this.establishmentDate;
+	}
+
+	public void setEstablishmentDate(final Date establishmentDate) {
+		this.establishmentDate = establishmentDate;
+	}
+
+	public Collection<String> getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(final Collection<String> photos) {
+		this.photos = photos;
+	}
+
+}

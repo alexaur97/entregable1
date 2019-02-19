@@ -1,0 +1,52 @@
+
+package domain;
+
+import java.util.Collection;
+import java.util.Date;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class Brootherhood extends Actor {
+
+	// Atributos Privados
+
+	private String				title;
+	private Date				establishmentDate;
+	private Collection<String>	photos;
+	
+	
+	// Getters y Setters
+	
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public Date getEstablishmentDate() {
+		return establishmentDate;
+	}
+	
+	public void setEstablishmentDate(Date establishmentDate) {
+		this.establishmentDate = establishmentDate;
+	}
+	
+	public Collection<String> getPhotos() {
+		return photos;
+	}
+	
+	public void setPhotos(Collection<String> photos) {
+		this.photos = photos;
+	}
+
+	
+	
+	
+
+}
