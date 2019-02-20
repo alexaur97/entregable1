@@ -4,7 +4,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
@@ -27,7 +27,7 @@ public class Request extends DomainEntity {
 
 	// Getters y Setters
 
-	@OneToMany
+	@ManyToOne
 	public Procession getProcession() {
 		return this.procession;
 	}

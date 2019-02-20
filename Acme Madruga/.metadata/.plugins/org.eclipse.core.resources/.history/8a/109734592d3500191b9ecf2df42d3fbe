@@ -1,0 +1,29 @@
+
+package domain;
+
+import java.util.Date;
+
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Entity;
+
+@Entity
+@Access(AccessType.PROPERTY)
+public class DropOut extends DomainEntity {
+
+	// Atributos Privados
+
+	private Date	moment;
+
+
+	// Getters y Setters
+
+	public Date getMoment() {
+		return this.moment;
+	}
+
+	public void setMoment(final Date moment) {
+		this.moment = moment;
+	}
+
+}

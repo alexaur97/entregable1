@@ -23,16 +23,26 @@ public class Brootherhood extends Actor {
 
 	// Atributos Privados
 
-	private String				title;
-	private Date				establishmentDate;
-	private Collection<String>	photos;
+	private String					title;
+	private Date					establishmentDate;
+	private Collection<String>		photos;
 
 	// Atributos Públicos
 
-	public Collection<Float>	floats;
+	public Collection<Float>		floats;
+	public Collection<Procession>	processions;
 
 
 	// Getters y Setters
+
+	@OneToMany
+	public Collection<Procession> getProcessions() {
+		return this.processions;
+	}
+
+	public void setProcessions(final Collection<Procession> processions) {
+		this.processions = processions;
+	}
 
 	@OneToMany
 	public Collection<Float> getFloats() {

@@ -40,7 +40,6 @@ INDEX VERSION 1.126+E:\DP2\Proyecto1\entregable1\Acme Madruga\.metadata\.plugins
 3994115545.index
 3182832990.index
 1027357392.index
-2817099979.index
 1257753676.index
 1553378406.index
 2455611774.index

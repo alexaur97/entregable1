@@ -16,9 +16,19 @@ public class Member extends Actor {
 
 	public Collection<Enrolment>	enrolments;
 	public Collection<Request>		requests;
+	public Collection<Request>		dropOuts;
 
 
 	// Getters y Setters
+
+	@OneToMany
+	public Collection<Request> getDropOuts() {
+		return this.dropOuts;
+	}
+
+	public void setDropOuts(final Collection<Request> dropOuts) {
+		this.dropOuts = dropOuts;
+	}
 
 	@OneToMany
 	public Collection<Request> getRequests() {
