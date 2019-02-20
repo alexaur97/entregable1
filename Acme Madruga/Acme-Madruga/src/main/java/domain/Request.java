@@ -24,11 +24,12 @@ public class Request extends DomainEntity {
 	// Atributos Públicos
 
 	public Procession	procession;
+	public Member		member;
 
 
 	// Getters y Setters
 
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Procession getProcession() {
 		return this.procession;
 	}
@@ -67,4 +68,12 @@ public class Request extends DomainEntity {
 		this.column = column;
 	}
 
+	@ManyToOne(optional = false)
+	public Member getMember() {
+		return this.member;
+	}
+
+	public void setMember(final Member member) {
+		this.member = member;
+	}
 }

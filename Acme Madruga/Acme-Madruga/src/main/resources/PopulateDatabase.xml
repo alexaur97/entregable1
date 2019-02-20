@@ -31,7 +31,7 @@
 		</property>
 	</bean>
 
-	<bean id="actor1" class="domain.Admin">
+	<bean id="actor1" class="domain.Administrator">
 		<property name="name" value="Admin" />
 		<property name="surname" value="Number One" />
 		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
@@ -40,14 +40,6 @@
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
-	<bean id="float1" class="domain.Float">
-		<property name="title" value="Gran Poder" />
-		<property name="description" value="Gran Poder" />
-		<property name="photos">
-			<list>
-			<value>https://sevilla.abc.es/pasionensevilla//wp-content/uploads/2016/11/gran-poder.jpg</value>
-			</list>
-		</property>
-	</bean>
+
 	
 </beans>

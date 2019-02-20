@@ -8,7 +8,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
@@ -19,39 +18,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Brootherhood extends Actor {
+public class Brotherhood extends Actor {
 
 	// Atributos Privados
 
-	private String					title;
-	private Date					establishmentDate;
-	private Collection<String>		photos;
-
-	// Atributos Públicos
-
-	public Collection<Float>		floats;
-	public Collection<Procession>	processions;
+	private String				title;
+	private Date				establishmentDate;
+	private Collection<String>	photos;
 
 
 	// Getters y Setters
-
-	@OneToMany
-	public Collection<Procession> getProcessions() {
-		return this.processions;
-	}
-
-	public void setProcessions(final Collection<Procession> processions) {
-		this.processions = processions;
-	}
-
-	@OneToMany
-	public Collection<Float> getFloats() {
-		return this.floats;
-	}
-
-	public void setFloats(final Collection<Float> floats) {
-		this.floats = floats;
-	}
 
 	@NotBlank
 	public String getTitle() {

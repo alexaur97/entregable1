@@ -22,17 +22,18 @@ public class DropOut extends DomainEntity {
 
 	// Atributos Públicos
 
-	public Brootherhood	brotherhood;
+	public Brotherhood	brotherhood;
+	public Member		member;
 
 
 	// Getters y Setters
 
 	@ManyToOne(optional = false)
-	public Brootherhood getBrotherhood() {
+	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
 
-	public void setBrotherhood(final Brootherhood brotherhood) {
+	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
 
@@ -44,6 +45,15 @@ public class DropOut extends DomainEntity {
 
 	public void setMoment(final Date moment) {
 		this.moment = moment;
+	}
+
+	@ManyToOne(optional = false)
+	public Member getMember() {
+		return this.member;
+	}
+
+	public void setMember(final Member member) {
+		this.member = member;
 	}
 
 }

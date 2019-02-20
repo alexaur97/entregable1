@@ -22,8 +22,9 @@ public class Enrolment extends DomainEntity {
 
 	// Atributos Públicos
 
-	public Brootherhood	brotherhood;
+	public Brotherhood	brotherhood;
 	public Position		position;
+	public Member		member;
 
 
 	// Getters y Setters
@@ -39,11 +40,11 @@ public class Enrolment extends DomainEntity {
 	}
 
 	@ManyToOne(optional = false)
-	public Brootherhood getBrotherhood() {
+	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
 
-	public void setBrotherhood(final Brootherhood brotherhood) {
+	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
 
@@ -54,6 +55,15 @@ public class Enrolment extends DomainEntity {
 
 	public void setPosition(final Position position) {
 		this.position = position;
+	}
+
+	@ManyToOne(optional = false)
+	public Member getMember() {
+		return this.member;
+	}
+
+	public void setMember(final Member member) {
+		this.member = member;
 	}
 
 }

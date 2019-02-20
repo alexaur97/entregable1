@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
@@ -29,6 +30,7 @@ public class Procession extends DomainEntity {
 
 	// Atributos Públicos
 
+	public Brotherhood			brotherhood;
 	public Collection<Float>	floats;
 
 
@@ -88,6 +90,15 @@ public class Procession extends DomainEntity {
 
 	public void setMode(final String mode) {
 		this.mode = mode;
+	}
+
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
+	}
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
 	}
 
 }
