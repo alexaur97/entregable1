@@ -3,6 +3,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
@@ -47,6 +48,7 @@ public class Request extends DomainEntity {
 	}
 
 	@Min(0)
+	@Column(name = "`row`")
 	public Integer getRow() {
 		return this.row;
 	}
@@ -56,6 +58,7 @@ public class Request extends DomainEntity {
 	}
 
 	@Min(0)
+	@Column(name = "`column`")
 	public Integer getColumn() {
 		return this.column;
 	}

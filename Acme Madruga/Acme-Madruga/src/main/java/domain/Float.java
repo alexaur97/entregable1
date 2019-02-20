@@ -7,11 +7,13 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(name = "`float`")
 public class Float extends DomainEntity {
 
 	// Atributos Privados

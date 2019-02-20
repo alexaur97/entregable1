@@ -16,51 +16,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
 	
-	<!-- User accounts -->
-
-	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-	
 	<!-- Other domain beans come here -->	
 	
 	
-	<bean id="userAccount4" class="security.UserAccount">
+	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin1" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
@@ -72,15 +31,23 @@
 		</property>
 	</bean>
 
-	<bean id="actor1" class="domain.Actor">
+	<bean id="actor1" class="domain.Admin">
 		<property name="name" value="Admin" />
 		<property name="surname" value="Number One" />
 		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
 		<property name="email" value="admin1@" />
 		<property name="phoneNumber" value="698765432" />
-		<property name="userAccount" ref="userAccount4" />
+		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
-	
+	<bean id="float1" class="domain.Float">
+		<property name="title" value="Gran Poder" />
+		<property name="description" value="Gran Poder" />
+		<property name="photos">
+			<list>
+			<value>https://sevilla.abc.es/pasionensevilla//wp-content/uploads/2016/11/gran-poder.jpg</value>
+			</list>
+		</property>
+	</bean>
 	
 </beans>
