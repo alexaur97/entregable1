@@ -11517,3 +11517,16 @@ java.lang.OutOfMemoryError: Requested array size exceeds VM limit
 	at org.eclipse.jdt.internal.core.search.indexing.IndexManager.notifyIdle(IndexManager.java:546)
 	at org.eclipse.jdt.internal.core.search.processing.JobManager.run(JobManager.java:388)
 	at java.lang.Thread.run(Thread.java:722)
+!SESSION 2019-02-21 16:44:28.827 -----------------------------------------------
+eclipse.buildId=M20120208-0800
+java.version=1.7.0_13
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-02-21 16:44:39.577
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jst.jsp.core 4 4 2019-02-21 16:44:46.624
+!MESSAGE A workspace crash was detected. The previous session did not exit normally. Not using saved taglib indexes.
