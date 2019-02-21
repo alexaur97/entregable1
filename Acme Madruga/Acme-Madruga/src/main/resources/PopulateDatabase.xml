@@ -452,4 +452,113 @@
 	<property name="member" ref = "actor4"/>
 	
 	</bean>
+	
+	<!-- .......................  Ale  ................................. -->
+	
+	<bean id="brotherhood4" class="domain.Brotherhood">
+		<property name="title" value="El Calvario" />
+		<property name="establishmentDate" value="19/09/1572" />
+		<property name="photos">
+			<list>
+				<value>http://hermandaddelcalvario.org/wp-content/uploads/2011/09/faldon-portada-Febrero-2013.jpg</value>
+				<value>http://4.bp.blogspot.com/-DJxMfS-KoRo/VIBzlaxXyeI/AAAAAAAAE_8/DL3iOsX6E58/s1600/Virgen-de-la-Presentacion-2.JPG</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount8" />
+		<property name="name" value="Brotherhood" />
+		<property name="surname" value="Number four" />
+		<property name="photo"
+			value="http://hermandaddelcalvario.org/wp-content/uploads/2011/09/faldon-portada-Febrero-2013.jpg" />
+		<property name="email" value="brotherhood4@gmail.com" />
+		<property name="phoneNumber" value="698765432" />
+		
+	</bean>
+	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="Brotherhood4" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="float4" class="domain.Float">
+		<property name="title" value="Stmo. Cristo del Calvario" />
+		<property name="description" value="Primer paso de la hermandad de El Calvario" />
+		<property name="pictures">
+			<list>
+				<value>http://hermandaddelcalvario.org/wp-content/uploads/2011/09/faldon-portada-Febrero-2013.jpg</value>
+			</list>
+		</property>
+		<property name="brotherhood" ref="brotherhood4"/>
+			
+	</bean>
+	
+	<bean id="procession4" class="domain.Procession">
+		<property name="title" value="Name4" />
+		<property name="description" value="This is a description" />
+		<property name="moment" value="01/03/2019"/>
+		<property name="ticker" value="190101-J2R2G"/>
+		<property name="mode" value="DRAFT"/>
+		<property name="floats">
+			<list>
+				<ref bean = "float4"/>
+			</list>
+		</property>
+		<property name= "brotherhood"  ref = "brotherhood4"/>
+			
+		
+	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="member4" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="actor5" class="domain.Member">
+		<property name="name" value="Member" />
+		<property name="surname" value="Number four" />
+		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member4@gmail.com" />
+		<property name="phoneNumber" value="698765431" />
+		<property name="userAccount" ref="userAccount9" />
+	</bean>
+	
+	<bean id="position8" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	
+	<bean id="enrolment8" class="domain.Enrolment">
+	<property name="moment" value = "02/04/2000"/>
+	<property name="brotherhood" ref = "brotherhood4"/>
+	<property name="position" ref = "position8"/>
+	<property name="member" ref = "actor5"/>
+	</bean>
+	
+	<bean id="dropout3" class="domain.DropOut">
+	<property name="moment" value = "02/04/2019"/>
+	<property name="brotherhood" ref = "brotherhood4"/>
+	<property name="member" ref = "actor5"/>
+	
+	</bean>
+	
+	<bean id="request5" class="domain.Request">
+	<property name="status" value = "APPROVED"/>
+	<property name="row" value = "7"/>
+	<property name="column" value = "5"/>
+	<property name="procession" ref = "procession4"/>
+	<property name="member" ref = "actor5"/>
+	</bean>
+	
 </beans>
