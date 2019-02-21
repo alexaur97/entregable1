@@ -1,0 +1,23 @@
+
+package repositories;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import domain.Request;
+
+@Repository
+public interface RequestRepository extends JpaRepository<Request, Integer> {
+
+	// FR 10.6
+	@Query("select r from Request r where r.status = ?1 and r.procession.brotherhood.id = ?2")
+	Collection<Request> findRequestByStatus(String status, int id);
+
+	// FR 11.1
+	@Query("select r from Request r where r.status = ?1 and r.procession.brotherhood.id = ?2")
+	Collection<Request> findRequestByStatus(String status, int id);
+
+}

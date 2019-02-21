@@ -1,0 +1,22 @@
+
+package repositories;
+
+import java.util.Collection;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import domain.Brotherhood;
+
+@Repository
+public interface BrotherhoodRepository extends JpaRepository<domain.Brotherhood, Integer> {
+
+	// RF 11.3 (a)
+	@Query("select e.brotherhood from Enrolment e where e.member.id = ?1")
+	Collection<Brotherhood> findBrotherhoodByMemberBelong(int id);
+
+	// RF 11.3 (b)
+	@Query("select d.brotherhood from DropOut d where d.member.id = ?1")
+	Collection<Brotherhood> findBrotherhoodByMemberHasBelonged(int id);
+}
