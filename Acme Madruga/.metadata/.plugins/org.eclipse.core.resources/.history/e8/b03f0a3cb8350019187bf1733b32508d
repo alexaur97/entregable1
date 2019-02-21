@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- Other domain beans come here -->	
+	
+	
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin1" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="actor1" class="domain.Administrator">
+		<property name="name" value="Admin" />
+		<property name="surname" value="Number One" />
+		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="admin1@" />
+		<property name="phoneNumber" value="698765432" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+
+<bean id="brotherhood1" class="domain.Brothehood">
+		<property name="title" value="Santa Maria Magdalena" />
+		<property name="establishmentDate" value="19/09/1980" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/search?q=santa+maria+magdalena+hermandad</value>
+				<value>https://www.google.com/search?q=santa+maria+magdalena+hermandad</value>
+			</list>
+		</property>
+		<property name="floats">
+			<list>
+				<ref bean="float1" /> 
+  				<ref bean="float2" /> 
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="brotherhood2" class="domain.Brothehood">
+		<property name="title" value="San Gil" />
+		<property name="establishmentDate" value="05/02/1985" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/search?q=san+gil+hermandad</value>
+				<value>https://www.google.com/search?q=san+gil+hermandad</value>
+			</list>
+		</property>
+		<property name="floats">
+			<list>
+				<ref bean="float3" /> 
+  				<ref bean="float4" /> 
+			</list>
+		</property>
+		
+		
+	</bean>
+	
+	<bean id="brotherhood3" class="domain.Brothehood">
+		<property name="title" value="Cristo nuestro" />
+		<property name="establishmentDate" value="19/09/1956" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/search?q=santa+maria+magdalena+hermandad</value>
+				<value>https://www.google.com/search?q=santa+maria+magdalena+hermandad</value>
+			</list>
+		</property>
+		<property name="floats">
+			<list>
+				<ref bean="float5" /> 
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="float1" class="domain.Float">
+		<property name="title" value="La Macarena" />
+		<property name="description" value="Antigua Dolorosa, medalla de la ciudad de Sevilla, icono y patrimonio de la humanidad, imagen anonima atribuida a la talla de La Roldana" />
+		<property name="photos">
+			<list>
+				<value>https://sevilla.abc.es/pasionensevilla//wp-content/uploads/2017/12/macarena_besamanos_saez.jpg</value>
+				<value>https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiLv6uRksvgAhVPyRoKHcHRDH0QjRx6BAgBEAU&url=https%3A%2F%2Fsevilla.abc.es%2Fpasionensevilla%2Factualidad%2Fnoticias%2Fproyeccion-de-la-pelicula-qjoselito-sevilla-lloro-con-la-macarenaq.html&psig=AOvVaw2xIktxms47wCCY8Gus5IaC&ust=1550780555086618</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="float2" class="domain.Float">
+		<property name="title" value="LA CARRETERIA" />
+		<property name="description" value="Del siglo XV" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjz1N38lMvgAhUOCxoKHXrUDWAQjRx6BAgBEAU&url=http%3A%2F%2Fwww.hermandaddelacarreteria.org%2F&psig=AOvVaw2o_qVYqbUIN2HTcUxSCDeU&ust=1550781379871241</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="float3" class="domain.Float">
+		<property name="title" value="MONTSERRAT" />
+		<property name="description" value="This is a description" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiugoiWpcvgAhWR4YUKHT_mCcgQjRx6BAgBEAU&url=https%3A%2F%2Fcadenaser.com%2Femisora%2F2017%2F11%2F27%2Fradio_sevilla%2F1511809585_701890.html&psig=AOvVaw2J4sUA1ffZCdOUDE1vEYDO&ust=1550785726953214</value>
+				<value>https://www.google.com/imgres?imgurl=https%3A%2F%2Fsevilla.abc.es%2Fpasionensevilla%2Fwp-content%2Fuploads%2F2011%2F08%2Fmontserrat_re.jpg&imgrefurl=https%3A%2F%2Fsevilla.abc.es%2Fpasionensevilla%2Factualidad%2Fnoticias%2Fmontserrat-continua-el-proceso-de-restauracion-de-su-patrimonio.html&docid=4rErftpCP-YtaM&tbnid=W2awB1goJyWVbM%3A&vet=10ahUKEwij0pKUpcvgAhVPyRoKHcHRDH0QMwhGKAIwAg..i&w=300&h=326&client=firefox-b-ab&bih=767&biw=1440&q=MONTSERRAT%20sevilla&ved=0ahUKEwij0pKUpcvgAhVPyRoKHcHRDH0QMwhGKAIwAg&iact=mrc&uact=8</value>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="float4" class="domain.Float">
+		<property name="title" value="LA TRINIDAD" />
+		<property name="description" value="This is a description" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/imgres?imgurl=https%3A%2F%2Fsevilla.abc.es%2Fpasionensevilla%2F%2Fwp-content%2Fuploads%2F2014%2F11%2Fvirgen-esperanza-trinidad.jpg&imgrefurl=https%3A%2F%2Fsevilla.abc.es%2Fpasionensevilla%2Fhermandades%2Fpenitencia-semana-santa%2Fsabado-santo-ss%2Fla-trinidad.html&docid=wdgkHYW5QjUjSM&tbnid=pjPp6SxnjqfsGM%3A&vet=10ahUKEwiApevYpsvgAhVKgxoKHUQHBo4QMwhDKAEwAQ..i&w=644&h=400&client=firefox-b-ab&bih=767&biw=1440&q=LA%20TRINIDAD%20sevilla&ved=0ahUKEwiApevYpsvgAhVKgxoKHUQHBo4QMwhDKAEwAQ&iact=mrc&uact=8</value>				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="float5" class="domain.Float">
+		<property name="title" value="Cristo" />
+		<property name="description" value="This is a description6" />
+		<property name="photos">
+			<list>
+				<value>https://www.google.com/</value>				
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="procession1" class="domain.Procession">
+		<property name="title" value="Name1" />
+		<property name="description" value="This is a description2" />
+		<property name="moment" value="01/03/2019"/>
+		<property name="ticker" value="190301-JURTG"/>
+		<property name="mode" value="draft mode"/>
+		<property name="floats">
+			<list>
+				<ref bean = "float1"/>
+				<ref bean ="float2"/>
+			</list>
+		<property name= "brotherhood"  ref = "brotherhood1"/>
+			
+		
+	</bean>
+	
+
+	
+	<bean id="procession2" class="domain.Procession">
+		<property name="title" value="Name2" />
+		<property name="description" value="This is a description2" />
+		<property name="moment" value="01/04/2019"/>
+		<property name="ticker" value="190401-IOERT"/>
+		<property name="mode" value="draft"/>
+		<property name="floats">
+			<list>
+				<ref bean = "float4"/>
+				<ref bean ="float3"/>
+			</list>
+		</property>
+		<property name= "brotherhood"  ref = "brotherhood2"/>
+	</bean>
+	
+	<bean id="procession3" class="domain.Procession">
+		<property name="title" value="Name3" />
+		<property name="description" value="This is a description3" />
+		<property name="moment" value="05/04/2019"/>
+		<property name="ticker" value="190405-OIRTG"/>
+		<property name="mode" value="draft"/>
+		<property name="floats">
+			<list>
+				<ref bean = "float1"/>
+				<ref bean ="float3"/>
+			</list>
+		</property>
+		<property name= "brotherhood"  ref = "brotherhood3"/>
+	</bean>
+	
+</beans>
