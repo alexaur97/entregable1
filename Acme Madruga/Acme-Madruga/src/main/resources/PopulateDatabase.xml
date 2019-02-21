@@ -258,5 +258,198 @@
 		</property>
 		<property name= "brotherhood"  ref = "brotherhood3"/>
 	</bean>
+	<!-- MI PARTE -->
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="member1" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="actor2" class="domain.Member">
+		<property name="name" value="Member1" />
+		<property name="surname" value="Number One" />
+		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member1@" />
+		<property name="phoneNumber" value="698765431" />
+		<property name="userAccount" ref="userAccount2" />
+	</bean>
 	
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="nameEs" value="Presidente" />
+	</bean>
+	
+	<bean id="enrolment1" class="domain.Enrolment">
+	<property name="moment" value = "02/04/1998"/>
+	<property name="brotherhood" ref = "brotherhood1"/>
+	<property name="position" ref = "position1"/>
+	<property name="member" ref = "actor2"/>
+	
+	</bean>
+	
+	<bean id="request1" class="domain.Request">
+	<property name="status" value = "PENDING"/>
+	<property name="row" value = "1"/>
+	<property name="column" value = "1"/>
+	<property name="procession" ref = "procession1"/>
+	<property name="member" ref = "actor2"/>
+	
+	</bean>
+	
+	<bean id="position2" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	
+	<bean id="enrolment2" class="domain.Enrolment">
+	<property name="moment" value = "02/04/2010"/>
+	<property name="brotherhood" ref = "brotherhood2"/>
+	<property name="position" ref = "position2"/>
+	<property name="member" ref = "actor2"/>
+	
+	</bean>
+	
+	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="member2" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="actor3" class="domain.Member">
+		<property name="name" value="Member2" />
+		<property name="surname" value="Number Two" />
+		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member2@" />
+		<property name="phoneNumber" value="698765430" />
+		<property name="userAccount" ref="userAccount3" />
+	</bean>
+	
+	<bean id="position3" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	
+	<bean id="enrolment3" class="domain.Enrolment">
+	<property name="moment" value = "02/04/1990"/>
+	<property name="brotherhood" ref = "brotherhood1"/>
+	<property name="position" ref = "position3"/>
+	<property name="member" ref = "actor3"/>
+	
+	</bean>
+	<bean id="position6" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="nameEs" value="Presidente" />
+	</bean>
+	
+	<bean id="enrolment6" class="domain.Enrolment">
+	<property name="moment" value = "02/04/1987"/>
+	<property name="brotherhood" ref = "brotherhood3"/>
+	<property name="position" ref = "position6"/>
+	<property name="member" ref = "actor3"/>
+	
+	</bean>
+	<bean id="dropout1" class="domain.DropOut">
+	<property name="moment" value = "02/04/1978"/>
+	<property name="brotherhood" ref = "brotherhood3"/>
+	<property name="member" ref = "actor3"/>
+	
+	</bean>
+	<bean id="request2" class="domain.Request">
+	<property name="status" value = "APPROVED"/>
+	<property name="row" value = "2"/>
+	<property name="column" value = "2"/>
+	<property name="procession" ref = "procession1"/>
+	<property name="member" ref = "actor3"/>
+	
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="member3" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="actor4" class="domain.Member">
+		<property name="name" value="Member3" />
+		<property name="surname" value="Number Three" />
+		<property name="photo" value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member3@" />
+		<property name="phoneNumber" value="698765429" />
+		<property name="userAccount" ref="userAccount4" />
+	</bean>
+	
+	<bean id="position4" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="nameEs" value="Presidente" />
+	</bean>
+	
+	<bean id="enrolment4" class="domain.Enrolment">
+	<property name="moment" value = "02/04/1950"/>
+	<property name="brotherhood" ref = "brotherhood2"/>
+	<property name="position" ref = "position4"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
+	<bean id="position5" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	
+	<bean id="enrolment5" class="domain.Enrolment">
+	<property name="moment" value = "02/04/1963"/>
+	<property name="brotherhood" ref = "brotherhood3"/>
+	<property name="position" ref = "position5"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
+	<bean id="position7" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	
+	<bean id="enrolment7" class="domain.Enrolment">
+	<property name="moment" value = "02/04/2000"/>
+	<property name="brotherhood" ref = "brotherhood1"/>
+	<property name="position" ref = "position7"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
+	<bean id="dropout2" class="domain.DropOut">
+	<property name="moment" value = "02/04/19"/>
+	<property name="brotherhood" ref = "brotherhood1"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
+	<bean id="request3" class="domain.Request">
+	<property name="status" value = "REJECTED"/>
+	<property name="row" value = "5"/>
+	<property name="column" value = "5"/>
+	<property name="procession" ref = "procession2"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
+	<bean id="request4" class="domain.Request">
+	<property name="status" value = "APPROVED"/>
+	<property name="row" value = "7"/>
+	<property name="column" value = "5"/>
+	<property name="procession" ref = "procession3"/>
+	<property name="member" ref = "actor4"/>
+	
+	</bean>
 </beans>
