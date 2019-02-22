@@ -13,7 +13,7 @@
 
 	<groupId>Acme.com</groupId>
 	<artifactId>Acme-Madruga</artifactId>
-	<version>1.0</version>
+	<version>0.0.0.SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>

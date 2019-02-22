@@ -34,7 +34,7 @@ public class ConfigurationParametersService {
 
 	public ConfigurationParameters save(final ConfigurationParameters config) {
 
-		final AdministratorService principal = this.administratorService.findByPrincipal();
+		this.administratorService.findByPrincipal();
 
 		if (config.getId() == 0) {
 			config.setName("Acme Madrugá");

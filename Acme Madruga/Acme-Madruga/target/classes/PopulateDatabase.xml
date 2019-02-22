@@ -18,7 +18,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="ADMINISTRATOR" />
 				</bean>
 			</list>
 		</property>
@@ -77,7 +77,7 @@
 		<property name="messageEs"
 			value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones." />
 		<property name="countryCode" value="+34" />
-		<property name="position">
+		<property name="positions">
 			<list>
 				<value>President
 				</value>
@@ -95,7 +95,7 @@
 				</value>
 			</list>
 		</property>
-		<property name="positionEs">
+		<property name="positionsEs">
 			<list>
 				<value>Presidente
 				</value>
