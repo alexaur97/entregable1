@@ -22,8 +22,8 @@ public class ConfigurationParameters extends DomainEntity {
 	private String				message;
 	private String				messageEs;
 	private String				countryCode;
-	private Collection<String>	position;
-	private Collection<String>	positionEs;
+	private Collection<String>	positions;
+	private Collection<String>	positionsEs;
 
 
 	@NotBlank
@@ -75,22 +75,22 @@ public class ConfigurationParameters extends DomainEntity {
 
 	@ElementCollection
 	@NotEmpty
-	public Collection<String> getPosition() {
-		return this.position;
+	public Collection<String> getPositions() {
+		return this.positions;
 	}
 
-	public void setPosition(final Collection<String> position) {
-		this.position = position;
+	public void setPositions(final Collection<String> positions) {
+		this.positions = positions;
 	}
 
 	@ElementCollection
 	@NotEmpty
-	public Collection<String> getPositionEs() {
-		return this.positionEs;
+	public Collection<String> getPositionsEs() {
+		return this.positionsEs;
 	}
 
-	public void setPositionEs(final Collection<String> positionEs) {
-		this.positionEs = positionEs;
+	public void setPositionsEs(final Collection<String> positionsEs) {
+		this.positionsEs = positionsEs;
 	}
 
 }
