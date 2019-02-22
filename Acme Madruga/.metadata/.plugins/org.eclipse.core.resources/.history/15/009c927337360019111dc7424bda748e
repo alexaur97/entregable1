@@ -1,0 +1,68 @@
+
+package services;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import repositories.AdministratorRepository;
+import security.Authority;
+import security.LoginService;
+import domain.Administrator;
+
+@Service
+@Transactional
+public class AdministratorService {
+
+	// Repositorios propios
+	@Autowired
+	private AdministratorRepository	administratorRepository;
+
+
+	// Servicios ajenos
+
+	// Métodos CRUD
+
+	public Collection<Administrator> findAll() {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		Collection<Administrator> result;
+		result = this.administratorRepository.findAll();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Administrator findOne(int administratorId) {
+		Assert.isTrue(administratorId != 0);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		Administrator result;
+		result = this.administratorRepository.findOne(administratorId);
+		Assert.notNull(result);
+		return result;
+	}
+
+	public void delete(Administrator administrator) {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		Assert.notNull(administrator);
+		this.administratorRepository.delete(administrator);
+	}
+
+	public void save(Administrator administrator) {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		Assert.notNull(administrator);
+		administratorRepository.save(administrator);
+	}
+
+	public Administrator create() {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		Administrator result = new Administrator();
+		Authority authority = new Authority();
+		authority.setAuthority(Authority.ADMINISTRATOR);
+		result.getUserAccount().addAuthority(authority);
+		return result;
+
+	}
+
+}

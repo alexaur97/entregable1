@@ -1,0 +1,33 @@
+
+package services;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import repositories.DropOutRepository;
+import domain.DropOut;
+
+@Service
+@Transactional
+public class DropOutService {
+
+	// Repositorios propios
+	@Autowired
+	private DropOutRepository	dropOutRepository;
+
+
+	// Servicios ajenos
+
+	// Métodos CRUD
+
+	public Collection<DropOut> findAll() {
+		Collection<DropOut> result;
+		result = this.dropOutRepository.findAll();
+		Assert.notNull(result);
+		return result;
+	}
+}

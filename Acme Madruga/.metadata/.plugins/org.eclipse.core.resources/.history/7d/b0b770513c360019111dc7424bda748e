@@ -1,0 +1,63 @@
+
+package services;
+
+import java.util.Collection;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+
+import repositories.EnrolmentRepository;
+import domain.Brotherhood;
+import domain.Enrolment;
+import domain.Member;
+import domain.Position;
+
+@Service
+@Transactional
+public class EnrolmentService {
+
+	// Repositorios propios
+	@Autowired
+	private EnrolmentRepository	enrolmentRepository;
+
+
+	// Servicios ajenos
+
+	// Métodos CRUD
+
+	public Collection<Enrolment> findAll() {
+		Collection<Enrolment> result;
+		result = this.enrolmentRepository.findAll();
+		Assert.notNull(result);
+		return result;
+	}
+
+	public Enrolment findOne(int enrolmentId) {
+		Assert.isTrue(enrolmentId != 0);
+		Enrolment result;
+		result = this.enrolmentRepository.findOne(enrolmentId);
+		Assert.notNull(result);
+		return result;
+	}
+
+	public void save(Enrolment enrolment) {
+		Assert.notNull(enrolment);
+		this.enrolmentRepository.save(enrolment);
+	}
+
+	public void delete(Enrolment enrolment) {
+		Assert.notNull(enrolment);
+		this.enrolmentRepository.delete(enrolment);
+	}
+	
+	public Enrolment create(Brotherhood brotherhood, Member member, Date moment, Position position){
+		Assert.notNull(member);
+		Assert.notNull(moment);
+		Assert.notNull(position);
+		
+	}
+
+}

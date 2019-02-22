@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Stack"/>
-<fullyQualifiedTypeName name="org.hibernate.FlushMode"/>
-<fullyQualifiedTypeName name="javax.persistence.FlushModeType"/>
 <fullyQualifiedTypeName name="utilities.internal.ThrowablePrinter"/>
 <fullyQualifiedTypeName name="utilities.internal.SchemaPrinter"/>
 <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
@@ -44,20 +41,23 @@
 <fullyQualifiedTypeName name="javax.persistence.AccessType"/>
 <fullyQualifiedTypeName name="javax.persistence.Temporal"/>
 <fullyQualifiedTypeName name="org.hibernate.validator.constraints.NotBlank"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="javax.validation.constraints.Min"/>
-<fullyQualifiedTypeName name="domain.Position"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
-<fullyQualifiedTypeName name="domain.Enrolment"/>
-<fullyQualifiedTypeName name="domain.Request"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
-<fullyQualifiedTypeName name="domain.Float"/>
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
 <fullyQualifiedTypeName name="domain.Actor"/>
 <fullyQualifiedTypeName name="domain.Admin"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
-<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
 <fullyQualifiedTypeName name="domain.Brootherhood"/>
-<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="domain.DropOut"/>
+<fullyQualifiedTypeName name="domain.Enrolment"/>
+<fullyQualifiedTypeName name="domain.Position"/>
+<fullyQualifiedTypeName name="domain.Member"/>
 <fullyQualifiedTypeName name="domain.Procession"/>
+<fullyQualifiedTypeName name="domain.Float"/>
+<fullyQualifiedTypeName name="domain.Request"/>
+<fullyQualifiedTypeName name="domain.Brotherhood"/>
+<fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>
