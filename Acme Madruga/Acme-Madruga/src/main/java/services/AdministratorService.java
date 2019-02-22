@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 
 @Service
@@ -34,21 +35,20 @@ public class AdministratorService {
 		return result;
 	}
 
-	public Administrator findOne(int administratorId) {
+	public Administrator findOne(final int administratorId) {
 		Assert.isTrue(administratorId != 0);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
 		Administrator result;
 		result = this.administratorRepository.findOne(administratorId);
-		t
 		return result;
 	}
-	public void delete(Administrator administrator) {
+	public void delete(final Administrator administrator) {
 		Assert.notNull(administrator);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
 		this.administratorRepository.delete(administrator);
 	}
 
-	public void save(Administrator administrator) {
+	public void save(final Administrator administrator) {
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
 		Assert.notNull(administrator);
 		this.administratorRepository.save(administrator);
@@ -57,12 +57,27 @@ public class AdministratorService {
 	// FR 12.1
 	public Administrator create() {
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
-		Administrator result = new Administrator();
-		Authority authority = new Authority();
+		final Administrator result = new Administrator();
+		final Authority authority = new Authority();
 		authority.setAuthority(Authority.ADMINISTRATOR);
 		result.getUserAccount().addAuthority(authority);
 		return result;
 
+	}
+
+	public Administrator findByPrincipal() {
+		final UserAccount user = LoginService.getPrincipal();
+		Assert.notNull(user);
+
+		final Administrator a = this.findByUserId(user.getId());
+		Assert.notNull(a);
+
+		return a;
+	}
+
+	public Administrator findByUserId(final int id) {
+		final Administrator a = this.administratorRepository.findByUserId(id);
+		return a;
 	}
 
 }
