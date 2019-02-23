@@ -20,8 +20,18 @@
 	<util:list id="converters">
 		<!-- 
 			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
+			<bean class="converters.ClassToString" /> 
 		-->
+		
+		<bean class="converters.ProcessionToStringConverter"/>
+		
+		<!-- 
+			Add your own converters using entries of the following form: 
+			<bean class="converters.StringToClass" /> 
+		-->
+		
+		<bean class="converters.StringToClassConverter"/>
+		
 	</util:list>
 	
 </beans>
