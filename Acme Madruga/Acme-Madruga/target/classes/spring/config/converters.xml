@@ -30,7 +30,7 @@
 			<bean class="converters.StringToClass" /> 
 		-->
 		
-		<bean class="converters.StringToClassConverter"/>
+		<bean class="converters.StringToProcessionConverter"/>
 		
 	</util:list>
 	

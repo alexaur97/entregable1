@@ -26,11 +26,11 @@ public interface BrotherhoodRepository extends JpaRepository<domain.Brotherhood,
 	Collection<Double> membersPerBrotherhood();
 
 	// RF 12.3.2
-	@Query("select b from Brotherhood b where (select count(r.member) from Enrolment e where e.brotherhood.id=b.id)=(select max(1.0*(select count(r.member) from Enrolment e where e.brotherhood.id=bt.id)) from Brotherhood bt)")
+	@Query("select b from Brotherhood b where (select count(e.member) from Enrolment e where e.brotherhood.id=b.id)=(select max(1.0*(select count(e.member) from Enrolment e where e.brotherhood.id=bt.id)) from Brotherhood bt)")
 	Collection<Brotherhood> largestBrotherhoods();
 
 	// RF 12.3.3
-	@Query("select b from Brotherhood b where (select count(r.member) from Enrolment e where e.brotherhood.id=b.id)=(select min(1.0*(select count(r.member) from Enrolment e where e.brotherhood.id=bt.id)) from Brotherhood bt)")
+	@Query("select b from Brotherhood b where (select count(e.member) from Enrolment e where e.brotherhood.id=b.id)=(select min(1.0*(select count(e.member) from Enrolment e where e.brotherhood.id=bt.id)) from Brotherhood bt)")
 	Collection<Brotherhood> smallestBrotherhoods();
 
 	@Query("select b from Brotherhood b where b.userAccount.id=?1")
