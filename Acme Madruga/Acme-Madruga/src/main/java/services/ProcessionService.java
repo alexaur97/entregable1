@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -29,14 +30,14 @@ public class ProcessionService {
 	//Metodos CRUD  FR 10.2
 
 	public Collection<Procession> findAll() {
-		Collection<Procession> res = this.processionRepository.findAll();
+		final Collection<Procession> res = this.processionRepository.findAll();
 		Assert.notNull(res);
 		return res;
 
 	}
 
 	public Procession findOne(final int ProcessionId) {
-		Procession res = this.processionRepository.findOne(ProcessionId);
+		final Procession res = this.processionRepository.findOne(ProcessionId);
 		Assert.notNull(res);
 		return res;
 	}
@@ -63,23 +64,19 @@ public class ProcessionService {
 
 	// FR 8.2 - FR 10.2
 
-	public Collection<Procession> findProcessionsByBrotherhood(int idBrotherhood) {
-		Collection<Procession> res;
-		int id = LoginService.getPrincipal().getId();
-		Brotherhood bh = this.brotherhoodService.findOne(id);
+	public Collection<Procession> findProcessionsByBrotherhood(final int idBrotherhood) {
+		Collection<Procession> res = new ArrayList<>();
+		final int id = LoginService.getPrincipal().getId();
+		final Brotherhood bh = this.brotherhoodService.findOne(id);
 
-		if (LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood)) {
+		if (LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
 			res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		else {
 
-		} else {
-
-			Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-			for (Procession procession : all) {
-				if (!procession.getMode().equals("DRAFT")) {
+			final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+			for (final Procession procession : all)
+				if (!procession.getMode().equals("DRAFT"))
 					res.add(procession);
-				}
-
-			}
 		}
 
 		Assert.notNull(res);
@@ -88,9 +85,9 @@ public class ProcessionService {
 
 	// FR 12.3.5
 
-	public Collection<Procession> processionsBefore30Days(Date date) {
+	public Collection<Procession> processionsBefore30Days(final Date date) {
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
-		Collection<Procession> res = this.processionRepository.processionsBefore30Days(date);
+		final Collection<Procession> res = this.processionRepository.processionsBefore30Days(date);
 		Assert.notNull(res);
 		return res;
 	}
