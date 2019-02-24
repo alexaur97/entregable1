@@ -53,12 +53,12 @@ public class WelcomeController extends AbstractController {
 
 		name = config.getName();
 		banner = config.getBanner();
-		String message = "";
+		String sysMessage = "";
 
 		if (lang == "en")
-			message = message + config.getMessage();
+			sysMessage = sysMessage + config.getMessage();
 		else if (lang == "es")
-			message = message + config.getMessageEs();
+			sysMessage = sysMessage + config.getMessageEs();
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());
@@ -66,7 +66,7 @@ public class WelcomeController extends AbstractController {
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
 		result.addObject("banner", banner);
-		result.addObject("message", message);
+		result.addObject("sysMessage", sysMessage);
 		result.addObject("moment", moment);
 		result.addObject("lang", lang);
 
