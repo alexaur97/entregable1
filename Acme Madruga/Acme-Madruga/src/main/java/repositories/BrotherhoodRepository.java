@@ -21,8 +21,8 @@ public interface BrotherhoodRepository extends JpaRepository<domain.Brotherhood,
 	Collection<Brotherhood> findBrotherhoodByMemberHasBelonged(int id);
 
 	// RF 12.3.1
-	@Query("select avg(1.0*(select count(r.member) from Enrolment e where e.brotherhood.id=br.id))," + "min(1.0*(select count(r.member) from Enrolment e where e.brotherhood.id=br.id)), "
-		+ "max(1.0*(select count(r.member) from Enrolment e where e.brotherhood.id=br.id))," + "stddev(1.0*(select count(r.member) " + "from Enrolment e where e.brotherhood.id=br.id)) from Brotherhood br")
+	@Query("select avg(1.0*(select count(e.member) from Enrolment e where e.brotherhood.id=br.id))," + "min(1.0*(select count(e.member) from Enrolment e where e.brotherhood.id=br.id)), "
+		+ "max(1.0*(select count(e.member) from Enrolment e where e.brotherhood.id=br.id))," + "stddev(1.0*(select count(e.member) " + "from Enrolment e where e.brotherhood.id=br.id)) from Brotherhood br")
 	Collection<Double> membersPerBrotherhood();
 
 	// RF 12.3.2
