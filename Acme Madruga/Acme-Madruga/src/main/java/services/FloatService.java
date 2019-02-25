@@ -9,6 +9,7 @@ import org.springframework.util.Assert;
 
 import repositories.FloatRepository;
 import security.Authority;
+import domain.Float;
 
 @Service
 @Transactional
@@ -24,40 +25,40 @@ public class FloatService {
 
 	//Metodos CRUD
 
-	public Collection<domain.Float> findAll() {
-		Collection<domain.Float> res = this.floatRepository.findAll();
+	public Collection<Float> findAll() {
+		Collection<Float> res = this.floatRepository.findAll();
 		Assert.notNull(res);
 		return res;
 
 	}
 
-	public domain.Float findOne(final int FloatId) {
-		domain.Float res = this.floatRepository.findOne(FloatId);
+	public Float findOne(final int FloatId) {
+		Float res = this.floatRepository.findOne(FloatId);
 		Assert.notNull(res);
 		return res;
 	}
 
-	public void delete(final domain.Float floatt) {
+	public void delete(final Float floatt) {
 		Assert.notNull(floatt);
 		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		this.floatRepository.delete(floatt.getId());
 	}
 
-	public domain.Float save(final domain.Float floatt) {
-		final domain.Float result;
+	public Float save(final Float floatt) {
+		final Float result;
 		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		Assert.notNull(floatt);
 		result = this.floatRepository.save(floatt);
 		return result;
 	}
 
-	public domain.Float create() {
+	public Float create() {
 		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
-		return new domain.Float();
+		return new Float();
 	}
 	//FR 8.2 - FR 10.1
-	public Collection<domain.Float> findFloatsByBrotherhood(int id) {
-		Collection<domain.Float> res = this.floatRepository.findFloatsByBrotherhood(id);
+	public Collection<Float> findFloatsByBrotherhood(int id) {
+		Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
 		Assert.notNull(res);
 		return res;
 	}
