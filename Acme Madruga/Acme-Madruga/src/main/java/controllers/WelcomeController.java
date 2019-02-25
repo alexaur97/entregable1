@@ -46,13 +46,11 @@ public class WelcomeController extends AbstractController {
 		String moment;
 		final ConfigurationParameters config = this.configurationParametersService.find();
 		final String name;
-		final String banner;
 
 		final Locale l = LocaleContextHolder.getLocale();
 		final String lang = l.getLanguage();
 
 		name = config.getName();
-		banner = config.getBanner();
 		String sysMessage = "";
 
 		if (lang == "en")
@@ -65,7 +63,6 @@ public class WelcomeController extends AbstractController {
 
 		result = new ModelAndView("welcome/index");
 		result.addObject("name", name);
-		result.addObject("banner", banner);
 		result.addObject("sysMessage", sysMessage);
 		result.addObject("moment", moment);
 		result.addObject("lang", lang);

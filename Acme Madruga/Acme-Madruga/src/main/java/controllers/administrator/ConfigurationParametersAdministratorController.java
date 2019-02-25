@@ -53,14 +53,12 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 				//sistema, la hora, etc.
 				SimpleDateFormat formatter;
 				String moment;
-				final String banner;
 
 				//el tipo Locale nos permite hacer operaciones con el idioma del sistema
 				final Locale l = LocaleContextHolder.getLocale();
 				final String lang = l.getLanguage();
 
 				final String name = c.getName();
-				banner = c.getBanner();
 				String sysMessage = "";
 
 				if (lang == "en")
@@ -73,13 +71,12 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 
 				//añadimos en el modelo todos los elementos necesarios>>>>>
 				result.addObject("name", name);
-				result.addObject("banner", banner);
 				result.addObject("sysMessage", sysMessage);
 				result.addObject("moment", moment);
 				result.addObject("lang", lang);
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(c, "config.commit.error");
+				result = this.createEditModelAndView(c, "configurationParameters.commit.error");
 			}
 
 		Assert.notNull(c);
