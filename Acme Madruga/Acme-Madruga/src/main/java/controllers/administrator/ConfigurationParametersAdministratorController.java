@@ -38,13 +38,13 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final ConfigurationParameters c, final BindingResult b) {
+	public ModelAndView save(@Valid final ConfigurationParameters config, final BindingResult binding) {
 		ModelAndView result;
-		if (b.hasErrors())
-			result = this.createEditModelAndView(c);
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(config);
 		else
 			try {
-				this.configurationParametersService.save(c);
+				final ConfigurationParameters saved = this.configurationParametersService.save(config);
 
 				//Creamos el model and view de la página a la que nos lleva el form
 				result = new ModelAndView("welcome/index");
@@ -58,13 +58,13 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 				final Locale l = LocaleContextHolder.getLocale();
 				final String lang = l.getLanguage();
 
-				final String name = c.getName();
+				final String name = saved.getName();
 				String sysMessage = "";
 
 				if (lang == "en")
-					sysMessage = sysMessage + c.getSysMessage();
+					sysMessage = sysMessage + saved.getSysMessage();
 				else if (lang == "es")
-					sysMessage = sysMessage + c.getSysMessageEs();
+					sysMessage = sysMessage + saved.getSysMessageEs();
 
 				formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 				moment = formatter.format(new Date());
@@ -75,11 +75,14 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 				result.addObject("moment", moment);
 				result.addObject("lang", lang);
 
+				final String banner = saved.getBanner();
+				result.addObject("banner", banner);
+
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(c, "configurationParameters.commit.error");
+				result = this.createEditModelAndView(config, "configurationParameters.commit.error");
 			}
 
-		Assert.notNull(c);
+		Assert.notNull(config);
 		return result;
 
 	}
@@ -88,13 +91,12 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 		return this.createEditModelAndView(config, null);
 	}
 
-	private ModelAndView createEditModelAndView(final ConfigurationParameters config, final String messageCode) {
+	private ModelAndView createEditModelAndView(final ConfigurationParameters configurationParameters, final String messageCode) {
 		final ModelAndView result;
 		result = new ModelAndView("configurationParameters/edit");
-		result.addObject("config", config);
+		result.addObject("configurationParameters", configurationParameters);
 		result.addObject("message", messageCode);
-		final String banner = config.getBanner();
-		result.addObject("banner", banner);
+
 		return result;
 	}
 
