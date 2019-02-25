@@ -14,17 +14,17 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Madruga Co., Inc." /></a>
+	<a href="#"><img src="${banner}" width="450" alt="Acme Madruga Co., Inc." /></a>
 </div>
 
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('ADMIN')">
+		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
+					<li><a href="configurationParameters/administrator/edit.do"><spring:message code="master.page.administrator.config" /></a></li>
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
 			</li>
