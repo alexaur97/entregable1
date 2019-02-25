@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ConfigurationParametersService;
 import controllers.AbstractController;
+import domain.ConfigurationParameters;
 
 @Controller
 @RequestMapping("/security")
@@ -29,7 +31,10 @@ public class LoginController extends AbstractController {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	LoginService	service;
+	LoginService							service;
+
+	@Autowired
+	private ConfigurationParametersService	configurationParametersService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -51,6 +56,12 @@ public class LoginController extends AbstractController {
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);
 
+		final ConfigurationParameters config = this.configurationParametersService.find();
+
+		final String banner;
+
+		banner = config.getBanner();
+		result.addObject("banner", banner);
 		return result;
 	}
 

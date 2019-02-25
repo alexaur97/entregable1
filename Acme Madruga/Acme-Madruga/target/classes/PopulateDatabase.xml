@@ -72,47 +72,11 @@
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
 		<property name="name" value="Acme Madrugá" />
 		<property name="banner" value="https://tinyurl.com/acme-madruga" />
-		<property name="message"
+		<property name="sysMessage"
 			value="Welcome to Acme Madrugá, the site to organise your processions." />
-		<property name="messageEs"
+		<property name="sysMessageEs"
 			value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones." />
 		<property name="countryCode" value="+34" />
-		<property name="positions">
-			<list>
-				<value>President
-				</value>
-				<value>Vice President
-				</value>
-				<value>Secretary
-				</value>
-				<value>Treasurer
-				</value>
-				<value>Historian
-				</value>
-				<value>Fundraiser
-				</value>
-				<value>Officer
-				</value>
-			</list>
-		</property>
-		<property name="positionsEs">
-			<list>
-				<value>Presidente
-				</value>
-				<value>Vice Presidente
-				</value>
-				<value>Secretario
-				</value>
-				<value>Tesorero
-				</value>
-				<value>Historiador
-				</value>
-				<value>Promotor
-				</value>
-				<value>Vocal
-				</value>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="brotherhood1" class="domain.Brotherhood">

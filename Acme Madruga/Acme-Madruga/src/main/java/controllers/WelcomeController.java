@@ -56,9 +56,9 @@ public class WelcomeController extends AbstractController {
 		String sysMessage = "";
 
 		if (lang == "en")
-			sysMessage = sysMessage + config.getMessage();
+			sysMessage = sysMessage + config.getSysMessage();
 		else if (lang == "es")
-			sysMessage = sysMessage + config.getMessageEs();
+			sysMessage = sysMessage + config.getSysMessageEs();
 
 		formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		moment = formatter.format(new Date());

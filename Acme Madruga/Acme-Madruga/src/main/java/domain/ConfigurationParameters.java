@@ -1,29 +1,23 @@
 
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class ConfigurationParameters extends DomainEntity {
 
-	private String				name;
-	private String				banner;
-	private String				message;
-	private String				messageEs;
-	private String				countryCode;
-	private Collection<String>	positions;
-	private Collection<String>	positionsEs;
+	private String	name;
+	private String	banner;
+	private String	sysMessage;
+	private String	sysMessageEs;
+	private String	countryCode;
 
 
 	@NotBlank
@@ -46,24 +40,6 @@ public class ConfigurationParameters extends DomainEntity {
 	}
 
 	@NotBlank
-	public String getMessage() {
-		return this.message;
-	}
-
-	public void setMessage(final String message) {
-		this.message = message;
-	}
-
-	@NotBlank
-	public String getMessageEs() {
-		return this.messageEs;
-	}
-
-	public void setMessageEs(final String messageEs) {
-		this.messageEs = messageEs;
-	}
-
-	@NotBlank
 	@Pattern(regexp = "^\\+\\d{1,3}$")
 	public String getCountryCode() {
 		return this.countryCode;
@@ -72,25 +48,21 @@ public class ConfigurationParameters extends DomainEntity {
 	public void setCountryCode(final String countryCode) {
 		this.countryCode = countryCode;
 	}
-
-	@ElementCollection
-	@NotEmpty
-	public Collection<String> getPositions() {
-		return this.positions;
+	@NotBlank
+	public String getSysMessage() {
+		return this.sysMessage;
 	}
 
-	public void setPositions(final Collection<String> positions) {
-		this.positions = positions;
+	public void setSysMessage(final String sysMessage) {
+		this.sysMessage = sysMessage;
 	}
 
-	@ElementCollection
-	@NotEmpty
-	public Collection<String> getPositionsEs() {
-		return this.positionsEs;
+	@NotBlank
+	public String getSysMessageEs() {
+		return this.sysMessageEs;
 	}
 
-	public void setPositionsEs(final Collection<String> positionsEs) {
-		this.positionsEs = positionsEs;
+	public void setSysMessageEs(final String sysMessageEs) {
+		this.sysMessageEs = sysMessageEs;
 	}
-
 }
