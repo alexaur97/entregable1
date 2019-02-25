@@ -25,8 +25,8 @@ public class ProcessionService {
 
 	//Service
 	private BrotherhoodService		brotherhoodService;
-
-	private AdministratorService	administratorService;
+	
+	private AdministratorService administratorService;
 
 
 	//Metodos CRUD  FR 10.2

@@ -26,8 +26,6 @@ public class ProcessionService {
 	//Service
 	private BrotherhoodService		brotherhoodService;
 
-	private AdministratorService	administratorService;
-
 
 	//Metodos CRUD  FR 10.2
 
@@ -46,13 +44,13 @@ public class ProcessionService {
 
 	public void delete(final Procession procession) {
 		Assert.notNull(procession);
-		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
 		this.processionRepository.delete(procession.getId());
 	}
 
 	public Procession save(final Procession procession) {
 		final Procession result;
-		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
 		Assert.notNull(procession);
 		result = this.processionRepository.save(procession);
 		return result;
@@ -60,7 +58,7 @@ public class ProcessionService {
 	}
 
 	public Procession create() {
-		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
 		return new Procession();
 	}
 
@@ -71,7 +69,7 @@ public class ProcessionService {
 		final int id = LoginService.getPrincipal().getId();
 		final Brotherhood bh = this.brotherhoodService.findOne(id);
 
-		if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
+		if (LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
 			res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
 		else {
 
@@ -88,7 +86,7 @@ public class ProcessionService {
 	// FR 12.3.5
 
 	public Collection<Procession> processionsBefore30Days(final Date date) {
-		Assert.isTrue(this.administratorService.findByPrincipal().equals(Authority.ADMINISTRATOR));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
 		final Collection<Procession> res = this.processionRepository.processionsBefore30Days(date);
 		Assert.notNull(res);
 		return res;
