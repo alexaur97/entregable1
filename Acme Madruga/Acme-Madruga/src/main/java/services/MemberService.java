@@ -25,6 +25,12 @@ public class MemberService {
 	@Autowired
 	private BrotherhoodRepository	brotherhoodRepository;
 
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private EnrolmentService	enrolmentService;
+
 
 	public Member create() {
 		final Member m = new Member();
@@ -39,16 +45,15 @@ public class MemberService {
 
 	}
 	public Member save(final Member m) {
-		if (!(this.findByPrincipal() == null)) {
+		if (!(this.findByPrincipal() == null))
 			//PUEDE QUE SEA COMPROBAR EL PROPIO MEMBER
 			Assert.isTrue(this.findByPrincipal().getId() == m.getId());
-		}
 		Assert.notNull(m);
 		return this.memberRepository.save(m);
 	}
 	//RF 8.2
 
-	public Collection<Member> findMembersByBrotherhood(int id) {
+	public Collection<Member> findMembersByBrotherhood(final int id) {
 		Collection<Member> result;
 		result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
@@ -62,7 +67,7 @@ public class MemberService {
 		return result;
 	}
 
-	public Member findMembersById(int id) {
+	public Member findMembersById(final int id) {
 		Member result;
 		result = this.memberRepository.findOne(id);
 		return result;
@@ -73,8 +78,9 @@ public class MemberService {
 		return result;
 	}
 	public Member findByPrincipal() {
-		Integer id = LoginService.getPrincipal().getId();
-		Member result = this.memberRepository.findMemberByPrincipal(id);
+		final Integer id = LoginService.getPrincipal().getId();
+		final Member result = this.memberRepository.findMemberByPrincipal(id);
 		return result;
 	}
+
 }

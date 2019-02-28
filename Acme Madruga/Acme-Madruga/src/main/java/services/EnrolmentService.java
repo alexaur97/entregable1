@@ -36,7 +36,7 @@ public class EnrolmentService {
 		return result;
 	}
 
-	public Enrolment findOne(int enrolmentId) {
+	public Enrolment findOne(final int enrolmentId) {
 		Assert.isTrue(enrolmentId != 0);
 		Enrolment result;
 		result = this.enrolmentRepository.findOne(enrolmentId);
@@ -44,24 +44,24 @@ public class EnrolmentService {
 		return result;
 	}
 
-	public void save(Enrolment enrolment) {
+	public void save(final Enrolment enrolment) {
 		Assert.notNull(enrolment);
 		this.enrolmentRepository.save(enrolment);
 	}
 
-	public void delete(Enrolment enrolment) {
+	public void delete(final Enrolment enrolment) {
 		Assert.notNull(enrolment);
 		this.enrolmentRepository.delete(enrolment);
 	}
 
 	// RF 10.3
-	public Enrolment create(Brotherhood brotherhood, Member member, Date moment, Position position) {
+	public Enrolment create(final Brotherhood brotherhood, final Member member, final Date moment, final Position position) {
 		Assert.notNull(member);
 		Assert.notNull(moment);
 		Assert.notNull(position);
 		Assert.notNull(brotherhood);
 		Assert.isTrue(LoginService.getPrincipal().getId() == brotherhood.getUserAccount().getId());
-		Enrolment result = new Enrolment();
+		final Enrolment result = new Enrolment();
 		result.setBrotherhood(brotherhood);
 		result.setMember(member);
 		result.setPosition(position);
@@ -69,4 +69,9 @@ public class EnrolmentService {
 		return result;
 	}
 
+	//----Ale------
+	public Integer countEnrolmentsByBrotherhood(final int id) {
+		return this.enrolmentRepository.countEnrolmentByBrotherhood(id);
+	}
+	//---Ale-----
 }
