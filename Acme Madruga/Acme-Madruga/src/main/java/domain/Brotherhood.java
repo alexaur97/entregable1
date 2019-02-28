@@ -8,8 +8,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -25,6 +27,8 @@ public class Brotherhood extends Actor {
 	private String				title;
 	private Date				establishmentDate;
 	private Collection<String>	photos;
+
+	private Collection<Member>	members;
 
 
 	// Getters y Setters
@@ -57,6 +61,16 @@ public class Brotherhood extends Actor {
 
 	public void setPhotos(final Collection<String> photos) {
 		this.photos = photos;
+	}
+
+	@NotNull
+	@ManyToMany
+	public Collection<Member> getMembers() {
+		return this.members;
+	}
+
+	public void setMembers(final Collection<Member> members) {
+		this.members = members;
 	}
 
 }
