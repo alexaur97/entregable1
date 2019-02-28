@@ -16,4 +16,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	@Query("select e.member from Enrolment e where e.brotherhood.id = ?1 unique")
 	Collection<Member> findMembersByBrotherhood(int id);
 
+	@Query("select m from Member m where m.userAccount.id = ?1 unique")
+	Member findMemberByPrincipal(int id);
 }

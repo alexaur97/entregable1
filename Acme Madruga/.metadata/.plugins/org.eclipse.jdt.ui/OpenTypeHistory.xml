@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=Acme-Madruga/src\/main\/java&lt;domain{Actor.java[Actor" modifiers="1025" timestamp="1551085438000"/>
-<typeInfo handle="=Acme-Madruga/src\/main\/java&lt;domain{DomainEntity.java[DomainEntity" modifiers="1025" timestamp="1551085438000"/>
+<typeInfo handle="=Acme-Madruga/src\/main\/java&lt;domain{Actor.java[Actor" modifiers="1025" timestamp="1551268606962"/>
+<typeInfo handle="=Acme-Madruga/src\/main\/java&lt;domain{DomainEntity.java[DomainEntity" modifiers="1025" timestamp="1551268607023"/>
 <typeInfo handle="=Acme-Madruga/C:\/Documents and Settings\/Student\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/1.4.3.RELEASE\/spring-data-jpa-1.4.3.RELEASE.jar&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1537437780877"/>
 </typeInfoHistroy>
