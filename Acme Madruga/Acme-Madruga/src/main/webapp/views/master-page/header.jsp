@@ -25,7 +25,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="configurationParameters/administrator/edit.do"><spring:message code="master.page.administrator.config" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
+					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.position" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>
