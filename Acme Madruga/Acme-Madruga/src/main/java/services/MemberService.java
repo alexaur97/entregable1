@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.BrotherhoodRepository;
 import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
@@ -20,7 +21,9 @@ import domain.Member;
 public class MemberService {
 
 	@Autowired
-	private MemberRepository	memberRepository;
+	private MemberRepository		memberRepository;
+	@Autowired
+	private BrotherhoodRepository	brotherhoodRepository;
 
 
 	public Member create() {
@@ -50,6 +53,15 @@ public class MemberService {
 		result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
 	}
+	public Collection<Member> findMembersByBrotherhoodPrincipal() {
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		Collection<Member> result;
+		Integer idB = LoginService.getPrincipal().getId();
+		Integer id = this.brotherhoodRepository.findByUserId(idB).getId();
+		result = this.memberRepository.findMembersByBrotherhood(id);
+		return result;
+	}
+
 	public Member findMembersById(int id) {
 		Member result;
 		result = this.memberRepository.findOne(id);
