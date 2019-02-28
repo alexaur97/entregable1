@@ -13,9 +13,9 @@ import domain.Member;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	// FR 8.2 - FR 10.3
-	@Query("select e.member from Enrolment e where e.brotherhood.id = ?1 unique")
+	@Query("select e.member from Enrolment e where e.brotherhood.id = ?1")
 	Collection<Member> findMembersByBrotherhood(int id);
 
-	@Query("select m from Member m where m.userAccount.id = ?1 unique")
+	@Query("select m from Member m where m.userAccount.id = ?1")
 	Member findMemberByPrincipal(int id);
 }

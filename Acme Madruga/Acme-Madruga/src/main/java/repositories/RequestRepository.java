@@ -28,7 +28,7 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.member.id = ?1 group by status")
 	Collection<Request> findRequestByMemberGroupByStatus(int id);
 
-	@Query("select r from Request r where r.procession.id = ?1 && r.status=?2 ")
+	@Query("select r from Request r where r.procession.id = ?1 and r.status=?2 ")
 	Collection<Request> findRequestApprovedByProcession(int id, String status);
 
 	// RF 12.3.4
