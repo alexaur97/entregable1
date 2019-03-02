@@ -58,8 +58,8 @@ public class FloatService {
 	}
 	//FR 8.2 - FR 10.1
 	public Collection<Float> findFloatsByBrotherhood(int id) {
+		Assert.notNull(id);
 		Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
-		Assert.notNull(res);
 		return res;
 	}
 }

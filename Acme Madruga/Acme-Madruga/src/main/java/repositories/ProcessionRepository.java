@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import domain.Procession;
 
 @Repository
-public interface ProcessionRepository extends JpaRepository<Procession, Integer> {
+public interface ProcessionRepository extends JpaRepository<domain.Procession, Integer> {
 
 	// FR 8.2 - FR 10.2
 	@Query("select p from Procession p where p.brotherhood.id = ?1")

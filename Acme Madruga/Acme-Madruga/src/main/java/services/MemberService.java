@@ -51,8 +51,8 @@ public class MemberService {
 	//RF 8.2
 
 	public Collection<Member> findMembersByBrotherhood(final int id) {
-		Collection<Member> result;
-		result = this.memberRepository.findMembersByBrotherhood(id);
+		Assert.notNull(id);
+		Collection<Member> result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
 	}
 	public Member findMembersById(final int id) {

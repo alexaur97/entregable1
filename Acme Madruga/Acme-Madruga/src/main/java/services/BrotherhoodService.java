@@ -73,15 +73,25 @@ public class BrotherhoodService {
 
 	public Collection<Brotherhood> findBrotherhoodByMemberBelong(final int id) {
 		Assert.isTrue(id != 0);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
-		Collection<Brotherhood> result;
-		result = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.MEMBER);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		Collection<Brotherhood> result = new ArrayList<Brotherhood>();
+		Collection<Brotherhood> brotherhoods;
+		brotherhoods = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
+		for(Brotherhood b : brotherhoods){
+			if(b.getMembers().contains(this.actorService.findByPrincipal())){
+				result.add(b);
+			}
+		}
 		return result;
 	}
 
 	public Collection<Brotherhood> findBrotherhoodByMemberHasBelonged(final int id) {
 		Assert.isTrue(id != 0);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.MEMBER);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Collection<Brotherhood> result;
 		result = this.brotherhoodRepository.findBrotherhoodByMemberHasBelonged(id);
 		return result;

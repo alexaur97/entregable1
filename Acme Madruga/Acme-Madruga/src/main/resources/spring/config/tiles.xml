@@ -29,6 +29,10 @@
 		
 		<value>/views/configurationParameters/tiles.xml</value>
 		<value>/views/position/tiles.xml</value>
+		<value>/views/brotherhood/tiles.xml</value>
+		<value>/views/float/tiles.xml</value>
+		<value>/views/procession/tiles.xml</value>
+		<value>/views/member/tiles.xml</value>
 		
 	</util:list>
 

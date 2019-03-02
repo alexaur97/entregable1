@@ -63,25 +63,31 @@ public class ProcessionService {
 		Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		return new Procession();
 	}
+	
+	public Collection<Procession> findProcessionsByBrotherhoodForList(final int idBrotherhood) {
+		Assert.notNull(idBrotherhood);
+		Collection<Procession> res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		return res;
+	}
 
 	// FR 8.2 - FR 10.2
 
 	public Collection<Procession> findProcessionsByBrotherhood(final int idBrotherhood) {
-		Collection<Procession> res = new ArrayList<>();
-		final int id = LoginService.getPrincipal().getId();
-		final Brotherhood bh = this.brotherhoodService.findOne(id);
+		Assert.notNull(idBrotherhood);
+		Collection<Procession> res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		//final int id = LoginService.getPrincipal().getId();
+		//final Brotherhood bh = this.brotherhoodService.findOne(id);
 
-		if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
-			res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-		else {
+		//if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
+			//res = 
+		//else {
 
-			final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-			for (final Procession procession : all)
-				if (!procession.getMode().equals("DRAFT"))
-					res.add(procession);
-		}
+			//final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+			//for (final Procession procession : all)
+				//if (!procession.getMode().equals("DRAFT"))
+					//res.add(procession);
+		//}
 
-		Assert.notNull(res);
 		return res;
 	}
 
