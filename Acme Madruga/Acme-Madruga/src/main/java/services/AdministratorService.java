@@ -22,6 +22,9 @@ public class AdministratorService {
 	@Autowired
 	private AdministratorRepository	administratorRepository;
 
+	@Autowired
+	private ActorService			actorService;
+
 
 	// Servicios ajenos
 
@@ -71,7 +74,7 @@ public class AdministratorService {
 
 		final Administrator a = this.findByUserId(user.getId());
 		Assert.notNull(a);
-
+		this.actorService.auth(a, Authority.ADMINISTRATOR);
 		return a;
 	}
 

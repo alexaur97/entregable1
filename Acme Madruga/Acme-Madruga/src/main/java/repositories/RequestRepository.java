@@ -28,15 +28,17 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 	@Query("select r from Request r where r.member.id = ?1 group by status")
 	Collection<Request> findRequestByMemberGroupByStatus(int id);
 
-	@Query("select r from Request r where r.procession.id = ?1 && r.status=?2 ")
+	@Query("select r from Request r where r.procession.id = ?1 and r.status=?2 ")
 	Collection<Request> findRequestApprovedByProcession(int id, String status);
 
-	// RF 12.3.4
-	@Query("select 1.0*(select count(r1) from Request r1 where r1.procession.id = ?1 and r1.status = 'PENDING'),1.0*(select count(r2) from Request r2 where r2.procession.id = ?1 and r2.status = 'APPROVED'),1.0*(select count(r3) from Request r3 where r3.procession.id = ?1 and r3.status = 'REJECTED'), count(r) from Request r where r.procession.id = ?1 ")
-	Collection<Double> ratioOfRequestByProcessionGroupedByStatus(int id);
+	//---Ale--- 
+	@Query("select sum(case when r.status='APPROVED' then 1.0 else 0.0 end)/count(r) from Request r")
+	Double approvedRatio();
 
-	// RF 12.3.6
-	@Query("select 1.0*(select count(r1) from Request r1 where r1.status = 'PENDING'),1.0*(select count(r2) from Request r2 where r2.status = 'APPROVED'),1.0*(select count(r3) from Request r3 where r3.status= 'REJECTED'), count(r) from Request r")
-	Collection<Double> ratioOfRequestGroupedByStatus(int id);
+	@Query("select sum(case when r.status='PENDING' then 1.0 else 0.0 end)/count(r) from Request r")
+	Double pendingRatio();
 
+	@Query("select sum(case when r.status='REJECTED' then 1.0 else 0.0 end)/count(r) from Request r")
+	Double rejectedRatio();
+	//---Ale---
 }

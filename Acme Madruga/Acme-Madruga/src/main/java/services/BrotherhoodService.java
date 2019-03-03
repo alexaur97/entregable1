@@ -103,4 +103,35 @@ public class BrotherhoodService {
 		return b;
 	}
 
+	//---Ale----
+
+	public Collection<Brotherhood> findLargest() {
+		final Collection<Brotherhood> result = new ArrayList<>();
+		final Collection<Brotherhood> largest = this.brotherhoodRepository.findLargest();
+		Assert.notNull(largest);
+		if (largest.size() > 3)
+			for (int i = 0; i < 3; i++) {
+				final Brotherhood b = (Brotherhood) largest.toArray()[i];
+				result.add(b);
+			}
+		else
+			result.addAll(largest);
+		return result;
+	}
+
+	public Collection<Brotherhood> findSmallest() {
+		final Collection<Brotherhood> result = new ArrayList<>();
+		final Collection<Brotherhood> smallest = this.brotherhoodRepository.findSmallest();
+		Assert.notNull(smallest);
+		if (smallest.size() > 3)
+			for (int i = 0; i < 3; i++) {
+				final Brotherhood b = (Brotherhood) smallest.toArray()[i];
+				result.add(b);
+			}
+		else
+			result.addAll(smallest);
+		return result;
+	}
+
+	//---Ale----
 }
