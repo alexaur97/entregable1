@@ -2,8 +2,8 @@
 package services;
 
 import java.util.Collection;
-import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -19,11 +19,14 @@ public class ProcessionService {
 
 	//Repositorios
 
+	@Autowired
 	private ProcessionRepository	processionRepository;
 
 	//Service
+	@Autowired
 	private BrotherhoodService		brotherhoodService;
 
+	@Autowired
 	private AdministratorService	administratorService;
 
 
@@ -91,9 +94,9 @@ public class ProcessionService {
 
 	// FR 12.3.5
 
-	public Collection<Procession> processionsBefore30Days(final Date date) {
-		Assert.isTrue(this.administratorService.findByPrincipal().equals(Authority.ADMINISTRATOR));
-		final Collection<Procession> res = this.processionRepository.processionsBefore30Days(date);
+	public Collection<Procession> processionsBefore30Days() {
+		this.administratorService.findByPrincipal();
+		final Collection<Procession> res = this.processionRepository.processionsBefore30Days();
 		Assert.notNull(res);
 		return res;
 	}

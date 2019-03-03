@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
@@ -60,6 +61,16 @@ public class ActorService {
 		result = this.actorRepository.findAll();
 		Assert.notNull(result);
 		return result;
+	}
+
+	public Boolean auth(final Actor a, final String auth) {
+		final UserAccount userAccount = a.getUserAccount();
+		final Collection<Authority> allAuths = userAccount.getAuthorities();
+		final Authority au = new Authority();
+		au.setAuthority(auth);
+		final Boolean res = allAuths.contains(au);
+		Assert.isTrue(res);
+		return res;
 	}
 
 }

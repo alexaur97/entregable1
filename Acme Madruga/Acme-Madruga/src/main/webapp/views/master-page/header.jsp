@@ -25,7 +25,11 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="configurationParameters/administrator/edit.do"><spring:message code="master.page.administrator.config" /></a></li>
+
 					<li><a href="position/administrator/list.do"><spring:message code="master.page.administrator.position" /></a></li>					
+
+					<li><a href="stats/administrator/display.do"><spring:message code="master.page.administrator.stats" /></a></li>					
+
 				</ul>
 			</li>
 		</security:authorize>
@@ -34,6 +38,8 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="brotherhood/list.do"><spring:message code="master.page.brotherhoods" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.signup.brotherhood" /></a></li>
+			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.signup.member" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
