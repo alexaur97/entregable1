@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Member;
+import domain.Position;
 import domain.Request;
 
 @Service
@@ -31,6 +32,14 @@ public class MemberService {
 	@Autowired
 	private EnrolmentService	enrolmentService;
 
+	
+	public Member findOne(int memberId){
+		Member result;
+
+		result = memberRepository.findOne(memberId);
+
+		return result;
+	}
 
 	public Member create() {
 		final Member m = new Member();

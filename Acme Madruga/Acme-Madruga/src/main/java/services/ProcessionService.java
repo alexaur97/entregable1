@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.ProcessionRepository;
 import security.Authority;
+import domain.Brotherhood;
+import domain.Member;
 import domain.Procession;
 import forms.ProcessionForm;
 
@@ -25,6 +28,9 @@ public class ProcessionService {
 	//Service
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+	
+	@Autowired
+	private MemberService		memberService;
 
 	@Autowired
 	private AdministratorService	administratorService;
@@ -37,6 +43,19 @@ public class ProcessionService {
 		//Assert.notNull(res);
 		return res;
 
+	}
+	
+	public Collection<Procession> findProcessionsAvailableForMember(){
+		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
+		final Member member = this.memberService.findByPrincipal();
+		final Collection<Procession> res = new ArrayList<Procession>();
+		for(Brotherhood b: brotherhoods){
+			if(b.getMembers().contains(member))
+				res.addAll(this.processionRepository.findProcessionsByBrotherhood(b.getId()));
+		}
+		
+		//Assert.notNull(res);
+		return res;
 	}
 
 	public Procession findOne(final int ProcessionId) {

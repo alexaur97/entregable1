@@ -47,15 +47,18 @@
 				<ul>
 					<li class="arrow"></li>
 			<li><a href="brotherhood/list.do"><spring:message code="master.page.allbrotherhoods" /></a></li>
-		
-		<security:authorize access="hasRole('BROTHERHOOD')">
-			<li><a href="brotherhood/procession/list.do"><spring:message code="master.page.processions" /></a></li>
-		</security:authorize>
-		
 		<security:authorize access="hasRole('MEMBER')">
 			<li><a href="brotherhood/member/myList.do"><spring:message code="master.page.mybrotherhoods" /></a></li>
 		</security:authorize>				</ul>
 			</li>
+			
+		<security:authorize access="hasRole('MEMBER')">
+			<li><a href="request/member/list.do"><spring:message code="master.page.requests" /></a></li>
+		</security:authorize>
+					
+		<security:authorize access="hasRole('BROTHERHOOD')">
+			<li><a href="brotherhood/procession/list.do"><spring:message code="master.page.processions" /></a></li>
+		</security:authorize>
 			
 			<li>
 				<a class="fNiv"> 
