@@ -39,7 +39,14 @@
 				</ul>
 			</li>
 		</security:authorize>
-		
+		<security:authorize access="hasRole('BROTHERHOOD')">
+			<li><a class="fNiv"><spring:message	code="master.page.brotherhood" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="member/brotherhood/list.do"><spring:message code="master.page.brotherhood.list" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>

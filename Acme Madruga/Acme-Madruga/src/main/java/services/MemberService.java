@@ -26,10 +26,10 @@ public class MemberService {
 	private BrotherhoodRepository	brotherhoodRepository;
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
-	private EnrolmentService	enrolmentService;
+	private EnrolmentService		enrolmentService;
 
 
 	public Member create() {
@@ -59,7 +59,8 @@ public class MemberService {
 		return result;
 	}
 	public Collection<Member> findMembersByBrotherhoodPrincipal() {
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		//CORREGIR
+		//Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
 		Collection<Member> result;
 		Integer idB = LoginService.getPrincipal().getId();
 		Integer id = this.brotherhoodRepository.findByUserId(idB).getId();

@@ -16,4 +16,10 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="administrator.action.1" /></p>
+<display:table name="members" id="member" requestURI="member/brotherhood/list.do" pagesize="5" class="displaytag">
+<display:column property="name" titleKey="Name"/>
+<display:column property="surname" titleKey="Surname"/>
+<display:column><a href="member/profile.do?memberId={{member.id}}">Profile</a>
+</display:column>
+
+</display:table>

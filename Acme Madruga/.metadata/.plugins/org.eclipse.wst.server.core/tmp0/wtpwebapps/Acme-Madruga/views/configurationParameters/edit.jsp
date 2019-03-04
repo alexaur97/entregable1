@@ -18,7 +18,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form modelAttribute="config"
+<form:form modelAttribute="configurationParameters"
 	action="configurationParameters/administrator/edit.do">
 	
 	<form:hidden path="id" />

@@ -14,7 +14,7 @@ import controllers.AbstractController;
 import domain.Member;
 
 @Controller
-@RequestMapping("/member/Brotherhood")
+@RequestMapping("member/brotherhood")
 public class MemberBrotherhoodController extends AbstractController {
 
 	@Autowired
@@ -27,7 +27,7 @@ public class MemberBrotherhoodController extends AbstractController {
 		Collection<Member> members = memberService.findMembersByBrotherhoodPrincipal();
 		result = new ModelAndView("member/list");
 		result.addObject("members", members);
-		result.addObject("requestURI", "/member/Brotherhood/list.do");
+		result.addObject("requestURI", "member/brotherhood/list.do");
 		return result;
 	}
 }

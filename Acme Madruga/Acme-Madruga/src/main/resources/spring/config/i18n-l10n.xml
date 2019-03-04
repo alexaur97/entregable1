@@ -28,6 +28,7 @@
 		<value>/views/profile/messages</value>
 		
 		<value>/views/configurationParameters/messages</value>
+		<value>/views/member/messages</value>
 		
 	</util:list>
 
