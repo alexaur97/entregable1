@@ -44,8 +44,6 @@
 	<display:column style="color:grey" titleKey="request.status" property="status" />
 	<display:column style="color:grey" titleKey="request.procession"
 		property="procession.title" />
-	<display:column style="color:grey" titleKey="request.row" property="row" />
-	<display:column style="color:grey" titleKey="request.column" property="column" />
 	<display:column titleKey="request.delete">
 		<acme:cancel url="/request/member/delete.do?requestId=${pendingRequest.id}"
 			code="request.delete" />
@@ -60,8 +58,6 @@
 	<display:column style="color:orange" titleKey="request.status" property="status" />
 	<display:column style="color:orange" titleKey="request.procession"
 		property="procession.title" />
-	<display:column style="color:orange" titleKey="request.row" property="row" />
-	<display:column style="color:orange" titleKey="request.column" property="column" />
 </display:table>
 
 
