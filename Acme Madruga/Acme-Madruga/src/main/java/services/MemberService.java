@@ -3,6 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Member;
+import domain.Request;
 
 @Service
 @Transactional
@@ -54,8 +57,8 @@ public class MemberService {
 	//RF 8.2
 
 	public Collection<Member> findMembersByBrotherhood(final int id) {
-		Collection<Member> result;
-		result = this.memberRepository.findMembersByBrotherhood(id);
+		Assert.notNull(id);
+		Collection<Member> result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
 	}
 	public Collection<Member> findMembersByBrotherhoodPrincipal() {
@@ -83,5 +86,32 @@ public class MemberService {
 		final Member result = this.memberRepository.findMemberByPrincipal(id);
 		return result;
 	}
+
+	//---Ale----
+
+	public Collection<Double> statsMembersPerBrotherhood() {
+		final Collection<Double> result = this.memberRepository.statsMembersPerBrotherhood();
+		Assert.notNull(result);
+		return result;
+	}
+	public Collection<Member> tenPercentMembers() {
+		Collection<Member> res = new ArrayList<>();
+		final Map<Member, Integer> m = new HashMap<>();
+		final Collection<Request> approved = this.memberRepository.approvedRequests();
+		final Double tenPerCent = approved.size() * 0.1;
+		for (final Request r : approved)
+			if (!m.containsKey(r.getMember()))
+				m.put(r.getMember(), 1);
+			else
+				m.put(r.getMember(), m.get(r.getMember()) + 1);
+		res = m.keySet();
+		for (final Member member : res)
+			if (m.get(member) < tenPerCent)
+				res.remove(member);
+		return res;
+
+	}
+
+	//---Ale----
 
 }

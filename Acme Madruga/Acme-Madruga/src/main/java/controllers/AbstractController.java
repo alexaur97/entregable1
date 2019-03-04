@@ -28,7 +28,7 @@ public class AbstractController {
 
 	@Autowired
 	private ConfigurationParametersService	configurationParametersService;
-
+	
 
 	@ExceptionHandler(Throwable.class)
 	public ModelAndView panic(final Throwable oops) {

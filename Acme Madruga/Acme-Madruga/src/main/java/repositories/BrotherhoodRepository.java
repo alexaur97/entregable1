@@ -36,4 +36,11 @@ public interface BrotherhoodRepository extends JpaRepository<domain.Brotherhood,
 	@Query("select b from Brotherhood b where b.userAccount.id=?1")
 	Brotherhood findByUserId(int id);
 
+	//---Ale---
+	@Query("select b from Brotherhood b order by b.members.size desc")
+	Collection<Brotherhood> findLargest();
+
+	@Query("select b from Brotherhood b order by b.members.size")
+	Collection<Brotherhood> findSmallest();
+	//---Ale---
 }

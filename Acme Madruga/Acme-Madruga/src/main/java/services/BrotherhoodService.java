@@ -73,15 +73,25 @@ public class BrotherhoodService {
 
 	public Collection<Brotherhood> findBrotherhoodByMemberBelong(final int id) {
 		Assert.isTrue(id != 0);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
-		Collection<Brotherhood> result;
-		result = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.MEMBER);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		Collection<Brotherhood> result = new ArrayList<Brotherhood>();
+		Collection<Brotherhood> brotherhoods;
+		brotherhoods = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
+		for(Brotherhood b : brotherhoods){
+			if(b.getMembers().contains(this.actorService.findByPrincipal())){
+				result.add(b);
+			}
+		}
 		return result;
 	}
 
 	public Collection<Brotherhood> findBrotherhoodByMemberHasBelonged(final int id) {
 		Assert.isTrue(id != 0);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.MEMBER);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Collection<Brotherhood> result;
 		result = this.brotherhoodRepository.findBrotherhoodByMemberHasBelonged(id);
 		return result;
@@ -103,4 +113,35 @@ public class BrotherhoodService {
 		return b;
 	}
 
+	//---Ale----
+
+	public Collection<Brotherhood> findLargest() {
+		final Collection<Brotherhood> result = new ArrayList<>();
+		final Collection<Brotherhood> largest = this.brotherhoodRepository.findLargest();
+		Assert.notNull(largest);
+		if (largest.size() > 3)
+			for (int i = 0; i < 3; i++) {
+				final Brotherhood b = (Brotherhood) largest.toArray()[i];
+				result.add(b);
+			}
+		else
+			result.addAll(largest);
+		return result;
+	}
+
+	public Collection<Brotherhood> findSmallest() {
+		final Collection<Brotherhood> result = new ArrayList<>();
+		final Collection<Brotherhood> smallest = this.brotherhoodRepository.findSmallest();
+		Assert.notNull(smallest);
+		if (smallest.size() > 3)
+			for (int i = 0; i < 3; i++) {
+				final Brotherhood b = (Brotherhood) smallest.toArray()[i];
+				result.add(b);
+			}
+		else
+			result.addAll(smallest);
+		return result;
+	}
+
+	//---Ale----
 }
