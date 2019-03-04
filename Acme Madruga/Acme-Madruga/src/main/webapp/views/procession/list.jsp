@@ -31,4 +31,14 @@
 	<display:column titleKey="procession.moment" property="moment" />
 	<display:column titleKey="procession.ticker" property="ticker" />
 	<display:column titleKey="procession.mode" property="mode" />
+	<display:column titleKey="position.edit">
+		<a href="brotherhood/procession/edit.do?processionId=${row.id}">
+		<spring:message code="procession.edit" />
+		</a>
+	</display:column>
 </display:table>
+</div>
+</div>
+</div>
+		<acme:cancel url="/brotherhood/procession/create.do" code="procession.create"/>
+</div>
