@@ -33,4 +33,6 @@
 </form:select>
 
 <input type="submit" name="save" value="submit"/>
+<acme:cancel url="/member/brotherhood/list.do"
+code="procession.cancel" />
 </form:form>
