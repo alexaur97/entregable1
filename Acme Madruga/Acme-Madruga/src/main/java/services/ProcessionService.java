@@ -150,12 +150,12 @@ public class ProcessionService {
 //		return res;
 //	}
 
-	public Procession reconstruct(final Procession procession, BindingResult binding) {
+	public Procession reconstruct( Procession procession, BindingResult binding) {
 		final Procession res;
 		
-		if (procession.getId() == 0)
+		if (procession.getId() == 0){
 			res = procession;
-		else
+		}else{
 			res = processionRepository.findOne(procession.getId());
 		
 		res.setDescription(procession.getDescription());
@@ -164,8 +164,9 @@ public class ProcessionService {
 		res.setMoment(procession.getMoment());
 		res.setTitle(procession.getTitle());
 		res.setTicker(procession.getTicker());
-		
+		}	
 		validator.validate(res, binding);
+		
 		return res;
 	}
 
