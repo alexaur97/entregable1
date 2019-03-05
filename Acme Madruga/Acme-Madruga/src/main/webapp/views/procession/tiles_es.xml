@@ -20,5 +20,15 @@
 		<put-attribute name="body" value="/views/procession/list.jsp" />
 	</definition>
 	
+	<definition name="procession/edit" extends="master.page">
+		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="body" value="/views/procession/edit.jsp" />
+	</definition>
+	
+	<definition name="procession/create" extends="master.page">
+		<put-attribute name="title" value="Procesiones" />
+		<put-attribute name="body" value="/views/procession/edit.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

@@ -25,10 +25,17 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table name="processions" id="procession"
-	requestURI="${requestURI }">
+	requestURI="${requestURI}">
 	<display:column titleKey="procession.title"  property="title" />
 	<display:column titleKey="procession.description" property="description" />
 	<display:column titleKey="procession.moment" property="moment" />
 	<display:column titleKey="procession.ticker" property="ticker" />
 	<display:column titleKey="procession.mode" property="mode" />
+	<display:column titleKey="position.edit">
+		<a href="brotherhood/procession/edit.do?processionId=${procession.id}">
+		<spring:message code="procession.edit" />
+		</a>
+	</display:column>
 </display:table>
+
+		<acme:cancel url="/brotherhood/procession/create.do" code="procession.create"/>

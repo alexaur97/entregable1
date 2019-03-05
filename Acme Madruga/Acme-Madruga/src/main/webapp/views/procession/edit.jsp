@@ -31,10 +31,11 @@
 	
 	<form:hidden path="processionId"/>
 	<acme:textbox code="procession.title" path="title"/>
-	<acme:textbox code="procession.description" path="description"/>
+	<acme:textarea code="procession.description" path="description"/>
 	<acme:textbox code="procession.moment" path="moment"/>
+	<acme:textbox code="procession.ticker" path="ticker"/>
 	<acme:textbox code="procession.mode" path="mode"/>
-	<acme:textbox code="procession.brotherhood" path="brotherhood"/>
+	<acme:texbox code="procession.brotherhood" path="brotherhood"/>
 	<acme:textbox code="procession.floats" path="floats"/>
 	
 
