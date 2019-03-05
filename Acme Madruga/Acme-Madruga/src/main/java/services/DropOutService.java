@@ -52,20 +52,26 @@ public class DropOutService {
 
 	public void save(DropOut dropOut) {
 		Assert.notNull(dropOut);
+		Member m = dropOut.getMember();
+		Brotherhood b = dropOut.getBrotherhood();
+		Collection<Member> ms = b.getMembers();
+		ms.remove(m);
+		b.setMembers(ms);
+		this.brotherhoodService.save(b);
 		this.dropOutRepository.save(dropOut);
 	}
-
 	// FR 10.3 - 11.2
 	public DropOut create(Member member, Brotherhood brotherhood, Date moment) {
 		Assert.notNull(member);
 		Assert.notNull(brotherhood);
 		Assert.notNull(moment);
 		Assert.isTrue(LoginService.getPrincipal().getId() == member.getUserAccount().getId() || LoginService.getPrincipal().getId() == brotherhood.getUserAccount().getId());
-		Assert.isTrue(this.brotherhoodService.findBrotherhoodByMemberBelong(member.getUserAccount().getId()).contains(brotherhood));
+		Assert.isTrue(brotherhood.getMembers().contains(member));
 		DropOut result = new DropOut();
 		result.setBrotherhood(brotherhood);
 		result.setMember(member);
 		result.setMoment(moment);
 		return result;
 	}
+
 }

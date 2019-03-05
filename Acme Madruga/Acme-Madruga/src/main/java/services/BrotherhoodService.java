@@ -29,7 +29,10 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		Assert.notNull(b);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		this.brotherhoodRepository.flush();
 		return this.brotherhoodRepository.save(b);
 
 	}
@@ -79,8 +82,8 @@ public class BrotherhoodService {
 		Collection<Brotherhood> result = new ArrayList<Brotherhood>();
 		Collection<Brotherhood> brotherhoods;
 		brotherhoods = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
-		for(Brotherhood b : brotherhoods){
-			if(b.getMembers().contains(this.actorService.findByPrincipal())){
+		for (Brotherhood b : brotherhoods) {
+			if (b.getMembers().contains(this.actorService.findByPrincipal())) {
 				result.add(b);
 			}
 		}

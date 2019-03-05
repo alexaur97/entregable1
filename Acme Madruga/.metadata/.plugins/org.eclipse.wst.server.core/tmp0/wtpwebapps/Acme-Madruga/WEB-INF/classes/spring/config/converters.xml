@@ -23,14 +23,32 @@
 			<bean class="converters.ClassToString" /> 
 		-->
 		
+		<bean class="converters.ActorToStringConverter"/>
+		<bean class="converters.AdministratorToStringConverter"/>
+		<bean class="converters.BrotherhoodToStringConverter"/>
+		<bean class="converters.DropOutToStringConverter"/>
+		<bean class="converters.EnrolmentToStringConverter"/>
+		<bean class="converters.FloatToStringConverter"/>
+		<bean class="converters.MemberToStringConverter"/>
+		<bean class="converters.PositionToStringConverter"/>
 		<bean class="converters.ProcessionToStringConverter"/>
+		<bean class="converters.RequestToStringConverter"/>
 		
 		<!-- 
 			Add your own converters using entries of the following form: 
 			<bean class="converters.StringToClass" /> 
 		-->
 		
+		<bean class="converters.StringToActorConverter"/>
+		<bean class="converters.StringToAdministratorConverter"/>
+		<bean class="converters.StringToBrotherhoodConverter"/>
+		<bean class="converters.StringToDropOutConverter"/>
+		<bean class="converters.StringToEnrolmentConverter"/>
+		<bean class="converters.StringToFloatConverter"/>
+		<bean class="converters.StringToMemberConverter"/>
+		<bean class="converters.StringToPositionConverter"/>
 		<bean class="converters.StringToProcessionConverter"/>
+		<bean class="converters.StringToRequestConverter"/>
 		
 	</util:list>
 	

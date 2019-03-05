@@ -15,6 +15,7 @@ import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
 import domain.Position;
+import forms.EnrolmentForm;
 
 @Service
 @Transactional
@@ -23,6 +24,9 @@ public class EnrolmentService {
 	// Repositorios propios
 	@Autowired
 	private EnrolmentRepository	enrolmentRepository;
+
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
 
 
 	// Servicios ajenos
@@ -73,5 +77,14 @@ public class EnrolmentService {
 	public Integer countEnrolmentsByBrotherhood(final int id) {
 		return this.enrolmentRepository.countEnrolmentByBrotherhood(id);
 	}
-	//---Ale-----
+	//JAVI
+	public Enrolment reconstruct(final EnrolmentForm enrolmentForm) {
+		final Enrolment res;
+		Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+		Member member = enrolmentForm.getMember();
+		Date moment = new Date();
+		Position position = enrolmentForm.getPosition();
+		res = this.create(brotherhood, member, moment, position);
+		return res;
+	}
 }

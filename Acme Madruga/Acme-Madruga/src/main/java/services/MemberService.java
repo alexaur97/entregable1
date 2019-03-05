@@ -62,8 +62,9 @@ public class MemberService {
 		return result;
 	}
 	public Collection<Member> findMembersByBrotherhoodPrincipal() {
-		//CORREGIR
-		//Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		Authority auth = new Authority();
+		auth.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Collection<Member> result;
 		Integer idB = LoginService.getPrincipal().getId();
 		Integer id = this.brotherhoodRepository.findByUserId(idB).getId();

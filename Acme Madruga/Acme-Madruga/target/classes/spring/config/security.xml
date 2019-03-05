@@ -59,7 +59,11 @@
 
 		<security:intercept-url pattern="/configurationParameters/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/position/administrator/*" access="hasRole('ADMINISTRATOR')" />
-		<security:intercept-url pattern="/member/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/member/brotherhood/list.do" access="permitAll" />
+		<security:intercept-url pattern="/member/brotherhood/profile.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/dropOut/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/enrolment/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/enrolment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
 
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

@@ -29,7 +29,12 @@
 	<display:column titleKey="member.name" property="name" />
 	<display:column titleKey="member.middleName" property="middleName" />
 	<display:column titleKey="member.surname" property="surname" />
-	<display:column titleKey="member.email" property="email" />
-	<display:column titleKey="member.phone" property="phoneNumber" />
-	<display:column titleKey="member.address" property="address" />
+	<display:column titleKey="member.profile">
+		<acme:cancel url="/member/brotherhood/profile.do?memberId=${member.id}" code="member.profile" />
+	</display:column>
+	<display:column titleKey="member.remove">
+		<acme:cancel url="/dropOut/brotherhood/create.do?memberId=${member.id}" code="member.remove" />
+	</display:column>
 </display:table>
+		<acme:cancel url="/enrolment/brotherhood/create.do" code="member.enrol" />
+
