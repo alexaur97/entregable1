@@ -26,6 +26,7 @@ public class ProcessionForm {
 	private String				description;
 	private Date				moment;
 	private String				mode;
+	private String 				ticker;
 
 	// Atributos Públicos
 
@@ -35,6 +36,17 @@ public class ProcessionForm {
 
 	public ProcessionForm() {
 		super();
+	}
+	
+	
+	@NotBlank
+	public String getTicker() {
+		
+		return this.ticker;
+	}
+
+	public void setTicker(final String ticker) {
+		this.ticker = ticker;
 	}
 
 	public int getProcessionId() {

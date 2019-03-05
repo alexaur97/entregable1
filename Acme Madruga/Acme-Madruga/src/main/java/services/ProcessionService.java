@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.ProcessionRepository;
 import security.Authority;
+import security.LoginService;
+import domain.Brotherhood;
 import domain.Procession;
 import forms.ProcessionForm;
 
@@ -46,14 +49,14 @@ public class ProcessionService {
 	}
 
 	public void delete(final Procession procession) {
-		Assert.notNull(procession);
+		//Assert.notNull(procession);
 		//Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		this.processionRepository.delete(procession.getId());
 	}
 
 	public Procession save(final Procession procession) {
 		final Procession result;
-		//Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+	//	Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		//Assert.notNull(procession);
 		result = this.processionRepository.save(procession);
 		return result;
@@ -66,7 +69,7 @@ public class ProcessionService {
 	}
 
 	public Collection<Procession> findProcessionsByBrotherhoodForList(final int idBrotherhood) {
-		Assert.notNull(idBrotherhood);
+		//Assert.notNull(idBrotherhood);
 		final Collection<Procession> res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
 		return res;
 	}
@@ -74,20 +77,21 @@ public class ProcessionService {
 	// FR 8.2 - FR 10.2
 
 	public Collection<Procession> findProcessionsByBrotherhood(final int idBrotherhood) {
-		Assert.notNull(idBrotherhood);
+		//Assert.notNull(idBrotherhood);
 		final Collection<Procession> res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-		//final int id = LoginService.getPrincipal().getId();
-		//final Brotherhood bh = this.brotherhoodService.findOne(id);
-
-		//if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood))
-		//res = 
-		//else {
-
-		//final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-		//for (final Procession procession : all)
-		//if (!procession.getMode().equals("DRAFT"))
-		//res.add(procession);
-		//}
+//		Collection<Procession> res = new ArrayList<>();
+//		final int id = LoginService.getPrincipal().getId();
+//		final Brotherhood bh = this.brotherhoodService.findOne(id);
+//
+//		if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood)){
+//		res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+//		}else {
+//
+//		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+//		for (final Procession procession : all)
+//		if (!procession.getMode().equals("DRAFT"))
+//		res.add(procession);
+//		}
 
 		return res;
 	}
@@ -97,7 +101,7 @@ public class ProcessionService {
 	public Collection<Procession> processionsBefore30Days() {
 		this.administratorService.findByPrincipal();
 		final Collection<Procession> res = this.processionRepository.processionsBefore30Days();
-		Assert.notNull(res);
+		//Assert.notNull(res);
 		return res;
 	}
 
@@ -113,6 +117,7 @@ public class ProcessionService {
 		res.setMoment(procession.getMoment());
 		res.setTitle(procession.getTitle());
 		res.setProcessionId(processionId);
+		res.setTicker(procession.getTicker());
 
 		return res;
 	}
@@ -129,6 +134,7 @@ public class ProcessionService {
 		res.setMode(processionForm.getMode());
 		res.setMoment(processionForm.getMoment());
 		res.setTitle(processionForm.getTitle());
+		res.setTicker(processionForm.getTicker());
 		return res;
 	}
 
