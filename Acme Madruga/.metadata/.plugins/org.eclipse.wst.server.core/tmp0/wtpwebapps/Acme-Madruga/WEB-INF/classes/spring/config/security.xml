@@ -51,6 +51,9 @@
 		<security:intercept-url pattern="/brotherhood/member/myList.do" access="hasRole('MEMBER')" />
 
 		<security:intercept-url pattern="/brotherhood/procession/list.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/brotherhood/procession/create.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/brotherhood/procession/edit.do" access="hasRole('BROTHERHOOD')" />
+
 
 
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" />

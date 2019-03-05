@@ -4,6 +4,8 @@ package services;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,6 @@ import domain.Brotherhood;
 import domain.Enrolment;
 import domain.Member;
 import domain.Position;
-import forms.EnrolmentForm;
 
 @Service
 @Transactional
@@ -27,6 +28,9 @@ public class EnrolmentService {
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private Validator			validator;
 
 
 	// Servicios ajenos
@@ -50,6 +54,12 @@ public class EnrolmentService {
 
 	public void save(final Enrolment enrolment) {
 		Assert.notNull(enrolment);
+		Brotherhood b = enrolment.getBrotherhood();
+		Member m = enrolment.getMember();
+		Collection<Member> ms = b.getMembers();
+		ms.add(m);
+		b.setMembers(ms);
+		this.brotherhoodService.save(b);
 		this.enrolmentRepository.save(enrolment);
 	}
 
@@ -78,13 +88,21 @@ public class EnrolmentService {
 		return this.enrolmentRepository.countEnrolmentByBrotherhood(id);
 	}
 	//JAVI
-	public Enrolment reconstruct(final EnrolmentForm enrolmentForm) {
+	public Enrolment reconstruct(final Enrolment enrolment) {
 		final Enrolment res;
+		Assert.notNull(enrolment.getMember());
+		Assert.notNull(enrolment.getPosition());
 		Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Member member = enrolmentForm.getMember();
+		Member member = enrolment.getMember();
 		Date moment = new Date();
-		Position position = enrolmentForm.getPosition();
+		Position position = enrolment.getPosition();
 		res = this.create(brotherhood, member, moment, position);
+		Assert.notNull(res);
+		return res;
+	}
+	public Collection<Enrolment> enrolmentByMember(int id) {
+		Collection<Enrolment> res;
+		res = this.enrolmentRepository.enrolmentByMember(id);
 		return res;
 	}
 }

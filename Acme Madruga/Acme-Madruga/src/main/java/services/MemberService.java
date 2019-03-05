@@ -16,8 +16,8 @@ import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Brotherhood;
 import domain.Member;
-import domain.Position;
 import domain.Request;
 
 @Service
@@ -35,8 +35,8 @@ public class MemberService {
 	@Autowired
 	private EnrolmentService		enrolmentService;
 
-	
-	public Member findOne(int memberId){
+
+	public Member findOne(int memberId) {
 		Member result;
 
 		result = memberRepository.findOne(memberId);
@@ -122,6 +122,13 @@ public class MemberService {
 
 	}
 
-	//---Ale----
-
+	//JAVI
+	public Collection<Member> findAllNotIn() {
+		Collection<Member> result;
+		result = this.memberRepository.findAll();
+		Brotherhood b = this.brotherhoodService.findByPrincipal();
+		Collection<Member> ms = b.getMembers();
+		result.removeAll(ms);
+		return result;
+	}
 }

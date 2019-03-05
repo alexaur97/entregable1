@@ -73,5 +73,9 @@ public class DropOutService {
 		result.setMoment(moment);
 		return result;
 	}
-
+	public Collection<DropOut> dropOutByMember(int id) {
+		Collection<DropOut> res;
+		res = this.dropOutRepository.dropOutByMember(id);
+		return res;
+	}
 }

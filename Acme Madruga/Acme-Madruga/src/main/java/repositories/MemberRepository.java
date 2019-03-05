@@ -15,8 +15,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	// FR 8.2 - FR 10.3
 
-
-
 	@Query("select distinct e.member from Enrolment e where e.brotherhood.id = ?1")
 	Collection<Member> findMembersByBrotherhood(int id);
 
@@ -29,5 +27,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	@Query("select r from Request r where r.status='APPROVED'")
 	Collection<Request> approvedRequests();
-	//--------- Ale
+	//JAVI
+
 }

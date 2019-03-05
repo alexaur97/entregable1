@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
+import services.DropOutService;
+import services.EnrolmentService;
 import services.MemberService;
 import controllers.AbstractController;
+import domain.DropOut;
+import domain.Enrolment;
 import domain.Member;
 
 @Controller
@@ -23,6 +27,10 @@ public class MemberBrotherhoodController extends AbstractController {
 	MemberService		memberService;
 	@Autowired
 	BrotherhoodService	brotherhoodService;
+	@Autowired
+	EnrolmentService	enrolmentService;
+	@Autowired
+	DropOutService		dropOutService;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -43,10 +51,13 @@ public class MemberBrotherhoodController extends AbstractController {
 			Assert.notNull(memberId);
 
 			member = this.memberService.findMembersById(memberId);
-
+			Collection<Enrolment> enrolments = this.enrolmentService.enrolmentByMember(memberId);
+			Collection<DropOut> dropOuts = this.dropOutService.dropOutByMember(memberId);
 			result = new ModelAndView("member/profile");
 			result.addObject("requestURI", "member/profile.do?=" + memberId);
 			result.addObject("member", member);
+			result.addObject("dropOuts", dropOuts);
+			result.addObject("enrolments", enrolments);
 		} catch (Exception e) {
 			result = new ModelAndView("redirect:/#");
 		}

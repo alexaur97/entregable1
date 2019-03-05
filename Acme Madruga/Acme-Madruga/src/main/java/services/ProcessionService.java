@@ -7,10 +7,10 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import repositories.ProcessionRepository;
-import security.Authority;
+import domain.Brotherhood;
+import domain.Member;
 import domain.Procession;
 import forms.ProcessionForm;
 
@@ -26,9 +26,9 @@ public class ProcessionService {
 	//Service
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
-	
+
 	@Autowired
-	private MemberService		memberService;
+	private MemberService			memberService;
 
 	@Autowired
 	private AdministratorService	administratorService;
@@ -42,16 +42,16 @@ public class ProcessionService {
 		return res;
 
 	}
-	
-	public Collection<Procession> findProcessionsAvailableForMember(){
+
+	public Collection<Procession> findProcessionsAvailableForMember() {
 		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		final Member member = this.memberService.findByPrincipal();
 		final Collection<Procession> res = new ArrayList<Procession>();
-		for(Brotherhood b: brotherhoods){
-			if(b.getMembers().contains(member))
+		for (Brotherhood b : brotherhoods) {
+			if (b.getMembers().contains(member))
 				res.addAll(this.processionRepository.findProcessionsByBrotherhood(b.getId()));
 		}
-		
+
 		//Assert.notNull(res);
 		return res;
 	}
@@ -70,7 +70,7 @@ public class ProcessionService {
 
 	public Procession save(final Procession procession) {
 		final Procession result;
-	//	Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+		//	Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
 		//Assert.notNull(procession);
 		result = this.processionRepository.save(procession);
 		return result;
@@ -93,19 +93,19 @@ public class ProcessionService {
 	public Collection<Procession> findProcessionsByBrotherhood(final int idBrotherhood) {
 		//Assert.notNull(idBrotherhood);
 		final Collection<Procession> res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-//		Collection<Procession> res = new ArrayList<>();
-//		final int id = LoginService.getPrincipal().getId();
-//		final Brotherhood bh = this.brotherhoodService.findOne(id);
-//
-//		if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood)){
-//		res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-//		}else {
-//
-//		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-//		for (final Procession procession : all)
-//		if (!procession.getMode().equals("DRAFT"))
-//		res.add(procession);
-//		}
+		//		Collection<Procession> res = new ArrayList<>();
+		//		final int id = LoginService.getPrincipal().getId();
+		//		final Brotherhood bh = this.brotherhoodService.findOne(id);
+		//
+		//		if (this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD) && (bh.getId() == idBrotherhood)){
+		//		res = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		//		}else {
+		//
+		//		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		//		for (final Procession procession : all)
+		//		if (!procession.getMode().equals("DRAFT"))
+		//		res.add(procession);
+		//		}
 
 		return res;
 	}

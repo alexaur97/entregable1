@@ -29,3 +29,19 @@
 <br/><spring:message code="member.surname"/>: <jstl:out value="${member.surname}"></jstl:out>
 <br/><spring:message code="member.email"/>: <jstl:out value="${member.email}"></jstl:out>
 <br/><spring:message code="member.address"/>: <jstl:out value="${member.address}"></jstl:out>
+
+<br/><spring:message code="member.enrolment"/>:
+<display:table name="enrolments" id="enrolment"
+	requestURI="${requestURI }">
+	<display:column titleKey="member.brotherhood" property="brotherhood.name" />
+	<display:column titleKey="member.moment" property="moment" />
+	
+</display:table>
+
+<br/><spring:message code="member.dropOut"/>:
+<display:table name="dropOuts" id="dropOut"
+	requestURI="${requestURI }">
+	<display:column titleKey="member.brotherhood" property="brotherhood.name" />
+	<display:column titleKey="member.moment" property="moment" />
+	
+</display:table>

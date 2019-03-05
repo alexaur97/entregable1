@@ -24,7 +24,7 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form modelAttribute="enrolmentForm" action="enrolment/brotherhood/edit.do">
+<form:form modelAttribute="enrolment" action="enrolment/brotherhood/edit.do">
 <form:select id="members" path="member">
 <form:options items="${members}" itemLabel="name" itemValue="id"/>
 </form:select>
