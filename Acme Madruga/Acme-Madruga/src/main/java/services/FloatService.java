@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -17,23 +18,25 @@ public class FloatService {
 
 	//Repositorio
 
+	@Autowired
 	private FloatRepository		floatRepository;
 
 	//Servicios
+	@Autowired
 	private BrotherhoodService	brotherhoodService;
 
 
 	//Metodos CRUD
 
 	public Collection<Float> findAll() {
-		Collection<Float> res = this.floatRepository.findAll();
+		final Collection<Float> res = this.floatRepository.findAll();
 		Assert.notNull(res);
 		return res;
 
 	}
 
 	public Float findOne(final int FloatId) {
-		Float res = this.floatRepository.findOne(FloatId);
+		final Float res = this.floatRepository.findOne(FloatId);
 		Assert.notNull(res);
 		return res;
 	}
@@ -57,9 +60,10 @@ public class FloatService {
 		return new Float();
 	}
 	//FR 8.2 - FR 10.1
-	public Collection<Float> findFloatsByBrotherhood(int id) {
+	public Collection<Float> findFloatsByBrotherhood(final int id) {
 		Assert.notNull(id);
-		Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
+		System.out.println(this.floatRepository);
+		final Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
 		return res;
 	}
 }

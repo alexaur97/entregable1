@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -15,6 +16,8 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Brotherhood;
+import domain.Member;
+import forms.BrotherhoodRegisterForm;
 
 @Service
 @Transactional
@@ -76,23 +79,21 @@ public class BrotherhoodService {
 
 	public Collection<Brotherhood> findBrotherhoodByMemberBelong(final int id) {
 		Assert.isTrue(id != 0);
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
-		Collection<Brotherhood> result = new ArrayList<Brotherhood>();
+		final Collection<Brotherhood> result = new ArrayList<Brotherhood>();
 		Collection<Brotherhood> brotherhoods;
 		brotherhoods = this.brotherhoodRepository.findBrotherhoodByMemberBelong(id);
-		for (Brotherhood b : brotherhoods) {
-			if (b.getMembers().contains(this.actorService.findByPrincipal())) {
+		for (final Brotherhood b : brotherhoods)
+			if (b.getMembers().contains(this.actorService.findByPrincipal()))
 				result.add(b);
-			}
-		}
 		return result;
 	}
 
 	public Collection<Brotherhood> findBrotherhoodByMemberHasBelonged(final int id) {
 		Assert.isTrue(id != 0);
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Collection<Brotherhood> result;
@@ -143,6 +144,36 @@ public class BrotherhoodService {
 			}
 		else
 			result.addAll(smallest);
+		return result;
+	}
+
+	public Brotherhood reconstruct(final BrotherhoodRegisterForm r) {
+		Assert.isTrue(r.getPassword().equals(r.getConfirmPassword()));
+		final Brotherhood result = this.create();
+		final UserAccount userAccount = result.getUserAccount();
+
+		final Md5PasswordEncoder pe = new Md5PasswordEncoder();
+		final String password = pe.encodePassword(r.getPassword(), null);
+
+		userAccount.setUsername(r.getUsername());
+		userAccount.setPassword(password);
+
+		result.setUserAccount(userAccount);
+
+		result.setName(r.getName());
+		result.setMiddleName(r.getMiddleName());
+		result.setSurname(r.getSurName());
+		result.setPhoto(r.getPhoto());
+		result.setEmail(r.getEmail());
+		result.setPhoneNumber(r.getPhone());
+		result.setAddress(r.getAddress());
+
+		result.setTitle(r.getTitle());
+		result.setEstablishmentDate(r.getEstablishmentDate());
+		result.setPhotos(r.getPhotos());
+		final Collection<Member> members = new ArrayList<>();
+		result.setMembers(members);
+
 		return result;
 	}
 

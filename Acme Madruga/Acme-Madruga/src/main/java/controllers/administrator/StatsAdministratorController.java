@@ -11,11 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
 import services.MemberService;
+import services.PositionService;
 import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Brotherhood;
 import domain.Member;
+import domain.Position;
 import domain.Procession;
 
 @Controller
@@ -34,6 +36,9 @@ public class StatsAdministratorController extends AbstractController {
 	@Autowired
 	private ProcessionService	processionService;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display() {
@@ -46,6 +51,17 @@ public class StatsAdministratorController extends AbstractController {
 		final Double rejectedRatio = this.requestService.rejectedRatio();
 		final Collection<Procession> soon = this.processionService.processionsBefore30Days();
 		final Collection<Member> members = this.memberService.tenPercentMembers();
+		final Collection<Position> positions = this.positionService.findAll();
+
+		String pos = "";
+		String posEs = "";
+
+		for (final Position p : positions) {
+			final Integer i = this.positionService.numberOfPositionsById(p.getId());
+			pos = pos + "{label: '" + p.getName() + "', backgroundColor:'blue', data['" + i + "']},";
+			posEs = posEs + "{label: '" + p.getNameEs() + "', backgroundColor:'blue', data['" + i + "']},";
+		}
+
 		result = new ModelAndView("stats/display");
 		result.addObject("membersPerBrotherhood", membersPerBrotherhood);
 		result.addObject("largestBrotherhoods", largestBrotherhoods);
@@ -55,6 +71,8 @@ public class StatsAdministratorController extends AbstractController {
 		result.addObject("rejectedRatio", rejectedRatio);
 		result.addObject("soon", soon);
 		result.addObject("members", members);
+		result.addObject("pos", pos);
+		result.addObject("posEs", posEs);
 
 		return result;
 	}

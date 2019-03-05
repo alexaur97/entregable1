@@ -18,6 +18,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+
 <spring:message code="stats.members.brotherhood.average"/>: <jstl:out value="${membersPerBrotherhood[0][0]}"/>
 <br/>
 <spring:message code="stats.members.brotherhood.min"/>: <jstl:out value="${membersPerBrotherhood[0][1]}"/>
@@ -60,3 +61,37 @@
 <li><jstl:out value="${member.name}"/> <jstl:out value="${member.surname}"/></li>
 </jstl:forEach>
 </ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<div style="width:25%;"><canvas id="myChart" width="400" height="400"></canvas></div>
+
+<script>
+window.onload = function(){
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Positions"],
+        datasets: [${pos}]
+        },
+        options: {
+        scales: {
+            yAxes: [{
+            	stacked: false,
+                ticks: {
+                    beginAtZero:true
+                }
+            }],
+            xAxes: [{
+            	barPercentage:0.5,
+            	stacked: true,
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+};
+</script>
