@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BrotherhoodService;
+import services.FloatService;
 import services.ProcessionService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.Procession;
-import forms.ProcessionForm;
+import domain.Float;
+
 
 @Controller
 @RequestMapping("/brotherhood/procession/")
@@ -30,6 +34,14 @@ public class BrotherhoodProcessionController extends AbstractController {
 
 	@Autowired
 	private ActorService		actorService;
+	
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
+	
+	@Autowired
+	private FloatService floatService;
+	
+	
 
 
 	public BrotherhoodProcessionController() {
@@ -54,13 +66,20 @@ public class BrotherhoodProcessionController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		ProcessionForm processionForm;
+		Procession procession;
+		procession = new Procession();
+		Brotherhood bh = this.brotherhoodService.findByPrincipal();
+		//processionForm = new ProcessionForm();
+		procession.setId(0);
+		procession.setBrotherhood(bh);
+		
+	
+		
+		Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
 
-		processionForm = new ProcessionForm();
-		processionForm.setProcessionId(0);
-
-		result = new ModelAndView("procession/create");
-		result.addObject("processionForm", processionForm);
+		result = new ModelAndView("procession/edit");
+		result.addObject("procession", procession);
+		result.addObject("floats", floats);
 
 		return result;
 	}
@@ -68,29 +87,34 @@ public class BrotherhoodProcessionController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int processionId) {
+	public ModelAndView edit(@RequestParam final int processionId ) {
 		final ModelAndView res = new ModelAndView("procession/edit");
-		final ProcessionForm processionForm = this.processionService.toForm(processionId);
-		res.addObject("processionForm", processionForm);
+		final Procession procession = this.processionService.findOne(processionId);
+		Brotherhood bh = this.brotherhoodService.findByPrincipal();
+		Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
+		res.addObject("procession", procession);
+		res.addObject("floats", floats);
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final ProcessionForm processionForm, final BindingResult binding) {
+	public ModelAndView save(Procession procession,  BindingResult binding) {
 		ModelAndView res;
-		if (processionForm.getProcessionId() == 0)
-			res = new ModelAndView("procession/create");
-		else
+		
+		procession = processionService.reconstruct(procession, binding);
+		
+		if (binding.hasErrors()){
 			res = new ModelAndView("procession/edit");
-
-		if (binding.hasErrors())
-			res.addObject("processionForm", processionForm);
-		else
+			Brotherhood bh = this.brotherhoodService.findByPrincipal();
+			Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
+			res.addObject("procession", procession);
+			res.addObject("floats", floats);
+		}else
 			try {
-				final Procession procession = this.processionService.reconstruct(processionForm);
 				this.processionService.save(procession);
 				res = new ModelAndView("redirect:/brotherhood/procession/list.do");
 			} catch (final Throwable oops) {
+				res = new ModelAndView("redirect:/brotherhood/procession/edit.do");
 				res.addObject("message", "procession.commit.error");
 			}
 
@@ -98,16 +122,16 @@ public class BrotherhoodProcessionController extends AbstractController {
 	}
 
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final ProcessionForm processionForm, final BindingResult binding) {
+	public ModelAndView delete( Procession procession, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
-			final Procession procession = this.processionService.reconstruct(processionForm);
+			 procession = this.processionService.reconstruct(procession,binding);
 			this.processionService.delete(procession);
 			result = new ModelAndView("redirect:/brotherhood/procession/list.do");
 		} catch (final Throwable oops) {
 			result = new ModelAndView("procession/edit");
-			result.addObject("processionForm", processionForm);
+			result.addObject("procession", procession);
 			result.addObject("message", oops.getMessage());
 			final String msg = oops.getMessage();
 			if (msg.equals("cannotDelete")) {

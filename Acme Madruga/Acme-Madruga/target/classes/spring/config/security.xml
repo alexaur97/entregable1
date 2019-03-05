@@ -49,6 +49,8 @@
 		<security:intercept-url pattern="/stats/administrator/display.do" access="hasRole('ADMINISTRATOR')" /> 
 
 		<security:intercept-url pattern="/brotherhood/member/myList.do" access="hasRole('MEMBER')" /> 
+		<security:intercept-url pattern="/request/member/list.do" access="hasRole('MEMBER')" /> 
+		<security:intercept-url pattern="/request/member/*" access="hasRole('MEMBER')" /> 
 		
 		<security:intercept-url pattern="/brotherhood/procession/list.do" access="hasRole('BROTHERHOOD')" /> 
 		<security:intercept-url pattern="/brotherhood/procession/create.do" access="hasRole('BROTHERHOOD')" /> 

@@ -14,6 +14,7 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+//import domain.Administrator;
 import domain.Brotherhood;
 
 @Service
@@ -29,7 +30,7 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		Assert.notNull(b);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		this.findByPrincipal();
 		return this.brotherhoodRepository.save(b);
 
 	}
@@ -43,7 +44,7 @@ public class BrotherhoodService {
 
 	public Brotherhood findOne(final int id) {
 		Assert.isTrue(id != 0);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		this.findByPrincipal();
 		Brotherhood result;
 		result = this.brotherhoodRepository.findOne(id);
 		return result;
@@ -66,7 +67,7 @@ public class BrotherhoodService {
 
 	public void delete(final Brotherhood brotherhood) {
 		Assert.notNull(brotherhood);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.BROTHERHOOD));
+		this.findByPrincipal();
 		this.brotherhoodRepository.delete(brotherhood);
 
 	}
@@ -104,7 +105,7 @@ public class BrotherhoodService {
 
 		final Brotherhood b = this.findByUserId(user.getId());
 		Assert.notNull(b);
-
+		this.actorService.auth(b, Authority.BROTHERHOOD);
 		return b;
 	}
 
