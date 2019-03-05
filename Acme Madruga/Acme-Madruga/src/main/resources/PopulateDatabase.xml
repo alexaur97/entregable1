@@ -13,7 +13,7 @@
 	<!-- Other domain beans come here -->
 
 	<bean id="userAccount1" class="security.UserAccount">
-		<property name="username" value="admin1" />
+		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="authorities">
 			<list>
@@ -25,7 +25,7 @@
 	</bean>
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="brotherhood1" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -36,7 +36,7 @@
 	</bean>
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="brotherhood2" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="88f1b810c40cd63107fb758fef4d77db" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -47,7 +47,7 @@
 	</bean>
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="brotherhood3" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="cb8f36c7d5bbbc6aa5798a0e5796ebd5" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -66,7 +66,46 @@
 		<property name="phoneNumber" value="698765432" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
-
+	
+	<bean id="actor2" class="domain.Member">
+		<property name="name" value="Member1" />
+		<property name="surname" value="Number One" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member1@" />
+		<property name="phoneNumber" value="698765431" />
+		<property name="userAccount" ref="userAccount2" />
+	</bean>
+	
+	<bean id="actor3" class="domain.Member">
+		<property name="name" value="Member" />
+		<property name="surname" value="Number Two" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="@" />
+		<property name="phoneNumber" value="698765430" />
+		<property name="userAccount" ref="userAccount3" />
+	</bean>
+	
+	<bean id="actor4" class="domain.Member">
+		<property name="name" value="Member3" />
+		<property name="surname" value="Number Three" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member3@" />
+		<property name="phoneNumber" value="698765429" />
+		<property name="userAccount" ref="userAccount4" />
+	</bean>
+	
+	<bean id="actor5" class="domain.Member">
+		<property name="name" value="Member" />
+		<property name="surname" value="Number four" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="member4@gmail.com" />
+		<property name="phoneNumber" value="698765431" />
+		<property name="userAccount" ref="userAccount9" />
+	</bean>
 
 
 	<bean id="configurationParameters" class="domain.ConfigurationParameters">
@@ -250,7 +289,7 @@
 	<!-- MI PARTE -->
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="member1" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="c7764cfed23c5ca3bb393308a0da2306" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -259,15 +298,7 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="actor2" class="domain.Member">
-		<property name="name" value="Member1" />
-		<property name="surname" value="Number One" />
-		<property name="photo"
-			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="member1@" />
-		<property name="phoneNumber" value="698765431" />
-		<property name="userAccount" ref="userAccount2" />
-	</bean>
+	
 
 	<bean id="position1" class="domain.Position">
 		<property name="name" value="President" />
@@ -307,7 +338,7 @@
 
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="member2" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="88ed421f060aadcacbd63f28d889797f" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -316,15 +347,7 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="actor3" class="domain.Member">
-		<property name="name" value="Member" />
-		<property name="surname" value="Number Two" />
-		<property name="photo"
-			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="@" />
-		<property name="phoneNumber" value="698765430" />
-		<property name="userAccount" ref="userAccount3" />
-	</bean>
+	
 
 	<bean id="position3" class="domain.Position">
 		<property name="name" value="Vice President" />
@@ -367,7 +390,7 @@
 
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="member3" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="3ef4802d8a37022fd187fbd829d1c4d6" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -376,15 +399,7 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="actor4" class="domain.Member">
-		<property name="name" value="Member3" />
-		<property name="surname" value="Number Three" />
-		<property name="photo"
-			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="member3@" />
-		<property name="phoneNumber" value="698765429" />
-		<property name="userAccount" ref="userAccount4" />
-	</bean>
+	
 
 	<bean id="position4" class="domain.Position">
 		<property name="name" value="President" />
@@ -515,7 +530,7 @@
 
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="member4" />
-		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="password" value="a998123003066ac9fa7de4b100e7c4bc" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -524,15 +539,7 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="actor5" class="domain.Member">
-		<property name="name" value="Member" />
-		<property name="surname" value="Number four" />
-		<property name="photo"
-			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="member4@gmail.com" />
-		<property name="phoneNumber" value="698765431" />
-		<property name="userAccount" ref="userAccount9" />
-	</bean>
+	
 
 	<bean id="position8" class="domain.Position">
 		<property name="name" value="Vice President" />
