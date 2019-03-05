@@ -1,69 +1,67 @@
-package services; 
 
-import java.util.Collection; 
+package services;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.stereotype.Service; 
-import org.springframework.transaction.annotation.Transactional; 
-import org.springframework.util.Assert; 
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import repositories.PositionRepository;
-
-import domain.Position; 
+import domain.Position;
 import forms.PositionForm;
 
-@Service 
-@Transactional 
-public class PositionService { 
+@Service
+@Transactional
+public class PositionService {
 
 	//Managed repository -------------------
 	@Autowired
-	private PositionRepository positionRepository;
+	private PositionRepository	positionRepository;
 
 
 	//Supporting Services ------------------
 
-
 	//Simple CRUD methods--------------------
 
-	public Position create(){
+	public Position create() {
 		return new Position();
 	}
 
-	public Collection<Position> findAll(){
+	public Collection<Position> findAll() {
 		Collection<Position> result;
 
-		result = positionRepository.findAll();
+		result = this.positionRepository.findAll();
 
 		return result;
 	}
 
-	public Position findOne(int positionId){
+	public Position findOne(final int positionId) {
 		Position result;
 
-		result = positionRepository.findOne(positionId);
+		result = this.positionRepository.findOne(positionId);
 
 		return result;
 	}
 
-	public void save(Position position){
+	public void save(final Position position) {
 		Assert.notNull(position);
 
-		positionRepository.save(position);
+		this.positionRepository.save(position);
 	}
 
-	public void delete(Position position){
-		Assert.isTrue(checkIfNotAssigned(position.getId()),"cannotDelete");
-		positionRepository.delete(position);
+	public void delete(final Position position) {
+		Assert.isTrue(this.checkIfNotAssigned(position.getId()), "cannotDelete");
+		this.positionRepository.delete(position);
 	}
-
 
 	//Other Methods--------------------
-	
-	public Boolean checkIfNotAssigned (final int positionId) {
+
+	public Boolean checkIfNotAssigned(final int positionId) {
 		return this.positionRepository.checkIfNotAssigned(positionId);
 	}
-	
+
 	public PositionForm toForm(final int positionId) {
 		final PositionForm res = new PositionForm();
 		final Position position = this.findOne(positionId);
@@ -83,4 +81,10 @@ public class PositionService {
 		res.setNameEs(positionForm.getNameEs());
 		return res;
 	}
-} 
+
+	public Integer numberOfPositionsById(final Integer id) {
+		final Integer res = this.positionRepository.numberOfPositionsById(id);
+		Assert.notNull(res);
+		return res;
+	}
+}

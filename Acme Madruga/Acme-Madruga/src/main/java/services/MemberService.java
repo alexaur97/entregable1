@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -17,6 +18,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Member;
 import domain.Request;
+import forms.MemberRegisterForm;
 
 @Service
 @Transactional
@@ -24,12 +26,6 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository	memberRepository;
-
-	@Autowired
-	private BrotherhoodService	brotherhoodService;
-
-	@Autowired
-	private EnrolmentService	enrolmentService;
 
 
 	public Member create() {
@@ -45,7 +41,7 @@ public class MemberService {
 
 	}
 	public Member save(final Member m) {
-		if (!(this.findByPrincipal() == null))
+		if (m.getId() != 0)
 			//PUEDE QUE SEA COMPROBAR EL PROPIO MEMBER
 			Assert.isTrue(this.findByPrincipal().getId() == m.getId());
 		Assert.notNull(m);
@@ -55,7 +51,7 @@ public class MemberService {
 
 	public Collection<Member> findMembersByBrotherhood(final int id) {
 		Assert.notNull(id);
-		Collection<Member> result = this.memberRepository.findMembersByBrotherhood(id);
+		final Collection<Member> result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
 	}
 	public Member findMembersById(final int id) {
@@ -69,11 +65,12 @@ public class MemberService {
 		return result;
 	}
 	public Member findByPrincipal() {
-		final Integer id = LoginService.getPrincipal().getId();
-		final Member result = this.memberRepository.findMemberByPrincipal(id);
+		final UserAccount u = LoginService.getPrincipal();
+		Member result = null;
+		if (u != null)
+			result = this.memberRepository.findMemberByPrincipal(u.getId());
 		return result;
 	}
-
 	//---Ale----
 
 	public Collection<Double> statsMembersPerBrotherhood() {
@@ -97,6 +94,30 @@ public class MemberService {
 				res.remove(member);
 		return res;
 
+	}
+
+	public Member reconstruct(final MemberRegisterForm r) {
+		Assert.isTrue(r.getPassword().equals(r.getConfirmPassword()));
+		final Member result = this.create();
+		final UserAccount userAccount = result.getUserAccount();
+
+		final Md5PasswordEncoder pe = new Md5PasswordEncoder();
+		final String password = pe.encodePassword(r.getPassword(), null);
+
+		userAccount.setUsername(r.getUsername());
+		userAccount.setPassword(password);
+
+		result.setUserAccount(userAccount);
+
+		result.setName(r.getName());
+		result.setMiddleName(r.getMiddleName());
+		result.setSurname(r.getSurName());
+		result.setPhoto(r.getPhoto());
+		result.setEmail(r.getEmail());
+		result.setPhoneNumber(r.getPhone());
+		result.setAddress(r.getAddress());
+
+		return result;
 	}
 
 	//---Ale----

@@ -93,7 +93,7 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "\\d+")
+	@Pattern(regexp = "\\+\\d{2} (\\(\\d{0,3}\\))?\\d{4,}|\\d{4,}| Null")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

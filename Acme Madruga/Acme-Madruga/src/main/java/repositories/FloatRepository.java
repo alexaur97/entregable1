@@ -13,7 +13,7 @@ import domain.Float;
 public interface FloatRepository extends JpaRepository<Float, Integer> {
 
 	// FR 8.2 - FR 10.1
-	@Query("select f from Float f where f.brotherhood.id = ?1")
+	@Query("select f from Float f where f.brotherhood.id=?1")
 	Collection<Float> findFloatsByBrotherhood(int id);
 
 }

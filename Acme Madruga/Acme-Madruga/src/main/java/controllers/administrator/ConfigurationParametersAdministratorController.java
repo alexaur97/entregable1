@@ -87,11 +87,11 @@ public class ConfigurationParametersAdministratorController extends AbstractCont
 
 	}
 
-	private ModelAndView createEditModelAndView(final ConfigurationParameters config) {
+	protected ModelAndView createEditModelAndView(final ConfigurationParameters config) {
 		return this.createEditModelAndView(config, null);
 	}
 
-	private ModelAndView createEditModelAndView(final ConfigurationParameters configurationParameters, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final ConfigurationParameters configurationParameters, final String messageCode) {
 		final ModelAndView result;
 		result = new ModelAndView("configurationParameters/edit");
 		result.addObject("configurationParameters", configurationParameters);
