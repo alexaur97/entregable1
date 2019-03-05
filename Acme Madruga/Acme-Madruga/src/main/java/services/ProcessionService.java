@@ -4,15 +4,22 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+
 
 import repositories.ProcessionRepository;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Procession;
-import forms.ProcessionForm;
+
 
 @Service
 @Transactional
@@ -32,6 +39,9 @@ public class ProcessionService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+	
+	@Autowired
+	private Validator validator;
 
 
 	//Metodos CRUD  FR 10.2
@@ -70,8 +80,12 @@ public class ProcessionService {
 
 	public Procession save(final Procession procession) {
 		final Procession result;
-		//	Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
-		//Assert.notNull(procession);
+		Brotherhood bh = this.brotherhoodService.findByPrincipal();
+		Assert.notNull(procession);
+		
+		
+		procession.setBrotherhood(bh);
+		
 		result = this.processionRepository.save(procession);
 		return result;
 
@@ -121,34 +135,37 @@ public class ProcessionService {
 
 	//Other Methods--------------------
 
-	public ProcessionForm toForm(final int processionId) {
-		final ProcessionForm res = new ProcessionForm();
-		final Procession procession = this.findOne(processionId);
+//	public ProcessionForm toForm(final int processionId) {
+//		final ProcessionForm res = new ProcessionForm();
+//		final Procession procession = this.findOne(processionId);
+//		
+//		res.setDescription(procession.getDescription());
+//		res.setFloats(procession.getFloats());
+//		res.setMode(procession.getMode());
+//		res.setMoment(procession.getMoment());
+//		res.setTitle(procession.getTitle());
+//		res.setProcessionId(processionId);
+//		res.setTicker(procession.getTicker());
+//
+//		return res;
+//	}
+
+	public Procession reconstruct(final Procession procession, BindingResult binding) {
+		final Procession res;
+		
+		if (procession.getId() == 0)
+			res = procession;
+		else
+			res = processionRepository.findOne(procession.getId());
+		
 		res.setDescription(procession.getDescription());
-		res.setBrotherhood(procession.getBrotherhood());
 		res.setFloats(procession.getFloats());
 		res.setMode(procession.getMode());
 		res.setMoment(procession.getMoment());
 		res.setTitle(procession.getTitle());
-		res.setProcessionId(processionId);
 		res.setTicker(procession.getTicker());
-
-		return res;
-	}
-
-	public Procession reconstruct(final ProcessionForm processionForm) {
-		final Procession res;
-		if (processionForm.getProcessionId() == 0)
-			res = this.create();
-		else
-			res = this.findOne(processionForm.getProcessionId());
-		res.setDescription(processionForm.getDescription());
-		res.setBrotherhood(processionForm.getBrotherhood());
-		res.setFloats(processionForm.getFloats());
-		res.setMode(processionForm.getMode());
-		res.setMoment(processionForm.getMoment());
-		res.setTitle(processionForm.getTitle());
-		res.setTicker(processionForm.getTicker());
+		
+		validator.validate(res, binding);
 		return res;
 	}
 

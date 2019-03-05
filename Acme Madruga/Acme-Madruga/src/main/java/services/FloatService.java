@@ -17,7 +17,6 @@ import domain.Float;
 public class FloatService {
 
 	//Repositorio
-
 	@Autowired
 	private FloatRepository		floatRepository;
 
