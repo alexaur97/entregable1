@@ -34,6 +34,7 @@
 		<value>/views/procession/messages</value>
 		<value>/views/float/messages</value>
 		<value>/views/member/messages</value>
+		<value>/views/request/messages</value>
 
 		<value>/views/stats/messages</value>
 
