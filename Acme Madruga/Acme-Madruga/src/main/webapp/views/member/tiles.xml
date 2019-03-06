@@ -32,4 +32,8 @@
 		<put-attribute name="title" value="Profile" />
 		<put-attribute name="body" value="/views/member/profile.jsp" />
 	</definition>
+	<definition name="member/histogram" extends="master.page">
+		<put-attribute name="title" value="Histogram" />
+		<put-attribute name="body" value="/views/member/histogram.jsp" />
+	</definition>
 </tiles-definitions>
