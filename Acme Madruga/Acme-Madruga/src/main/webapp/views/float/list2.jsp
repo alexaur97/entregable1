@@ -24,15 +24,21 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table name="floats" id="float"
+<display:table name="floats" id="floaat"
 	requestURI="${requestURI }">
 	<display:column titleKey="float.picture" > <img src="${brotherhood.picture}" alt="floatLogo" height="200" width="350"/></display:column>
 	<display:column titleKey="float.title" property="title" />
-<%--   	<display:column titleKey="float.edit">
- 	
- 	<acme:cancel url="/brotherhood/float/edit.do?floatId=${float.id}" code ="float.edit"/>
-
-	</display:column>  --%>
+	<display:column titleKey="float.edit">
+		<a href="brotherhood/float/edit.do?floatId=${floaat.id}">
+		<spring:message code="float.edit" />
+		</a>
+		</display:column>
+		<display:column titleKey="float.show">
+		<a href="brotherhood/float/show.do?floatId=${floaat.id}">
+		<spring:message code="float.show" />
+		</a>
+	</display:column>
 </display:table>
 
-<%--  <acme:cancel url="/brotherhood/float/create.do" code="float.create"/>  --%>
+
+  <acme:cancel url="/brotherhood/float/create.do" code="float.create"/>  
