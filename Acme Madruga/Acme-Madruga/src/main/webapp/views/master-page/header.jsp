@@ -66,6 +66,10 @@
 			<li><a href="brotherhood/procession/list.do"><spring:message code="master.page.processions" /></a></li>
 		</security:authorize>
 
+<security:authorize access="hasRole('BROTHERHOOD')">
+			<li><a href="request/brotherhood/list.do"><spring:message code="master.page.requests" /></a></li>
+		</security:authorize>
+
 			<li>
 				<a class="fNiv">
 					<spring:message code="master.page.profile" />
