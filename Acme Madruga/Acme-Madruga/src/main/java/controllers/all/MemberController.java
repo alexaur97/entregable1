@@ -80,9 +80,12 @@ public class MemberController extends AbstractController {
 				result = this.createEditModelAndView(memberRegisterForm);
 
 				final Collection<String> accounts = this.actorService.findAllAccounts();
+				final Collection<String> emails = this.actorService.findAllEmails();
 
 				if (accounts.contains(memberRegisterForm.getUsername()))
 					result.addObject("message", "register.username.error");
+				else if (emails.contains(memberRegisterForm.getEmail()))
+					result.addObject("message", "register.email.error");
 				else if (!memberRegisterForm.getConfirmPassword().equals(memberRegisterForm.getPassword()))
 					result.addObject("message", "register.password.error");
 				else

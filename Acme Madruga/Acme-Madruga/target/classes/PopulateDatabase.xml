@@ -72,7 +72,7 @@
 		<property name="surname" value="Number One" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="member1@" />
+		<property name="email" value="member1@gmail.com" />
 		<property name="phoneNumber" value="698765431" />
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
@@ -82,7 +82,7 @@
 		<property name="surname" value="Number Two" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="@" />
+		<property name="email" value="member2@gmail.com" />
 		<property name="phoneNumber" value="698765430" />
 		<property name="userAccount" ref="userAccount3" />
 	</bean>
@@ -92,7 +92,7 @@
 		<property name="surname" value="Number Three" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="member3@" />
+		<property name="email" value="member3@gmail.com" />
 		<property name="phoneNumber" value="698765429" />
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
@@ -134,7 +134,7 @@
 		<property name="surname" value="Number One" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="brotherhood1@" />
+		<property name="email" value="brother hood1@gmail.com" />
 		<property name="phoneNumber" value="698765432" />
 		<property name="members">
 			<list>
@@ -160,8 +160,8 @@
 		<property name="surname" value="Number two" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="brotherhood2@" />
-		<property name="phoneNumber" value="698765432" />
+		<property name="email" value="brotherhood2@gmail.com" />
+		<property name="phoneNumber" value="+34 698765432" />
 		<property name="members">
 			<list>
 				<ref bean="actor3" />
@@ -186,8 +186,8 @@
 		<property name="surname" value="Number three" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="brotherhood3@" />
-		<property name="phoneNumber" value="698765432" />
+		<property name="email" value="brotherhood3@gmail.com" />
+		<property name="phoneNumber" value="+34 (1) 698765432" />
 		<property name="members">
 			<list>
 				<ref bean="actor3" />
@@ -479,7 +479,7 @@
 		<property name="photo"
 			value="http://hermandaddelcalvario.org/wp-content/uploads/2011/09/faldon-portada-Febrero-2013.jpg" />
 		<property name="email" value="brotherhood4@gmail.com" />
-		<property name="phoneNumber" value="698765432" />
+		<property name="phoneNumber" value="+34 (999) 698765432" />
 		<property name="members">
 			<list>
 				<ref bean="actor5" />

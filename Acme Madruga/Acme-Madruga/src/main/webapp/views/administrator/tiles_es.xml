@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="administrator/action-1" extends="master.page">	
-		<put-attribute name="title" value="Administrador: Acción 1" />
-		<put-attribute name="body" value="/views/administrator/action-1.jsp" />
+	<definition name="administrator/edit" extends="master.page">	
+		<put-attribute name="title" value="Nuevo administrador" />
+		<put-attribute name="body" value="/views/administrator/edit.jsp" />
 	</definition>
 	
 	<definition name="administrator/action-2" extends="master.page">	

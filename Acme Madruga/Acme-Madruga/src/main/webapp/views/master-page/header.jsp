@@ -32,6 +32,7 @@
 
 				</ul>
 			</li>
+			<li><a class="fNiv" href="administrator/administrator/create.do"><spring:message code="master.page.signup.admin" /></a></li>
 		</security:authorize>
 
 
