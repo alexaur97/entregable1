@@ -1,41 +1,27 @@
 
 package forms;
 
-import java.util.Collection;
-import java.util.Date;
-
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.format.annotation.DateTimeFormat;
 
-public class BrotherhoodRegisterForm {
+public class AdministratorRegisterForm {
 
-	private String				name;
-	private String				middleName;
-	private String				surName;
-	private String				photo;
-	private String				email;
-	private String				phone;
-	private String				address;
-	private String				username;
-	private String				password;
-	private String				confirmPassword;
-	private Boolean				terms;
-
-	//atributos de brotherhood
-	private String				title;
-	private Date				establishmentDate;
-	private Collection<String>	photos;
+	private String	name;
+	private String	middleName;
+	private String	surName;
+	private String	photo;
+	private String	email;
+	private String	phone;
+	private String	address;
+	private String	username;
+	private String	password;
+	private String	confirmPassword;
+	private Boolean	terms;
 
 
 	@NotBlank
@@ -74,7 +60,7 @@ public class BrotherhoodRegisterForm {
 	}
 
 	@Column(unique = true)
-	@Pattern(regexp = "([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+|[a-zA-Z0-9]+[ a-zA-Z0-9]*\\<([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+\\>")
+	@Pattern(regexp = "([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+|[a-zA-Z0-9]+[ a-zA-Z0-9]*\\<([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)*\\>")
 	public String getEmail() {
 		return this.email;
 	}
@@ -135,36 +121,6 @@ public class BrotherhoodRegisterForm {
 
 	public void setTerms(final Boolean terms) {
 		this.terms = terms;
-	}
-
-	@NotBlank
-	public String getTitle() {
-		return this.title;
-	}
-
-	public void setTitle(final String title) {
-		this.title = title;
-	}
-
-	@Past
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getEstablishmentDate() {
-		return this.establishmentDate;
-	}
-
-	public void setEstablishmentDate(final Date establishmentDate) {
-		this.establishmentDate = establishmentDate;
-	}
-
-	@ElementCollection
-	@NotEmpty
-	public Collection<String> getPhotos() {
-		return this.photos;
-	}
-
-	public void setPhotos(final Collection<String> photos) {
-		this.photos = photos;
 	}
 
 }

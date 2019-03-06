@@ -78,8 +78,8 @@ public class ActorService {
 		final Collection<String> result = this.actorRepository.findAllAccounts();
 		return result;
 	}
-	public ActorEditForm toForm(Actor actor) {
-		ActorEditForm res = new ActorEditForm();
+	public ActorEditForm toForm(final Actor actor) {
+		final ActorEditForm res = new ActorEditForm();
 		res.setName(actor.getName());
 		res.setMiddleName(actor.getMiddleName());
 		res.setSurname(actor.getSurname());
@@ -96,5 +96,10 @@ public class ActorService {
 		au.setAuthority(auth);
 		final Boolean res = allAuths.contains(au);
 		return res;
+	}
+
+	public Collection<String> findAllEmails() {
+		final Collection<String> result = this.actorRepository.findAllEmails();
+		return result;
 	}
 }

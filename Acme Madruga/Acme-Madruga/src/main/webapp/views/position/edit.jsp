@@ -26,14 +26,15 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
 <fieldset class="col-md-6 col-md-offset-3">
 
-<form:form action="position/administrator/edit.do" modelAttribute="positionForm"  class="form-horizontal" method="post">
+<form:form action="position/administrator/edit.do" modelAttribute="position"  class="form-horizontal" method="post">
 	<div class="form-group ">
 	
-	<form:hidden path="positionId"/>
+	<form:hidden path="id"/>
+	<form:hidden path="version"/>
 	<acme:textbox code="position.name" path="name"/>
 	<acme:textbox code="position.nameEs" path="nameEs"/>
 	<acme:submit name="save" code="position.save"/>
-	<jstl:if test="${positionForm.positionId!=0}">
+	<jstl:if test="${position.id!=0}">
 	<acme:submitConfirmation name="delete" code="position.delete" onclick="position.delete.confirmation"/>
 	</jstl:if>
 	<acme:cancel url="/position/administrator/list.do" code="position.cancel"/>
@@ -41,7 +42,7 @@
 </div>	
 </form:form>
 </fieldset>
-<jstl:if test = "${position.cannotDelete}">
+<jstl:if test = "${cannotDelete}">
 </jstl:if>
 </div>	
 </div>	
