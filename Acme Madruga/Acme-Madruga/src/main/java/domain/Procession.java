@@ -78,8 +78,9 @@ public class Procession extends DomainEntity {
 		return this.ticker;
 	}
 
-	public void setTicker(final String ticker) {
-		this.ticker = ticker;
+	public void setTicker(final String date) {
+		String cadena = this.creaString();
+		this.ticker = date+"-"+ cadena ;
 	}
 
 	@NotBlank
@@ -100,5 +101,21 @@ public class Procession extends DomainEntity {
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
 	}
+
+	public String creaString(){
+	char[] elementos ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ'
+			,'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
+			char[] conjunto = new char[5];
+			String cadena;
+			for(int i=0;i<5;i++){
+				
+			int el = (int)(Math.random()*37);
+			
+			conjunto[i] = (char)elementos[el];
+			}
+			cadena = new String(conjunto);
+			return cadena;
+			}
 
 }

@@ -1,8 +1,11 @@
 
 package services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,9 +150,17 @@ public class ProcessionService {
 
 	public Procession reconstruct(Procession procession, BindingResult binding) {
 		final Procession res;
+		String pattern = "YYMMDD";
+		DateFormat df = new SimpleDateFormat(pattern);
+		Date fecha = procession.getMoment(); 
+		String cadena = df.format(fecha);
 
 		if (procession.getId() == 0) {
 			res = procession;
+			
+			
+			res.setTicker(cadena);
+			
 		} else {
 			res = processionRepository.findOne(procession.getId());
 
@@ -158,7 +169,7 @@ public class ProcessionService {
 			res.setMode(procession.getMode());
 			res.setMoment(procession.getMoment());
 			res.setTitle(procession.getTitle());
-			res.setTicker(procession.getTicker());
+			res.setTicker(cadena);
 		}
 		validator.validate(res, binding);
 
