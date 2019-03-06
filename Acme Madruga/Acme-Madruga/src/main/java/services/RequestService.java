@@ -55,7 +55,7 @@ public class RequestService {
 		auth.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(actorService.findByPrincipal().getUserAccount().getAuthorities().contains(auth));
 
-		final Integer id = this.memberService.findByPrincipal().getId();
+		final Integer id = this.brotherhoodService.findByPrincipal().getId();
 		result = this.requestRepository.findRequestByStatusAndBrotherhood(status, id);
 		return result;
 	}
