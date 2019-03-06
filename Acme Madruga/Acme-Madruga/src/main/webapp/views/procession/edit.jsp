@@ -30,7 +30,8 @@
 					modelAttribute="procession" class="form-horizontal" method="post">
 					<div class="form-group ">
 
-				
+						<form:hidden path="id"/>
+						<form:hidden path="version"/>
 						<acme:textbox code="procession.title" path="title" />
 						<acme:textarea code="procession.description" path="description" />
 						<acme:textbox code="procession.moment" path="moment" />
@@ -53,6 +54,7 @@
 				</form:form>
 			</fieldset>
 		
+
 		</div>
 	</div>
 </div>
