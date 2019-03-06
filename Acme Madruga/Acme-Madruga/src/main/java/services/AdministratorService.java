@@ -12,8 +12,8 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
 import domain.Administrator;
+import forms.ActorEditForm;
 
 @Service
 @Transactional
@@ -88,16 +88,16 @@ public class AdministratorService {
 		return a;
 	}
 	//JAVI
-	public Administrator reconstructEdit(final Actor actor) {
+	public Administrator reconstructEdit(final ActorEditForm actorEditForm) {
 		final Administrator res;
-		res = this.administratorRepository.findOne(actor.getId());
-		res.setName(actor.getName());
-		res.setMiddleName(actor.getMiddleName());
-		res.setSurname(actor.getSurname());
-		res.setPhoto(actor.getPhoto());
-		res.setEmail(actor.getEmail());
-		res.setPhoneNumber(actor.getPhoneNumber());
-		res.setAddress(actor.getAddress());
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setMiddleName(actorEditForm.getMiddleName());
+		res.setSurname(actorEditForm.getSurname());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhoneNumber(actorEditForm.getPhoneNumber());
+		res.setAddress(actorEditForm.getAddress());
 		Assert.notNull(res);
 		return res;
 	}

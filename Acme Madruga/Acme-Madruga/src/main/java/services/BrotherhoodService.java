@@ -15,9 +15,9 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
+import forms.ActorEditForm;
 import forms.BrotherhoodRegisterForm;
 
 @Service
@@ -33,11 +33,6 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		Assert.notNull(b);
-		if (b.getId() != 0) {
-			Authority auth = new Authority();
-			auth.setAuthority(Authority.BROTHERHOOD);
-			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
-		}
 		this.findByPrincipal();
 		return this.brotherhoodRepository.save(b);
 
@@ -182,16 +177,16 @@ public class BrotherhoodService {
 
 	//---Ale----
 	//JAVI
-	public Brotherhood reconstructEdit(final Actor actor) {
+	public Brotherhood reconstructEdit(final ActorEditForm actorEditForm) {
 		final Brotherhood res;
-		res = this.brotherhoodRepository.findOne(actor.getId());
-		res.setName(actor.getName());
-		res.setMiddleName(actor.getMiddleName());
-		res.setSurname(actor.getSurname());
-		res.setPhoto(actor.getPhoto());
-		res.setEmail(actor.getEmail());
-		res.setPhoneNumber(actor.getPhoneNumber());
-		res.setAddress(actor.getAddress());
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setMiddleName(actorEditForm.getMiddleName());
+		res.setSurname(actorEditForm.getSurname());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhoneNumber(actorEditForm.getPhoneNumber());
+		res.setAddress(actorEditForm.getAddress());
 		Assert.notNull(res);
 		return res;
 	}

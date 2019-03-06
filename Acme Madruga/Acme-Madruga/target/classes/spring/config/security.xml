@@ -72,6 +72,8 @@
 		<security:intercept-url pattern="/enrolment/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enrolment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
 
+		<security:intercept-url pattern="/actor/edit.do" access="isAuthenticated()" />
+
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

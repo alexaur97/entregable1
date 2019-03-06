@@ -17,10 +17,10 @@ import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Request;
+import forms.ActorEditForm;
 import forms.MemberRegisterForm;
 
 @Service
@@ -63,11 +63,7 @@ public class MemberService {
 
 	}
 	public Member save(final Member m) {
-		if (m.getId() != 0) {
-			Authority auth = new Authority();
-			auth.setAuthority(Authority.BROTHERHOOD);
-			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
-		}
+		this.actorService.auth(m, "MEMBER");
 		Assert.notNull(m);
 		return this.memberRepository.save(m);
 	}
@@ -168,16 +164,16 @@ public class MemberService {
 		result.removeAll(ms);
 		return result;
 	}
-	public Member reconstructEdit(final Actor actor) {
+	public Member reconstructEdit(final ActorEditForm actorEditForm) {
 		final Member res;
-		res = this.memberRepository.findOne(actor.getId());
-		res.setName(actor.getName());
-		res.setMiddleName(actor.getMiddleName());
-		res.setSurname(actor.getSurname());
-		res.setPhoto(actor.getPhoto());
-		res.setEmail(actor.getEmail());
-		res.setPhoneNumber(actor.getPhoneNumber());
-		res.setAddress(actor.getAddress());
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setMiddleName(actorEditForm.getMiddleName());
+		res.setSurname(actorEditForm.getSurname());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhoneNumber(actorEditForm.getPhoneNumber());
+		res.setAddress(actorEditForm.getAddress());
 		Assert.notNull(res);
 		return res;
 	}
