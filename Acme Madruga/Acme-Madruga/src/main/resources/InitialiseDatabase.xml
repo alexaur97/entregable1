@@ -31,5 +31,32 @@
 	</bean>
 	
 	<!-- Other domain beans come here -->	
-	
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="nameEs" value="Presidente" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Vice President" />
+		<property name="nameEs" value="Vice Presidente" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Secretary" />
+		<property name="nameEs" value="Secretario" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Treasure" />
+		<property name="nameEs" value="Tesorero" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Historian" />
+		<property name="nameEs" value="Historiador" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Fundraiser" />
+		<property name="nameEs" value="Promotor" />
+	</bean>
+	<bean id="position1" class="domain.Position">
+		<property name="name" value="Officer" />
+		<property name="nameEs" value="Vocal" />
+	</bean>
 </beans>

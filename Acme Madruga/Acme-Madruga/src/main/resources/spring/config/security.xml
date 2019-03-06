@@ -57,6 +57,7 @@
 		<security:intercept-url pattern="/brotherhood/procession/list.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/brotherhood/procession/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/brotherhood/procession/edit.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/brotherhood/procession/show.do" access="hasRole('BROTHERHOOD')" />
 
 
 
@@ -71,6 +72,9 @@
 		<security:intercept-url pattern="/dropOut/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enrolment/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enrolment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/request/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
+
+		<security:intercept-url pattern="/actor/edit.do" access="isAuthenticated()" />
 
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />

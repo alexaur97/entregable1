@@ -20,6 +20,7 @@ import security.UserAccount;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Request;
+import forms.ActorEditForm;
 import forms.MemberRegisterForm;
 
 @Service
@@ -62,9 +63,7 @@ public class MemberService {
 
 	}
 	public Member save(final Member m) {
-		if (m.getId() != 0)
-			//PUEDE QUE SEA COMPROBAR EL PROPIO MEMBER
-			Assert.isTrue(this.findByPrincipal().getId() == m.getId());
+		this.actorService.auth(m, "MEMBER");
 		Assert.notNull(m);
 		return this.memberRepository.save(m);
 	}
@@ -164,5 +163,18 @@ public class MemberService {
 		final Collection<Member> ms = b.getMembers();
 		result.removeAll(ms);
 		return result;
+	}
+	public Member reconstructEdit(final ActorEditForm actorEditForm) {
+		final Member res;
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setMiddleName(actorEditForm.getMiddleName());
+		res.setSurname(actorEditForm.getSurname());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhoneNumber(actorEditForm.getPhoneNumber());
+		res.setAddress(actorEditForm.getAddress());
+		Assert.notNull(res);
+		return res;
 	}
 }

@@ -26,7 +26,7 @@
 <br/><img src="${member.photo}" alt="MemberPhoto" height="200" width="350"/>
 <br/><spring:message code="member.name"/>: <jstl:out value="${member.name}"></jstl:out>
 <br/><spring:message code="member.middleName"/>: <jstl:out value="${member.middleName}"></jstl:out>
-<br/><spring:message code="member.surname"/>: <jstl:out value="${member.surname}"></jstl:out>
+<br/><spring:message code="member.surName"/>: <jstl:out value="${member.surname}"></jstl:out>
 <br/><spring:message code="member.email"/>: <jstl:out value="${member.email}"></jstl:out>
 <br/><spring:message code="member.address"/>: <jstl:out value="${member.address}"></jstl:out>
 

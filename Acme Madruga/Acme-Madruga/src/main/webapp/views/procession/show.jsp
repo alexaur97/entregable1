@@ -23,18 +23,17 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<br/><spring:message code="procession.title"/>: <jstl:out value="${procession.title}"></jstl:out>
+<br/><spring:message code="procession.description"/>: <jstl:out value="${procession.description}"></jstl:out>
+<br/><spring:message code="procession.moment"/>: <jstl:out value="${procession.moment}"></jstl:out>
+<br/><spring:message code="procession.mode"/>: <jstl:out value="${procession.mode}"></jstl:out>
+<br/><spring:message code="procession.brotherhood"/>: <jstl:out value="${procession.brotherhood.title}"></jstl:out>
 
-<display:table name="members" id="member"
+<br/><spring:message code="procession.floats"/>
+:<display:table name="floats" id="float"
 	requestURI="${requestURI }">
-	<display:column titleKey="member.name" property="name" />
-	<display:column titleKey="member.middleName" property="middleName" />
-	<display:column titleKey="member.surName" property="surname" />
-	<display:column titleKey="member.profile">
-		<acme:cancel url="/member/brotherhood/profile.do?memberId=${member.id}" code="member.profile" />
-	</display:column>
-	<display:column titleKey="member.remove">
-		<acme:cancel url="/dropOut/brotherhood/create.do?memberId=${member.id}" code="member.remove" />
-	</display:column>
+	<display:column titleKey="procession.title" property="title" />
+
+	
 </display:table>
-		<acme:cancel url="/enrolment/brotherhood/create.do" code="member.enrol" />
 

@@ -40,14 +40,18 @@ public class EnrolmentBrotherhoodController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		Enrolment enrolment;
-		enrolment = new Enrolment();
-		enrolment.setId(0);
-		Collection<Member> members = this.memberService.findAllNotIn();
-		Collection<Position> positions = this.positionService.findAll();
-		result = new ModelAndView("enrolment/create");
-		result.addObject("enrolment", enrolment);
-		result.addObject("members", members);
-		result.addObject("positions", positions);
+		try {
+			enrolment = new Enrolment();
+			enrolment.setId(0);
+			Collection<Member> members = this.memberService.findAllNotIn();
+			Collection<Position> positions = this.positionService.findAll();
+			result = new ModelAndView("enrolment/create");
+			result.addObject("enrolment", enrolment);
+			result.addObject("members", members);
+			result.addObject("positions", positions);
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 		return result;
 
 	}

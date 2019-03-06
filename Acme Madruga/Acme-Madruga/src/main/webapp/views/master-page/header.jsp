@@ -43,6 +43,8 @@
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
+					<li><a class ="fNiv" href="actor/edit.do"><spring:message code="master.page.editPersonalData" /></a></li>
+		
 					<li><a class="fNiv"><spring:message	code="master.page.brotherhoods" /></a>
 				<ul>
 					<li class="arrow"></li>

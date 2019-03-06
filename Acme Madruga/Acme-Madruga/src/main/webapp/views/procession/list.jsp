@@ -31,9 +31,15 @@
 	<display:column titleKey="procession.moment" property="moment" />
 	<display:column titleKey="procession.ticker" property="ticker" />
 	<display:column titleKey="procession.mode" property="mode" />
-	<display:column titleKey="position.edit">
+	<display:column titleKey="procession.edit">
 		<a href="brotherhood/procession/edit.do?processionId=${procession.id}">
 		<spring:message code="procession.edit" />
+		</a>
+		</display:column>
+		
+	<display:column titleKey="procession.show">
+		<a href="brotherhood/procession/show.do?processionId=${procession.id}">
+		<spring:message code="procession.show" />
 		</a>
 	</display:column>
 </display:table>
