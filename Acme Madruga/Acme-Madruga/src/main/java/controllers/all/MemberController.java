@@ -66,7 +66,6 @@ public class MemberController extends AbstractController {
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final MemberRegisterForm memberRegisterForm, final BindingResult binding) {
 		ModelAndView result;

@@ -15,9 +15,9 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-//import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
+import forms.ActorEditForm;
 import forms.BrotherhoodRegisterForm;
 
 @Service
@@ -176,4 +176,18 @@ public class BrotherhoodService {
 	}
 
 	//---Ale----
+	//JAVI
+	public Brotherhood reconstructEdit(final ActorEditForm actorEditForm) {
+		final Brotherhood res;
+		res = this.findByPrincipal();
+		res.setName(actorEditForm.getName());
+		res.setMiddleName(actorEditForm.getMiddleName());
+		res.setSurname(actorEditForm.getSurname());
+		res.setPhoto(actorEditForm.getPhoto());
+		res.setEmail(actorEditForm.getEmail());
+		res.setPhoneNumber(actorEditForm.getPhoneNumber());
+		res.setAddress(actorEditForm.getAddress());
+		Assert.notNull(res);
+		return res;
+	}
 }
