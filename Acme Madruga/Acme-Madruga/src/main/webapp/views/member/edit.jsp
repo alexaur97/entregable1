@@ -18,7 +18,7 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%> 
 
-<form:form action="member/edit.do" modelAttribute="reg">
+<form:form action="member/edit.do" modelAttribute="memberRegisterForm" method="POST">
 
 <acme:textbox code="member.name" path="name"/>
 <acme:textbox code="member.middleName" path="middleName"/>
@@ -31,6 +31,7 @@
 <acme:password code="member.password" path="password"/>
 <acme:password code="member.confirmPassword" path="confirmPassword"/>
 <spring:message code="member.check"/><form:checkbox path="terms"/>
+<form:errors path="terms" cssClass="error" />
 <br/>
 
 <acme:submit name="save" code="member.save"/>
