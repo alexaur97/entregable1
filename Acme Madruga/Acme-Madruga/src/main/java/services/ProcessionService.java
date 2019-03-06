@@ -73,8 +73,8 @@ public class ProcessionService {
 	}
 
 	public void delete(final Procession procession) {
-		//Assert.notNull(procession);
-		//Assert.isTrue(this.brotherhoodService.findByPrincipal().equals(Authority.BROTHERHOOD));
+		Assert.notNull(procession);
+		//this.brotherhoodService.findByPrincipal();
 		this.processionRepository.delete(procession.getId());
 	}
 
@@ -152,21 +152,23 @@ public class ProcessionService {
 
 	public Procession reconstruct( Procession procession, BindingResult binding) {
 		final Procession res;
+		System.out.println(procession.getId());
 		
 		if (procession.getId() == 0){
 			res = procession;
 		}else{
 			res = processionRepository.findOne(procession.getId());
 		
+		res.setId(procession.getId());
 		res.setDescription(procession.getDescription());
 		res.setFloats(procession.getFloats());
 		res.setMode(procession.getMode());
 		res.setMoment(procession.getMoment());
 		res.setTitle(procession.getTitle());
 		res.setTicker(procession.getTicker());
-		}	
+			
 		validator.validate(res, binding);
-		
+		}
 		return res;
 	}
 
