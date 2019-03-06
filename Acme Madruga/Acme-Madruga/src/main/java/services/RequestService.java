@@ -13,9 +13,7 @@ import security.Authority;
 import security.LoginService;
 import domain.Brotherhood;
 import domain.Member;
-import domain.Position;
 import domain.Request;
-import forms.PositionForm;
 import forms.RequestForm;
 
 @Service
@@ -30,20 +28,21 @@ public class RequestService {
 	private MemberService		memberService;
 	@Autowired
 	private ActorService		actorService;
-	
+
+
 	public Request findOne(final int id) {
 		Assert.isTrue(id != 0);
 		Request result;
 		result = this.requestRepository.findOne(id);
 		return result;
 	}
-	
+
 	public void delete(final Request request) {
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Assert.notNull(request);
-		Assert.isTrue(request.getMember().getId() == memberService.findByPrincipal().getId());
+		Assert.isTrue(request.getMember().getId() == this.memberService.findByPrincipal().getId());
 		Assert.isTrue(request.getStatus().equals("PENDING"));
 		this.requestRepository.delete(request);
 	}
@@ -51,21 +50,21 @@ public class RequestService {
 	//FR 10.6
 	public Collection<Request> findRequestByStatusAndBrotherhood(final String status) {
 		Collection<Request> result;
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount().getAuthorities().contains(auth));
+		Assert.isTrue(this.actorService.findByPrincipal().getUserAccount().getAuthorities().contains(auth));
 
 		final Integer id = this.brotherhoodService.findByPrincipal().getId();
 		result = this.requestRepository.findRequestByStatusAndBrotherhood(status, id);
 		return result;
 	}
-	
+
 	//FR 11.1
 	public Collection<Request> findRequestByStatusAndMember(final String status) {
 		Collection<Request> result;
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.MEMBER);
-		Assert.isTrue(actorService.findByPrincipal().getUserAccount().getAuthorities().contains(auth));
+		Assert.isTrue(this.actorService.findByPrincipal().getUserAccount().getAuthorities().contains(auth));
 
 		final Integer id = this.memberService.findByPrincipal().getId();
 		result = this.requestRepository.findRequestByStatusAndMember(status, id);
@@ -80,8 +79,8 @@ public class RequestService {
 	}
 	public Request save(final Request r) {
 		Assert.notNull(r);
-		Authority auth = new Authority();
-		Authority auth2 = new Authority();
+		final Authority auth = new Authority();
+		final Authority auth2 = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		auth2.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
@@ -122,7 +121,7 @@ public class RequestService {
 	}
 
 	//---Ale---
-	
+
 	public Request reconstruct(final RequestForm requestForm) {
 		final Request res;
 		if (requestForm.getRequestId() == 0)
@@ -135,6 +134,14 @@ public class RequestService {
 		res.setStatus("PENDING");
 		res.setMember(this.memberService.findByPrincipal());
 		return res;
+	}
+
+	public void reject(final int requestId, final String explanation) {
+		Request res;
+		res = this.findOne(requestId);
+		res.setStatus("REJECTED");
+		//res.setExplanation(explanation);
+		this.save(res);
 	}
 
 }

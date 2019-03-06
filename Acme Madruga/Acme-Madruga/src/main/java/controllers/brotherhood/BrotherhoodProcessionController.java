@@ -70,6 +70,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 		ModelAndView result;
 		Procession procession;
 		procession = new Procession();
+<<<<<<< HEAD
 
 		try {
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
@@ -83,6 +84,24 @@ public class BrotherhoodProcessionController extends AbstractController {
 			result.addObject("procession", procession);
 			result.addObject("floats", floats);
 		} catch (final Throwable oops) {
+=======
+		
+		try{
+		Brotherhood bh = this.brotherhoodService.findByPrincipal();
+		
+		procession.setId(0);
+		procession.setBrotherhood(bh);
+		
+		
+	
+		
+		Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
+
+		result = new ModelAndView("procession/edit");
+		result.addObject("procession", procession);
+		result.addObject("floats", floats);
+		}catch (final Throwable oops) {
+>>>>>>> f618c0e6b0141559a5f72d721f924fdb6d7f62c1
 			final String msg = oops.getMessage();
 			result = this.createEditModelAndView(procession, msg);
 
