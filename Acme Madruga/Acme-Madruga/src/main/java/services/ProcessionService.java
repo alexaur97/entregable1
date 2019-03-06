@@ -154,8 +154,7 @@ public class ProcessionService {
 		DateFormat df = new SimpleDateFormat(pattern);
 		Date fecha = procession.getMoment(); 
 		String fechaFormateada = df.format(fecha);
-		System.out.println(fechaFormateada);
-		System.out.println(fecha);
+	
 		
 		String cadena = this.creaString();
 		String ticker = fechaFormateada + "-" + cadena ;
