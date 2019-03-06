@@ -150,16 +150,21 @@ public class ProcessionService {
 
 	public Procession reconstruct(Procession procession, BindingResult binding) {
 		final Procession res;
-		String pattern = "YYMMDD";
+		String pattern = "YYMMdd";
 		DateFormat df = new SimpleDateFormat(pattern);
 		Date fecha = procession.getMoment(); 
-		String cadena = df.format(fecha);
+		String fechaFormateada = df.format(fecha);
+		System.out.println(fechaFormateada);
+		System.out.println(fecha);
+		
+		String cadena = this.creaString();
+		String ticker = fechaFormateada + "-" + cadena ;
 
 		if (procession.getId() == 0) {
 			res = procession;
 			
 			
-			res.setTicker(cadena);
+			res.setTicker(ticker);
 			
 		} else {
 			res = processionRepository.findOne(procession.getId());
@@ -169,12 +174,32 @@ public class ProcessionService {
 			res.setMode(procession.getMode());
 			res.setMoment(procession.getMoment());
 			res.setTitle(procession.getTitle());
-			res.setTicker(cadena);
+			res.setTicker(ticker);
 		}
 		validator.validate(res, binding);
 
 		return res;
 	}
+	
+	public String creaString(){
+		char[] elementos ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ'
+				,'O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+
+				char[] conjunto = new char[5];
+				String cadena;
+				for(int i=0;i<5;i++){
+					
+				int el = (int)(Math.random()*27);
+				
+				conjunto[i] = (char)elementos[el];
+				}
+				cadena = new String(conjunto);
+				return cadena;
+				}
+
+	
+	
+	
 	public Collection<Procession> findFinalProcessionsByBrotherhood(final int idBrotherhood) {
 		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
 		Collection<Procession> res = new ArrayList<>();
