@@ -33,7 +33,7 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		Assert.notNull(b);
-		this.findByPrincipal();
+		//		this.findByPrincipal();
 		return this.brotherhoodRepository.save(b);
 
 	}
@@ -47,7 +47,6 @@ public class BrotherhoodService {
 
 	public Brotherhood findOne(final int id) {
 		Assert.isTrue(id != 0);
-		this.findByPrincipal();
 		Brotherhood result;
 		result = this.brotherhoodRepository.findOne(id);
 		return result;
@@ -94,8 +93,12 @@ public class BrotherhoodService {
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
-		Collection<Brotherhood> result;
-		result = this.brotherhoodRepository.findBrotherhoodByMemberHasBelonged(id);
+		final Collection<Brotherhood> result = new ArrayList<Brotherhood>();
+		Collection<Brotherhood> brotherhoods;
+		brotherhoods = this.brotherhoodRepository.findBrotherhoodByMemberHasBelonged(id);
+		for (final Brotherhood b : brotherhoods)
+			if (!(b.getMembers().contains(this.actorService.findByPrincipal())))
+				result.add(b);
 		return result;
 
 	}

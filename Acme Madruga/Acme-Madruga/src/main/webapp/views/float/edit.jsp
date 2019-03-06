@@ -26,29 +26,27 @@
 		<div class="col-sm-12 col-md-12 col-lg-12">
 			<fieldset class="col-md-6 col-md-offset-3">
 
-				<form:form action="brotherhood/procession/edit.do"
-					modelAttribute="procession" class="form-horizontal" method="post">
+				<form:form action="brotherhood/float/edit.do"
+					modelAttribute="float" class="form-horizontal" method="post">
 					<div class="form-group ">
 
 						<form:hidden path="id"/>
 						<form:hidden path="version"/>
-						<acme:textbox code="procession.title" path="title" />
-						<acme:textarea code="procession.description" path="description" />
-						<acme:textbox code="procession.moment" path="moment" />
-						<acme:textbox code="procession.mode" path="mode" />
+						<form:hidden path="brotherhood"/>			
+						<acme:textbox code="float.title" path="title" />
+						<acme:textarea code="float.description" path="description" />
+						<acme:textbox code="float.pictures" path="pictures" />
 
-						<form:select id="floats" code="procession.floats" path="floats">
-							<form:options items="${floats}" itemLabel="title" itemValue="id" />
-						</form:select>
+	
 		
 						
-						<acme:submit name="save" code="procession.save" />
-						<jstl:if test="${procession.id!=0}">
-							<acme:submitConfirmation name="delete" code="procession.delete"
-								onclick="procession.delete.confirmation" />
-						</jstl:if>
-						<acme:cancel url="/brotherhood/procession/list.do"
-							code="procession.cancel" />
+						<acme:submit name="save" code="float.save" />
+						<jstl:if test="${floaat.id!=0}">
+							<acme:submitConfirmation name="delete" code="float.delete"
+								onclick="float.delete.confirmation" />
+						</jstl:if> 
+						<acme:cancel url="/brotherhood/float/list.do"
+							code="float.cancel" />
 					</div>
 				</form:form>
 			</fieldset>
