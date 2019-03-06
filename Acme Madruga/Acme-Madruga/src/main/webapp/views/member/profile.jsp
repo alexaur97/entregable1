@@ -23,6 +23,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
 <br/><img src="${member.photo}" alt="MemberPhoto" height="200" width="350"/>
 <br/><spring:message code="member.name"/>: <jstl:out value="${member.name}"></jstl:out>
 <br/><spring:message code="member.middleName"/>: <jstl:out value="${member.middleName}"></jstl:out>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.BrotherhoodService;
+import services.EnrolmentService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
@@ -38,6 +39,8 @@ public class StatsAdministratorController extends AbstractController {
 
 	@Autowired
 	private PositionService		positionService;
+	@Autowired
+	private EnrolmentService	enrolmentService;
 
 
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
@@ -56,23 +59,43 @@ public class StatsAdministratorController extends AbstractController {
 		String pos = "";
 		String posEs = "";
 
-		for (final Position p : positions) {
-			final Integer i = this.positionService.numberOfPositionsById(p.getId());
-			pos = pos + "{label: '" + p.getName() + "', backgroundColor:'blue', data['" + i + "']},";
-			posEs = posEs + "{label: '" + p.getNameEs() + "', backgroundColor:'blue', data['" + i + "']},";
-		}
+		//		for (final Position p : positions) {
+		//			final Integer i = this.positionService.numberOfPositionsById(p.getId());
+		//			pos = pos + "{label: '" + p.getName() + "', backgroundColor:'blue', data['" + i + "']},";
+		//			posEs = posEs + "{label: '" + p.getNameEs() + "', backgroundColor:'blue', data['" + i + "']},";
+		//		}
+
+		int president = this.enrolmentService.enrolmentsByPosition("President");
+		int vicePresident = this.enrolmentService.enrolmentsByPosition("Vice President");
+		Integer secretary = this.enrolmentService.enrolmentsByPosition("Secretary");
+		Integer treasurer = this.enrolmentService.enrolmentsByPosition("Treasure");
+		Integer historian = this.enrolmentService.enrolmentsByPosition("Historian");
+		Integer fundraiser = this.enrolmentService.enrolmentsByPosition("Fundraiser");
+		Integer officer = this.enrolmentService.enrolmentsByPosition("Officer");
+		Integer others = this.enrolmentService.enrolmentsByPosition("others");
+
+		int numero = 3;
 
 		result = new ModelAndView("stats/display");
-		result.addObject("membersPerBrotherhood", membersPerBrotherhood);
-		result.addObject("largestBrotherhoods", largestBrotherhoods);
-		result.addObject("smallestBrotherhoods", smallestBrotherhoods);
-		result.addObject("approvedRatio", approvedRatio);
-		result.addObject("pendingRatio", pendingRatio);
-		result.addObject("rejectedRatio", rejectedRatio);
-		result.addObject("soon", soon);
-		result.addObject("members", members);
-		result.addObject("pos", pos);
-		result.addObject("posEs", posEs);
+		//		result.addObject("membersPerBrotherhood", membersPerBrotherhood);
+		//		result.addObject("largestBrotherhoods", largestBrotherhoods);
+		//		result.addObject("smallestBrotherhoods", smallestBrotherhoods);
+		//		result.addObject("approvedRatio", approvedRatio);
+		//		result.addObject("pendingRatio", pendingRatio);
+		//		result.addObject("rejectedRatio", rejectedRatio);
+		//		result.addObject("soon", soon);
+		//		result.addObject("members", members);
+		//		result.addObject("pos", pos);
+		//		result.addObject("posEs", posEs);
+		result.addObject("president", president);
+		result.addObject("vicePresident", vicePresident);
+		result.addObject("secretary", secretary);
+		result.addObject("treasurer", treasurer);
+		result.addObject("historian", historian);
+		result.addObject("fundraiser", fundraiser);
+		result.addObject("officer", officer);
+		result.addObject("others", others);
+		result.addObject("numero", numero);
 
 		return result;
 	}

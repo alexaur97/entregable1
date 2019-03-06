@@ -177,4 +177,5 @@ public class MemberService {
 		Assert.notNull(res);
 		return res;
 	}
+
 }
