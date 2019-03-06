@@ -58,6 +58,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 	public ModelAndView list() {
 		
 		ModelAndView result;
+		try{
 		final Integer currentActorId = this.actorService.findByPrincipal().getId();
 		Collection<Procession> processions;
 		processions = this.processionService.findProcessionsByBrotherhood(currentActorId);
@@ -65,7 +66,10 @@ public class BrotherhoodProcessionController extends AbstractController {
 		result = new ModelAndView("procession/list");
 		result.addObject("requestURI", "procession/list.do");
 		result.addObject("processions", processions);
-
+		}catch (Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
+		
 		return result;
 	}
 
