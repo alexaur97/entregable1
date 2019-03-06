@@ -27,7 +27,7 @@
 			<fieldset class="col-md-6 col-md-offset-3">
 
 				<form:form action="brotherhood/float/edit.do"
-					modelAttribute="float" class="form-horizontal" method="post">
+					modelAttribute="floaat" class="form-horizontal" method="post">
 					<div class="form-group ">
 
 						<form:hidden path="id"/>
