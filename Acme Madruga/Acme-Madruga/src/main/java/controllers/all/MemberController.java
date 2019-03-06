@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.MemberService;
 import controllers.AbstractController;
 import domain.Member;
@@ -25,6 +26,9 @@ public class MemberController extends AbstractController {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private MemberService	memberService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	public MemberController() {
@@ -55,9 +59,8 @@ public class MemberController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		try {
-			final MemberRegisterForm reg = new MemberRegisterForm();
-			result = new ModelAndView("member/edit");
-			result.addObject("reg", reg);
+			final MemberRegisterForm registerForm = new MemberRegisterForm();
+			result = this.createEditModelAndView(registerForm);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/#");
 		}
@@ -65,25 +68,40 @@ public class MemberController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final MemberRegisterForm reg, final BindingResult binding) {
+	public ModelAndView save(@Valid final MemberRegisterForm memberRegisterForm, final BindingResult binding) {
 		ModelAndView result;
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			result = new ModelAndView("member/edit");
-			result.addObject("reg", reg);
-		} else
+		else
 			try {
-				final Member member = this.memberService.reconstruct(reg);
+				final Member member = this.memberService.reconstruct(memberRegisterForm);
 				this.memberService.save(member);
 				result = new ModelAndView("redirect:/security/login.do");
 			} catch (final Throwable oops) {
-				result = new ModelAndView("member/edit");
-				result.addObject("reg", reg);
+				result = this.createEditModelAndView(memberRegisterForm);
 
-				if (reg.getTerms() == false)
-					result.addObject("message", "register.terms.error");
+				final Collection<String> accounts = this.actorService.findAllAccounts();
+
+				if (accounts.contains(memberRegisterForm.getUsername()))
+					result.addObject("message", "register.username.error");
+				else if (!memberRegisterForm.getConfirmPassword().equals(memberRegisterForm.getPassword()))
+					result.addObject("message", "register.password.error");
 				else
 					result.addObject("message", "register.commit.error");
 			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final MemberRegisterForm memberRegisterForm) {
+		return this.createEditModelAndView(memberRegisterForm, null);
+	}
+
+	protected ModelAndView createEditModelAndView(final MemberRegisterForm memberRegisterForm, final String messageCode) {
+		final ModelAndView result;
+		result = new ModelAndView("member/edit");
+		result.addObject("memberRegisterForm", memberRegisterForm);
+		result.addObject("message", messageCode);
+
 		return result;
 	}
 
