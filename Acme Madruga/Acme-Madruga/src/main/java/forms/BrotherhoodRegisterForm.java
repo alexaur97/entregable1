@@ -81,7 +81,7 @@ public class BrotherhoodRegisterForm {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "\\d+ || Null")
+	@Pattern(regexp = "\\+\\d{2} \\(\\d{1,3}\\)\\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
 	public String getPhone() {
 		return this.phone;
 	}

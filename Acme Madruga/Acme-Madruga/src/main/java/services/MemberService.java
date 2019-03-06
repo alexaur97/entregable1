@@ -38,11 +38,14 @@ public class MemberService {
 	@Autowired
 	private EnrolmentService		enrolmentService;
 
+	@Autowired
+	private ActorService			actorService;
 
-	public Member findOne(int memberId) {
+
+	public Member findOne(final int memberId) {
 		Member result;
 
-		result = memberRepository.findOne(memberId);
+		result = this.memberRepository.findOne(memberId);
 
 		return result;
 	}
@@ -76,12 +79,12 @@ public class MemberService {
 		return result;
 	}
 	public Collection<Member> findMembersByBrotherhoodPrincipal() {
-		Authority auth = new Authority();
+		final Authority auth = new Authority();
 		auth.setAuthority(Authority.BROTHERHOOD);
 		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		Collection<Member> result;
-		Integer idB = LoginService.getPrincipal().getId();
-		Integer id = this.brotherhoodRepository.findByUserId(idB).getId();
+		final Integer idB = LoginService.getPrincipal().getId();
+		final Integer id = this.brotherhoodRepository.findByUserId(idB).getId();
 		result = this.memberRepository.findMembersByBrotherhood(id);
 		return result;
 	}
@@ -130,8 +133,11 @@ public class MemberService {
 
 	public Member reconstruct(final MemberRegisterForm r) {
 		Assert.isTrue(r.getPassword().equals(r.getConfirmPassword()));
+		final Collection<String> accounts = this.actorService.findAllAccounts();
 		final Member result = this.create();
 		final UserAccount userAccount = result.getUserAccount();
+		final Boolean b = !accounts.contains(userAccount.getUsername());
+		Assert.isTrue(b);
 
 		final Md5PasswordEncoder pe = new Md5PasswordEncoder();
 		final String password = pe.encodePassword(r.getPassword(), null);
@@ -151,15 +157,14 @@ public class MemberService {
 
 		return result;
 	}
-
 	//---Ale----
 
 	//JAVI
 	public Collection<Member> findAllNotIn() {
 		Collection<Member> result;
 		result = this.memberRepository.findAll();
-		Brotherhood b = this.brotherhoodService.findByPrincipal();
-		Collection<Member> ms = b.getMembers();
+		final Brotherhood b = this.brotherhoodService.findByPrincipal();
+		final Collection<Member> ms = b.getMembers();
 		result.removeAll(ms);
 		return result;
 	}

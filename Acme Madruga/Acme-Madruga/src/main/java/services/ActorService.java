@@ -73,4 +73,9 @@ public class ActorService {
 		return res;
 	}
 
+	public Collection<String> findAllAccounts() {
+		final Collection<String> result = this.actorRepository.findAllAccounts();
+		return result;
+	}
+
 }

@@ -93,7 +93,11 @@ public abstract class Actor extends DomainEntity {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "\\+\\d{2} (\\(\\d{0,3}\\))?\\d{4,}|\\d{4,}| Null")
+	// d{2} se refiere a los 2 dígitos del countryCode (La d que hay antes del { indica que solo pueden ser dígitos y no letras)
+	//d((d{0,3}))? ---> de 0 a 3 dígitos entre paréntesis. Los dos paréntesis externos más el ? indican que se puede poner o no
+	//d{4,} indica que hay 4 o más dígitos
+	// El | es un or
+	@Pattern(regexp = "\\+\\d{2} \\(\\d{1,3}\\)\\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
