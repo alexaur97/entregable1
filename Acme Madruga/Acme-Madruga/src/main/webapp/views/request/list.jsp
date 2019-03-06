@@ -29,6 +29,10 @@
 </h3>
 <display:table name="acceptedRequests" id="acceptedRequest"
 	requestURI="${requestURI }">
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<display:column style="color:green" titleKey="request.member"
+		property="member.name" />
+	</security:authorize>
 	<display:column style="color:green" titleKey="request.status" property="status" />
 	<display:column style="color:green" titleKey="request.procession"
 		property="procession.title" />
@@ -41,6 +45,10 @@
 </h3>
 <display:table name="pendingRequests" id="pendingRequest"
 	requestURI="${requestURI }">
+	<security:authorize access="hasRole('BROTHERHOOD')">
+	<display:column style="color:grey" titleKey="request.member"
+		property="member.name" />
+	</security:authorize>
 	<display:column style="color:grey" titleKey="request.status" property="status" />
 	<display:column style="color:grey" titleKey="request.procession"
 		property="procession.title" />

@@ -90,7 +90,7 @@ public class BrotherhoodFloatController extends AbstractController {
 
 		try {
 
-			res.addObject("float", floaat);
+			res.addObject("floaat", floaat);
 		} catch (final Throwable oops) {
 			final String msg = oops.getMessage();
 			res = this.createEditModelAndView(floaat, msg);
@@ -162,7 +162,7 @@ public class BrotherhoodFloatController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Float floaat, final String messageCode) {
 		final ModelAndView res;
 		res = new ModelAndView("float/edit");
-		res.addObject("float", floaat);
+		res.addObject("floaat", floaat);
 
 		return res;
 	}

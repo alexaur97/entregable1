@@ -78,6 +78,8 @@
 		<security:intercept-url pattern="/enrolment/brotherhood/create.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enrolment/brotherhood/edit.do" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/request/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
+
+		<security:intercept-url pattern="/request/brotherhood/*" access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/dropout/member/*" access="hasRole('MEMBER')" /> 
 		<security:intercept-url pattern="/dropout/member/create.do" access="hasRole('MEMBER')" /> 
 
