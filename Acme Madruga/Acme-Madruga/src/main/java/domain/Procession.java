@@ -78,8 +78,10 @@ public class Procession extends DomainEntity {
 		return this.ticker;
 	}
 
-	public void setTicker(final String ticker) {
-		this.ticker = ticker;
+	public void setTicker(final String date) {
+		
+		this.ticker = date;
+		
 	}
 
 	@NotBlank

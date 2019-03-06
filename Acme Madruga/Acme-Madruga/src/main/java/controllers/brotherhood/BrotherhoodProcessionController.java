@@ -86,6 +86,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 		procession.setId(0);
 		procession.setBrotherhood(bh);
 		
+		
 	
 		
 		Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());

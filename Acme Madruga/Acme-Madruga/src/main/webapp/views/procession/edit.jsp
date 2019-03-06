@@ -35,7 +35,6 @@
 						<acme:textbox code="procession.title" path="title" />
 						<acme:textarea code="procession.description" path="description" />
 						<acme:textbox code="procession.moment" path="moment" />
-						<acme:textbox code="procession.ticker" path="ticker" />
 						<acme:textbox code="procession.mode" path="mode" />
 
 						<form:select id="floats" code="procession.floats" path="floats">
