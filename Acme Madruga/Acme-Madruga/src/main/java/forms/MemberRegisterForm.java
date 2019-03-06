@@ -4,6 +4,7 @@ package forms;
 import javax.persistence.Column;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -58,7 +59,8 @@ public class MemberRegisterForm {
 		this.photo = photo;
 	}
 
-	@NotBlank
+	@Column(unique = true)
+	@Pattern(regexp = "([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+|[a-zA-Z0-9]+[ a-zA-Z0-9]*\\<([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+\\>")
 	public String getEmail() {
 		return this.email;
 	}
@@ -67,7 +69,7 @@ public class MemberRegisterForm {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "\\+\\d{2} \\(\\d{1,3}\\)\\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
+	@Pattern(regexp = "\\+\\d{2}([ ]{1}[(]{1}\\d{1,3}[)]{1})? \\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
 	public String getPhone() {
 		return this.phone;
 	}
@@ -84,7 +86,7 @@ public class MemberRegisterForm {
 		this.address = address;
 	}
 
-	@NotBlank
+	@Size(min = 5, max = 32)
 	@Column(unique = true)
 	public String getUsername() {
 		return this.username;
@@ -94,7 +96,7 @@ public class MemberRegisterForm {
 		this.username = username;
 	}
 
-	@NotBlank
+	@Size(min = 5, max = 32)
 	public String getPassword() {
 		return this.password;
 	}
@@ -103,7 +105,7 @@ public class MemberRegisterForm {
 		this.password = password;
 	}
 
-	@NotBlank
+	@Size(min = 5, max = 32)
 	public String getConfirmPassword() {
 		return this.confirmPassword;
 	}

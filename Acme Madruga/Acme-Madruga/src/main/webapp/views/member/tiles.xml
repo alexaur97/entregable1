@@ -17,7 +17,7 @@
 	</definition>
 
 	<definition name="member/edit" extends="master.page">
-		<put-attribute name="title" value="Edit member" />
+		<put-attribute name="title" value="Create member" />
 		<put-attribute name="body" value="/views/member/edit.jsp" />
 	</definition>
   <definition name="member/list" extends="master.page">
