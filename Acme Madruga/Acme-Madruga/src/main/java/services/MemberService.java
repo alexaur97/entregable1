@@ -17,6 +17,7 @@ import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Request;
@@ -59,9 +60,11 @@ public class MemberService {
 
 	}
 	public Member save(final Member m) {
-		if (m.getId() != 0)
-			//PUEDE QUE SEA COMPROBAR EL PROPIO MEMBER
-			Assert.isTrue(this.findByPrincipal().getId() == m.getId());
+		if (m.getId() != 0) {
+			Authority auth = new Authority();
+			auth.setAuthority(Authority.BROTHERHOOD);
+			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		}
 		Assert.notNull(m);
 		return this.memberRepository.save(m);
 	}
@@ -159,5 +162,18 @@ public class MemberService {
 		Collection<Member> ms = b.getMembers();
 		result.removeAll(ms);
 		return result;
+	}
+	public Member reconstructEdit(final Actor actor) {
+		final Member res;
+		res = this.memberRepository.findOne(actor.getId());
+		res.setName(actor.getName());
+		res.setMiddleName(actor.getMiddleName());
+		res.setSurname(actor.getSurname());
+		res.setPhoto(actor.getPhoto());
+		res.setEmail(actor.getEmail());
+		res.setPhoneNumber(actor.getPhoneNumber());
+		res.setAddress(actor.getAddress());
+		Assert.notNull(res);
+		return res;
 	}
 }

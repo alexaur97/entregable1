@@ -15,6 +15,7 @@ import services.DropOutService;
 import services.EnrolmentService;
 import services.MemberService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.DropOut;
 import domain.Enrolment;
 import domain.Member;
@@ -36,21 +37,27 @@ public class MemberBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Member> members = this.brotherhoodService.findByPrincipal().getMembers();
-		result = new ModelAndView("member/list");
-		result.addObject("members", members);
-		result.addObject("requestURI", "member/brotherhood/list.do");
+		try {
+			Collection<Member> members = this.brotherhoodService.findByPrincipal().getMembers();
+			result = new ModelAndView("member/list");
+			result.addObject("members", members);
+			result.addObject("requestURI", "member/brotherhood/list.do");
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 		return result;
 	}
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView profile(final int memberId) {
 		ModelAndView result;
 		Member member;
+		Brotherhood me;
 
 		try {
 			Assert.notNull(memberId);
-
+			me = this.brotherhoodService.findByPrincipal();
 			member = this.memberService.findMembersById(memberId);
+			Assert.isTrue(me.getMembers().contains(member));
 			Collection<Enrolment> enrolments = this.enrolmentService.enrolmentByMember(memberId);
 			Collection<DropOut> dropOuts = this.dropOutService.dropOutByMember(memberId);
 			result = new ModelAndView("member/profile");

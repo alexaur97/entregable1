@@ -15,7 +15,7 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-//import domain.Administrator;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Member;
 import forms.BrotherhoodRegisterForm;
@@ -33,6 +33,11 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		Assert.notNull(b);
+		if (b.getId() != 0) {
+			Authority auth = new Authority();
+			auth.setAuthority(Authority.BROTHERHOOD);
+			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		}
 		this.findByPrincipal();
 		return this.brotherhoodRepository.save(b);
 
@@ -176,4 +181,18 @@ public class BrotherhoodService {
 	}
 
 	//---Ale----
+	//JAVI
+	public Brotherhood reconstructEdit(final Actor actor) {
+		final Brotherhood res;
+		res = this.brotherhoodRepository.findOne(actor.getId());
+		res.setName(actor.getName());
+		res.setMiddleName(actor.getMiddleName());
+		res.setSurname(actor.getSurname());
+		res.setPhoto(actor.getPhoto());
+		res.setEmail(actor.getEmail());
+		res.setPhoneNumber(actor.getPhoneNumber());
+		res.setAddress(actor.getAddress());
+		Assert.notNull(res);
+		return res;
+	}
 }

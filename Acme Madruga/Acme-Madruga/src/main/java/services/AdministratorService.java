@@ -12,6 +12,7 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Administrator;
 
 @Service
@@ -52,7 +53,11 @@ public class AdministratorService {
 	}
 
 	public void save(final Administrator administrator) {
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		if (administrator.getId() != 0) {
+			Authority auth = new Authority();
+			auth.setAuthority(Authority.ADMINISTRATOR);
+			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		}
 		Assert.notNull(administrator);
 		this.administratorRepository.save(administrator);
 	}
@@ -82,5 +87,18 @@ public class AdministratorService {
 		final Administrator a = this.administratorRepository.findByUserId(id);
 		return a;
 	}
-
+	//JAVI
+	public Administrator reconstructEdit(final Actor actor) {
+		final Administrator res;
+		res = this.administratorRepository.findOne(actor.getId());
+		res.setName(actor.getName());
+		res.setMiddleName(actor.getMiddleName());
+		res.setSurname(actor.getSurname());
+		res.setPhoto(actor.getPhoto());
+		res.setEmail(actor.getEmail());
+		res.setPhoneNumber(actor.getPhoneNumber());
+		res.setAddress(actor.getAddress());
+		Assert.notNull(res);
+		return res;
+	}
 }

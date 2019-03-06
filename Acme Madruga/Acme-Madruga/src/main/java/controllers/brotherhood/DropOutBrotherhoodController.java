@@ -33,15 +33,19 @@ public class DropOutBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(final int memberId) {
 		ModelAndView result;
-		Member member = this.memberService.findMembersById(memberId);
-		Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
-		Date date = new Date();
-		DropOut dropOut = this.dropOutService.create(member, brotherhood, date);
-		this.dropOutService.save(dropOut);
-		Collection<Member> members = this.brotherhoodService.findByPrincipal().getMembers();
-		result = new ModelAndView("member/list");
-		result.addObject("members", members);
-		result.addObject("requestURI", "dropOut/brotherhood/create.do");
+		try {
+			Member member = this.memberService.findMembersById(memberId);
+			Brotherhood brotherhood = this.brotherhoodService.findByPrincipal();
+			Date date = new Date();
+			DropOut dropOut = this.dropOutService.create(member, brotherhood, date);
+			this.dropOutService.save(dropOut);
+			Collection<Member> members = this.brotherhoodService.findByPrincipal().getMembers();
+			result = new ModelAndView("member/list");
+			result.addObject("members", members);
+			result.addObject("requestURI", "dropOut/brotherhood/create.do");
+		} catch (Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 		return result;
 
 	}

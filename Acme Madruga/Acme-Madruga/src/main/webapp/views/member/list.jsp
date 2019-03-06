@@ -28,7 +28,7 @@
 	requestURI="${requestURI }">
 	<display:column titleKey="member.name" property="name" />
 	<display:column titleKey="member.middleName" property="middleName" />
-	<display:column titleKey="member.surname" property="surname" />
+	<display:column titleKey="member.surName" property="surname" />
 	<display:column titleKey="member.profile">
 		<acme:cancel url="/member/brotherhood/profile.do?memberId=${member.id}" code="member.profile" />
 	</display:column>
