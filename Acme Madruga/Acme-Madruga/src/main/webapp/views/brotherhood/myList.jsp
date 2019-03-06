@@ -58,5 +58,9 @@
 	<display:column titleKey="brotherhood.floats">
 		<acme:cancel url="/float/listByBrotherhood.do?brotherhoodId=${brotherhood.id}" code="brotherhood.floats" />
 	</display:column>
+	
+	<display:column titleKey="brotherhood.dropout">
+		<acme:cancel url="/dropout/member/create.do?brotherhoodId=${brotherhood.id}" code="brotherhood.dropout" />
+	</display:column>
 
 </display:table>
