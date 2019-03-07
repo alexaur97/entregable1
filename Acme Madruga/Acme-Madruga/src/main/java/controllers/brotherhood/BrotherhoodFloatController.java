@@ -95,11 +95,10 @@ public class BrotherhoodFloatController extends AbstractController {
 		final Float floaat = this.floatService.findOne(floatId);
 
 		try {
-
 			res.addObject("floaat", floaat);
-			res = this.createEditModelAndView(floaat);
 		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/#");
+			final String msg = oops.getMessage();
+			res = this.createEditModelAndView(floaat, msg);
 
 		}
 		return res;
@@ -109,22 +108,20 @@ public class BrotherhoodFloatController extends AbstractController {
 	public ModelAndView save(@ModelAttribute("floaat") Float floaat, final BindingResult binding) {
 		ModelAndView res;
 
+		floaat = this.floatService.reconstruct(floaat, binding);
+
 		if (binding.hasErrors())
-			res = new ModelAndView("float/list");
+			res = this.createEditModelAndView(floaat);
 		else
 			try {
-				floaat = this.floatService.reconstruct(floaat, binding);
 				this.floatService.save(floaat);
 				res = new ModelAndView("redirect:/brotherhood/float/list.do");
 			} catch (final Throwable oops) {
-				res = this.createEditModelAndView(floaat);
-				res = new ModelAndView("brotherhood/list");
-				res.addObject("floaat", floaat);
-
+				res = this.createEditModelAndView(floaat, "float.commit.error");
 			}
-
 		return res;
 	}
+
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Float floaat, final BindingResult binding) {
 		ModelAndView result;

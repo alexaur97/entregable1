@@ -82,13 +82,9 @@ public class FloatService {
 	public Float reconstruct(final Float floaat, final BindingResult binding) {
 		Float res;
 
-		if (floaat.getId() == 0)
-			res = floaat;
-		else {
-			res = this.floatRepository.findOne(floaat.getId());
-			floaat.setBrotherhood(res.getBrotherhood());
-			res = floaat;
-		}
+		res = this.floatRepository.findOne(floaat.getId());
+		res = floaat;
+
 		this.validator.validate(res, binding);
 
 		return res;
