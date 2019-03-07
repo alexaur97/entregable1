@@ -28,7 +28,7 @@ public class Procession extends DomainEntity {
 	private String				ticker;
 	private String				mode;
 
-	// Atributos Públicos
+	// Atributos Pï¿½blicos
 
 	public Brotherhood			brotherhood;
 	public Collection<Float>	floats;
@@ -80,9 +80,9 @@ public class Procession extends DomainEntity {
 	}
 
 	public void setTicker(final String date) {
-		
+
 		this.ticker = date;
-		
+
 	}
 
 	@NotBlank
