@@ -68,8 +68,6 @@ public class BrotherhoodController extends AbstractController {
 		else
 			try {
 				final Brotherhood brotherhood = this.brotherhoodService.reconstruct(brotherhoodRegisterForm);
-				this.brotherhoodService.save(brotherhood);
-				result = new ModelAndView("redirect:/security/login.do");
 				final Boolean b = this.brotherhoodService.validatePictures(brotherhood.getPhotos());
 				if (!b)
 					result = this.createEditModelAndView(brotherhoodRegisterForm, "brotherhood.photo.error");
