@@ -205,6 +205,8 @@
 			<list>
 				<value>https://sevilla.abc.es/pasionensevilla//wp-content/uploads/2017/12/macarena_besamanos_saez.jpg
 				</value>
+				<value>hola
+				</value>
 			</list>
 		</property>
 		<property name="brotherhood" ref="brotherhood1" />
