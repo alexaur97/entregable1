@@ -78,6 +78,9 @@
 	<display:column style="color:orange" titleKey="request.status" property="status" />
 	<display:column style="color:orange" titleKey="request.procession"
 		property="procession.title" />
+		<display:column style="color:orange" titleKey="reject.explanation"
+		property="explanation" />
+		
 </display:table>
 
 

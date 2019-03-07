@@ -16,7 +16,6 @@ import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
 import domain.Request;
-import forms.RejectForm;
 
 @Controller
 @RequestMapping("request/brotherhood")
@@ -57,11 +56,11 @@ public class RequestBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/reject", method = RequestMethod.GET)
 	public ModelAndView reject(@RequestParam final int requestId) {
 		final ModelAndView res = new ModelAndView("request/reject");
-		RejectForm rejectForm;
-		rejectForm = new RejectForm();
+		Request request;
+		request = new Request();
 		try {
-			rejectForm.setRequestId(requestId);
-			res.addObject("rejectForm", rejectForm);
+			request = this.requestService.findOne(requestId);
+			res.addObject("request", request);
 		} catch (final Throwable oops) {
 			res.addObject("message", "request.commit.error");
 		}
@@ -69,17 +68,46 @@ public class RequestBrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/reject", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final RejectForm rejectForm, final BindingResult binding) {
-		ModelAndView res = new ModelAndView("redirect:/request/brotherhood/list.do");
+	public ModelAndView saveR(Request request, final BindingResult binding) {
+		ModelAndView res = new ModelAndView();
 		try {
-			this.requestService.reject(rejectForm.getRequestId(), rejectForm.getExplanation());
+			Request requestFinal = this.requestService.rejectRecostruction(request);
+			this.requestService.save(requestFinal);
 			res = new ModelAndView("redirect:/request/brotherhood/list.do");
 		} catch (final Throwable oops) {
+			res = new ModelAndView("redirect:/request/brotherhood/list.do");
 			res.addObject("message", "request.commit.error");
 
 		}
 
 		return res;
 	}
+	@RequestMapping(value = "/accept", method = RequestMethod.GET)
+	public ModelAndView accept(@RequestParam final int requestId) {
+		final ModelAndView res = new ModelAndView("request/accept");
+		Request request;
+		request = new Request();
+		try {
+			request = this.requestService.findOne(requestId);
+			res.addObject("request", request);
+		} catch (final Throwable oops) {
+			res.addObject("message", "request.commit.error");
+		}
+		return res;
+	}
+	@RequestMapping(value = "/accept", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveA(Request request, final BindingResult binding) {
+		ModelAndView res = new ModelAndView();
+		//		try {
+		Request requestFinal = this.requestService.acceptRecostruction(request);
+		this.requestService.save(requestFinal);
+		res = new ModelAndView("redirect:/request/brotherhood/list.do");
+		//		} catch (final Throwable oops) {
+		res = new ModelAndView("redirect:/request/brotherhood/list.do");
+		res.addObject("message", "request.commit.error");
 
+		//		}
+
+		return res;
+	}
 }

@@ -20,7 +20,7 @@ public class Request extends DomainEntity {
 	private String		status;
 	private Integer		row;
 	private Integer		column;
-
+	private String		explanation;
 	// Atributos Públicos
 
 	public Procession	procession;
@@ -75,5 +75,13 @@ public class Request extends DomainEntity {
 
 	public void setMember(final Member member) {
 		this.member = member;
+	}
+
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 }
