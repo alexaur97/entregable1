@@ -31,11 +31,13 @@
 	<display:column titleKey="procession.moment" property="moment" />
 	<display:column titleKey="procession.ticker" property="ticker" />
 	<display:column titleKey="procession.mode" property="mode" />
+	<security:authorize access="hasRole('BROTHERHOOD')">
 	<display:column titleKey="procession.edit">
 		<a href="brotherhood/procession/edit.do?processionId=${procession.id}">
 		<spring:message code="procession.edit" />
 		</a>
 		</display:column>
+		</security:authorize>
 		
 	<display:column titleKey="procession.show">
 		<a href="brotherhood/procession/show.do?processionId=${procession.id}">
@@ -43,5 +45,6 @@
 		</a>
 	</display:column>
 </display:table>
-
+		<security:authorize access="hasRole('BROTHERHOOD')">
 		<acme:cancel url="/brotherhood/procession/create.do" code="procession.create"/>
+		</security:authorize>

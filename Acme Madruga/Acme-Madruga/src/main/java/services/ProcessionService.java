@@ -149,7 +149,9 @@ public class ProcessionService {
 	//	}
 
 	public Procession reconstruct(Procession procession, BindingResult binding) {
-		final Procession res;
+		Procession res = procession;
+		if(procession.getMoment()!=null){
+		
 		String pattern = "YYMMdd";
 		DateFormat df = new SimpleDateFormat(pattern);
 		Date fecha = procession.getMoment(); 
@@ -158,25 +160,25 @@ public class ProcessionService {
 		
 		String cadena = this.creaString();
 		String ticker = fechaFormateada + "-" + cadena ;
-
-		if (procession.getId() == 0) {
-			res = procession;
-			
-			
-			res.setTicker(ticker);
-			
-		} else {
-			res = processionRepository.findOne(procession.getId());
-
-			res.setDescription(procession.getDescription());
-			res.setFloats(procession.getFloats());
-			res.setMode(procession.getMode());
-			res.setMoment(procession.getMoment());
-			res.setTitle(procession.getTitle());
-			res.setTicker(ticker);
+		res.setTicker(ticker);
 		}
-		validator.validate(res, binding);
+		
+		if (procession.getId() != 0) {
+		
+			
+			Procession p2 = processionRepository.findOne(res.getId());
+			res.setBrotherhood(p2.getBrotherhood());
 
+
+//			res.setDescription(procession.getDescription());
+//			res.setFloats(procession.getFloats());
+//			res.setMode(procession.getMode());
+//			res.setMoment(procession.getMoment());
+//			res.setTitle(procession.getTitle());
+//			res.setTicker(ticker);
+	
+		this.validator.validate(res, binding);
+		}
 		return res;
 	}
 	
