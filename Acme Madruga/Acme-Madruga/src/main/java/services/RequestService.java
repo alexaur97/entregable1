@@ -14,7 +14,6 @@ import security.LoginService;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Request;
-import forms.RequestForm;
 
 @Service
 @Transactional
@@ -83,7 +82,7 @@ public class RequestService {
 		final Authority auth2 = new Authority();
 		auth.setAuthority(Authority.MEMBER);
 		auth2.setAuthority(Authority.BROTHERHOOD);
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth) || LoginService.getPrincipal().getAuthorities().contains(auth));
 		final Member m = r.getMember();
 		final Brotherhood b = r.getProcession().getBrotherhood();
 		if (LoginService.getPrincipal().getAuthorities().contains(auth)) {
@@ -93,8 +92,8 @@ public class RequestService {
 		if (LoginService.getPrincipal().getAuthorities().contains(auth2)) {
 			Assert.isTrue(this.brotherhoodService.findByPrincipal().getId() == b.getId());
 			final Collection<Request> rs = this.requestRepository.findRequestApprovedByProcession(r.getProcession().getId(), "APPROVED");
-			for (final Request request : rs)
-				Assert.isTrue(!((r.getRow() == request.getRow()) && (r.getColumn() == request.getColumn())));
+			//			for (final Request request : rs)
+			//				Assert.isTrue(!((r.getRow() == request.getRow()) && (r.getColumn() == request.getColumn())));
 		}
 
 		final Brotherhood brotherhood = r.procession.brotherhood;
@@ -122,26 +121,31 @@ public class RequestService {
 
 	//---Ale---
 
-	public Request reconstruct(final RequestForm requestForm) {
+	public Request reconstruct(final Request request) {
 		final Request res;
-		if (requestForm.getRequestId() == 0)
+		if (request.getId() == 0)
 			res = this.create();
 		else
-			res = this.findOne(requestForm.getRequestId());
-		res.setProcession(requestForm.getProcession());
-		res.setRow(requestForm.getRow());
-		res.setColumn(requestForm.getColumn());
+			res = this.findOne(request.getId());
+		res.setProcession(request.getProcession());
 		res.setStatus("PENDING");
 		res.setMember(this.memberService.findByPrincipal());
 		return res;
 	}
 
-	public void reject(final int requestId, final String explanation) {
+	public Request rejectRecostruction(Request request) {
 		Request res;
-		res = this.findOne(requestId);
+		res = this.findOne(request.getId());
 		res.setStatus("REJECTED");
-		//res.setExplanation(explanation);
-		this.save(res);
+		res.setExplanation(request.getExplanation());
+		return res;
+	}
+	public Request acceptRecostruction(Request request) {
+		Request res = this.findOne(request.getId());
+		res.setStatus("ACCEPTED");
+		res.setColumn(request.getColumn());
+		res.setRow(request.getRow());
+		return res;
 	}
 
 }

@@ -84,7 +84,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@Column(unique = true)
-	@NotBlank
+	@Pattern(regexp = "([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)*|[a-zA-Z0-9]+[ a-zA-Z0-9]*\\<([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)*\\>")
 	public String getEmail() {
 		return this.email;
 	}
@@ -97,7 +97,7 @@ public abstract class Actor extends DomainEntity {
 	//d((d{0,3}))? ---> de 0 a 3 dígitos entre paréntesis. Los dos paréntesis externos más el ? indican que se puede poner o no
 	//d{4,} indica que hay 4 o más dígitos
 	// El | es un or
-	@Pattern(regexp = "\\+\\d{2} \\(\\d{1,3}\\)\\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
+	@Pattern(regexp = "\\+\\d{2}([ ]{1}[(]{1}\\d{1,3}[)]{1})? \\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

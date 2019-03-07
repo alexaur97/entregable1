@@ -1,14 +1,11 @@
+
 package controllers.member;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,11 +15,8 @@ import services.AdministratorService;
 import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
-import domain.Administrator;
 import domain.Procession;
 import domain.Request;
-//import forms.RequestForm;
-import forms.RequestForm;
 
 @Controller
 @RequestMapping("request/member")
@@ -30,12 +24,13 @@ public class RequestMemberController extends AbstractController {
 
 	@Autowired
 	AdministratorService	memberService;
-	
+
 	@Autowired
-	RequestService	requestService;
-	
+	RequestService			requestService;
+
 	@Autowired
-	ProcessionService	processionService;
+	ProcessionService		processionService;
+
 
 	// List -----------------------------------------------------------	
 	@RequestMapping(value = "/list")
@@ -62,35 +57,35 @@ public class RequestMemberController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		RequestForm requestForm;
-		Collection<Procession> processions = processionService.findProcessionsAvailableForMember();
+		Request request;
+		final Collection<Procession> processions = this.processionService.findProcessionsAvailableForMember();
 
-		requestForm = new RequestForm();
-		requestForm.setRequestId(0);
+		request = new Request();
+
+		request.setId(0);
 		result = new ModelAndView("request/create");
-		result.addObject("requestForm", requestForm);
+		result.addObject("request", request);
 		result.addObject("processions", processions);
 
 		return result;
 	}
 
-	
- 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final RequestForm requestForm, final BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Request request, final BindingResult binding) {
 		ModelAndView res = new ModelAndView("request/create");
-		Collection<Procession> processions = processionService.findProcessionsAvailableForMember();
+		final Collection<Procession> processions = this.processionService.findProcessionsAvailableForMember();
 
-		if (binding.hasErrors()){
-			res.addObject("requestForm", requestForm);
+		if (binding.hasErrors()) {
+			res.addObject("request", request);
 			res.addObject("processions", processions);
-		}
-		else
+		} else
 			try {
-				final Request request = this.requestService.reconstruct(requestForm);
+				request = this.requestService.reconstruct(request);
 				this.requestService.save(request);
 				res = new ModelAndView("redirect:/request/member/list.do");
 			} catch (final Throwable oops) {
 				res.addObject("message", "request.commit.error");
+
 			}
 
 		return res;

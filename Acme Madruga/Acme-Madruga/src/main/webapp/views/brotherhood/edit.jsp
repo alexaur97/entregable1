@@ -16,12 +16,31 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="administrator.action.1" /></p>
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%> 
 
-<form:form action="brotherhood/edit.do" modelAttribute="actor">
-<form:hidden path="id"/>
-<form:hidden path="version"/>
-<form:hidden path="userAccount"/>
+<form:form action="brotherhood/edit.do" modelAttribute="brotherhoodRegisterForm" method="POST">
 
+<acme:textbox code="brotherhood.name" path="name"/>
+<acme:textbox code="brotherhood.middleName" path="middleName"/>
+<acme:textbox code="brotherhood.surName" path="surName"/>
+<acme:textbox code="brotherhood.photo" path="photo"/>
+<acme:textbox code="brotherhood.email" path="email"/>
+<acme:textbox code="brotherhood.phone" path="phone"/>
+<acme:textbox code="brotherhood.address" path="address"/>
+<acme:textbox code="brotherhood.username" path="username"/>
+<acme:password code="brotherhood.password" path="password"/>
+<acme:password code="brotherhood.confirmPassword" path="confirmPassword"/>
+
+<acme:textbox code="brotherhood.title" path="title" />
+<acme:textbox code="brotherhood.establishmentDate" path="establishmentDate" />
+<acme:textarea code="brotherhood.photos" path="photos" />
+
+<spring:message code="brotherhood.check"/><form:checkbox path="terms"/>
+
+<form:errors path="terms" cssClass="error" />
+<br/>
+
+<acme:submit name="save" code="brotherhood.save"/>
+<acme:cancel url="/#" code="brotherhood.cancel"/>
 
 </form:form>

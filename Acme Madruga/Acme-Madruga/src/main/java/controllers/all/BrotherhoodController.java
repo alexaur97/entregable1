@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.UserAccount;
+import services.ActorService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
 import domain.Brotherhood;
@@ -26,6 +26,9 @@ public class BrotherhoodController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	public BrotherhoodController() {
@@ -50,54 +53,51 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		try {
-			final BrotherhoodRegisterForm reg = new BrotherhoodRegisterForm();
-			result = new ModelAndView("brotherhood/create");
-			result.addObject("reg", reg);
+			final BrotherhoodRegisterForm registerForm = new BrotherhoodRegisterForm();
+			result = this.createEditModelAndView(registerForm);
 		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/#");
 		}
 		return result;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final BrotherhoodRegisterForm reg, final BindingResult binding) {
+	public ModelAndView save(@Valid final BrotherhoodRegisterForm brotherhoodRegisterForm, final BindingResult binding) {
 		ModelAndView result;
-		if (binding.hasErrors()) {
-			result = new ModelAndView("brotherhood/create");
-			result.addObject("reg", reg);
-		} else
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(brotherhoodRegisterForm);
+		else
 			try {
-				final Brotherhood brotherhood = this.brotherhoodService.reconstruct(reg);
+				final Brotherhood brotherhood = this.brotherhoodService.reconstruct(brotherhoodRegisterForm);
 				this.brotherhoodService.save(brotherhood);
 				result = new ModelAndView("redirect:/security/login.do");
 			} catch (final Throwable oops) {
-				result = new ModelAndView("brotherhood/create");
-				result.addObject("reg", reg);
+				result = this.createEditModelAndView(brotherhoodRegisterForm);
 
-				if (reg.getTerms() == false)
-					result.addObject("message", "register.terms.error");
+				final Collection<String> accounts = this.actorService.findAllAccounts();
+				final Collection<String> emails = this.actorService.findAllEmails();
+
+				if (accounts.contains(brotherhoodRegisterForm.getUsername()))
+					result.addObject("message", "register.username.error");
+				else if (emails.contains(brotherhoodRegisterForm.getEmail()))
+					result.addObject("message", "register.email.error");
+				else if (!brotherhoodRegisterForm.getConfirmPassword().equals(brotherhoodRegisterForm.getPassword()))
+					result.addObject("message", "register.password.error");
 				else
 					result.addObject("message", "register.commit.error");
 			}
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Brotherhood brotherhood) {
-		final ModelAndView result = this.createEditModelAndView(brotherhood, null);
-		return result;
+	protected ModelAndView createEditModelAndView(final BrotherhoodRegisterForm brotherhoodRegisterForm) {
+		return this.createEditModelAndView(brotherhoodRegisterForm, null);
 	}
 
-	private ModelAndView createEditModelAndView(final Brotherhood brotherhood, final String messageCode) {
-		ModelAndView result;
+	protected ModelAndView createEditModelAndView(final BrotherhoodRegisterForm brotherhoodRegisterForm, final String messageCode) {
+		final ModelAndView result;
 		result = new ModelAndView("brotherhood/edit");
-
-		result.addObject("brotherhood", brotherhood);
+		result.addObject("brotherhoodRegisterForm", brotherhoodRegisterForm);
 		result.addObject("message", messageCode);
 
-		final UserAccount userAccount = brotherhood.getUserAccount();
-		result.addObject("userAccount", userAccount);
-
 		return result;
 	}
-
 }

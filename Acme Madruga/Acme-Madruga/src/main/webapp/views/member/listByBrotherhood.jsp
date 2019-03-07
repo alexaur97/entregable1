@@ -28,7 +28,7 @@
 	requestURI="${requestURI }">
 	<display:column titleKey="member.name" property="name" />
 	<display:column titleKey="member.middleName" property="middleName" />
-	<display:column titleKey="member.surname" property="surname" />
+	<display:column titleKey="member.surName" property="surname" />
 	<display:column titleKey="member.email" property="email" />
 	<display:column titleKey="member.phone" property="phoneNumber" />
 	<display:column titleKey="member.address" property="address" />

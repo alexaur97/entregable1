@@ -129,11 +129,17 @@ public class MemberService {
 
 	public Member reconstruct(final MemberRegisterForm r) {
 		Assert.isTrue(r.getPassword().equals(r.getConfirmPassword()));
+
 		final Collection<String> accounts = this.actorService.findAllAccounts();
 		final Member result = this.create();
 		final UserAccount userAccount = result.getUserAccount();
-		final Boolean b = !accounts.contains(userAccount.getUsername());
-		Assert.isTrue(b);
+		final Boolean bAccount = !accounts.contains(userAccount.getUsername());
+		Assert.isTrue(bAccount);
+
+		final Collection<String> emails = this.actorService.findAllEmails();
+		final String email = result.getEmail();
+		final Boolean bEmail = !emails.contains(email);
+		Assert.isTrue(bEmail);
 
 		final Md5PasswordEncoder pe = new Md5PasswordEncoder();
 		final String password = pe.encodePassword(r.getPassword(), null);
@@ -177,4 +183,5 @@ public class MemberService {
 		Assert.notNull(res);
 		return res;
 	}
+
 }

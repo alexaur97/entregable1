@@ -1,9 +1,11 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -14,6 +16,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import forms.ActorEditForm;
+import forms.AdministratorRegisterForm;
 
 @Service
 @Transactional
@@ -54,7 +57,7 @@ public class AdministratorService {
 
 	public void save(final Administrator administrator) {
 		if (administrator.getId() != 0) {
-			Authority auth = new Authority();
+			final Authority auth = new Authority();
 			auth.setAuthority(Authority.ADMINISTRATOR);
 			Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		}
@@ -64,11 +67,16 @@ public class AdministratorService {
 
 	// FR 12.1
 	public Administrator create() {
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		this.findByPrincipal();
 		final Administrator result = new Administrator();
+		final UserAccount ua = new UserAccount();
+		result.setUserAccount(ua);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.ADMINISTRATOR);
-		result.getUserAccount().addAuthority(authority);
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		result.getUserAccount().setAuthorities(authorities);
+
 		return result;
 
 	}
@@ -87,6 +95,40 @@ public class AdministratorService {
 		final Administrator a = this.administratorRepository.findByUserId(id);
 		return a;
 	}
+
+	public Administrator reconstruct(final AdministratorRegisterForm r) {
+		Assert.isTrue(r.getPassword().equals(r.getConfirmPassword()));
+
+		final Collection<String> accounts = this.actorService.findAllAccounts();
+		final Administrator result = this.create();
+		final UserAccount userAccount = result.getUserAccount();
+		final Boolean bAccount = !accounts.contains(userAccount.getUsername());
+		Assert.isTrue(bAccount);
+
+		final Collection<String> emails = this.actorService.findAllEmails();
+		final String email = result.getEmail();
+		final Boolean bEmail = !emails.contains(email);
+		Assert.isTrue(bEmail);
+
+		final Md5PasswordEncoder pe = new Md5PasswordEncoder();
+		final String password = pe.encodePassword(r.getPassword(), null);
+
+		userAccount.setUsername(r.getUsername());
+		userAccount.setPassword(password);
+
+		result.setUserAccount(userAccount);
+
+		result.setName(r.getName());
+		result.setMiddleName(r.getMiddleName());
+		result.setSurname(r.getSurName());
+		result.setPhoto(r.getPhoto());
+		result.setEmail(r.getEmail());
+		result.setPhoneNumber(r.getPhone());
+		result.setAddress(r.getAddress());
+
+		return result;
+	}
+
 	//JAVI
 	public Administrator reconstructEdit(final ActorEditForm actorEditForm) {
 		final Administrator res;

@@ -24,12 +24,10 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
 <fieldset class="col-md-6 col-md-offset-3">
 
-<form:form action="request/member/edit.do" modelAttribute="requestForm"  class="form-horizontal" method="post">
+<form:form action="request/member/edit.do" modelAttribute="request"  class="form-horizontal" method="post">
 	<div class="form-group ">
 	
-	<form:hidden path="requestId"/>
-	<form:hidden path="row"/>
-	<form:hidden path="column"/>
+	<form:hidden path="id"/>
 	<acme:select items="${processions}" itemLabel="title" code="request.procession" path="procession"/>
 <%--	<acme:textbox type="number" min="0" code="request.row" path="row"/>
 	<acme:textbox type="number" min="0" code="request.column" path="column"/> --%>

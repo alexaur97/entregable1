@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -103,6 +104,29 @@ public class EnrolmentService {
 	public Collection<Enrolment> enrolmentByMember(int id) {
 		Collection<Enrolment> res;
 		res = this.enrolmentRepository.enrolmentByMember(id);
+		return res;
+	}
+	public Integer enrolmentsByPosition(String pos) {
+		Collection<Enrolment> all = this.enrolmentRepository.findAll();
+		Integer res = 0;
+		Collection<String> standar = new ArrayList<>();
+		standar.add("President");
+		standar.add("Vice President");
+		standar.add("Secretary");
+		standar.add("Treasurer");
+		standar.add("Historian");
+		standar.add("Fundraiser");
+		standar.add("Officer");
+		for (Enrolment enrolment : all) {
+			String a = enrolment.getPosition().getName();
+			if (a.compareTo(pos) == 0) {
+				res = res + 1;
+			}
+			if (pos == "others" && !(standar.contains(pos))) {
+				res = res + 1;
+
+			}
+		}
 		return res;
 	}
 }

@@ -1,7 +1,7 @@
 <%--
  * textbox.tag
  *
- * Copyright (C) 2019 Universidad de Sevilla
+ * Copyright (C) 2014 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -48,4 +48,4 @@
 	<form:input path="${path}" readonly="${readonly}" type="${type }" step="${step }"
 		min="${min }" max="${max }" format="${format}" value="${value}" placeholder="${placeholder}"/>	
 	<form:errors path="${path}" cssClass="error" />
-</div>	
+</div>

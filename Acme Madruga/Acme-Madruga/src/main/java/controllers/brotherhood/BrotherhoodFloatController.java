@@ -5,13 +5,18 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
+import services.BrotherhoodService;
 import services.FloatService;
 import controllers.AbstractController;
+import domain.Brotherhood;
 import domain.Float;
 
 @Controller
@@ -21,10 +26,13 @@ public class BrotherhoodFloatController extends AbstractController {
 	// Supporting services ----------------------------------------------------
 
 	@Autowired
-	private FloatService	floatService;
+	private FloatService		floatService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
+
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
 
 
 	public BrotherhoodFloatController() {
@@ -47,6 +55,116 @@ public class BrotherhoodFloatController extends AbstractController {
 		result.addObject("floats", floats);
 
 		return result;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+
+		ModelAndView result;
+		Float floaat;
+		floaat = new Float();
+
+		try {
+			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
+
+			floaat.setId(0);
+			floaat.setBrotherhood(bh);
+
+			result = new ModelAndView("float/edit");
+			result.addObject("floaat", floaat);
+		} catch (final Throwable oops) {
+			final String msg = oops.getMessage();
+			result = this.createEditModelAndView(floaat, msg);
+
+		}
+
+		return result;
+	}
+
+	// Edition ----------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int floatId) {
+		ModelAndView res = new ModelAndView("float/edit");
+		final Float floaat = this.floatService.findOne(floatId);
+
+		try {
+
+			res.addObject("floaat", floaat);
+		} catch (final Throwable oops) {
+			final String msg = oops.getMessage();
+			res = this.createEditModelAndView(floaat, msg);
+
+		}
+		return res;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(Float floaat, final BindingResult binding) {
+		ModelAndView res;
+
+		floaat = this.floatService.reconstruct(floaat, binding);
+
+		if (binding.hasErrors())
+			res = this.createEditModelAndView(floaat);
+		else
+			try {
+				this.floatService.save(floaat);
+				res = new ModelAndView("redirect:/brotherhood/float/list.do");
+			} catch (final Throwable oops) {
+				final String msg = oops.getMessage();
+				res = this.createEditModelAndView(floaat, msg);
+
+			}
+
+		return res;
+	}
+
+	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Float floaat, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+
+			this.floatService.delete(floaat);
+			result = new ModelAndView("redirect:/brotherhood/float/list.do");
+		} catch (final Throwable oops) {
+			final String msg = oops.getMessage();
+			result = this.createEditModelAndView(floaat, msg);
+
+		}
+
+		return result;
+	}
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int floatId) {
+		ModelAndView result;
+		Float floaat;
+
+		try {
+			Assert.notNull(floatId);
+
+			floaat = this.floatService.findOne(floatId);
+			result = new ModelAndView("float/show");
+			//	result.addObject("requestURI", "procession/show.do?=" + processionId);
+			result.addObject("floaat", floaat);
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Float floaat) {
+		return this.createEditModelAndView(floaat, null);
+	}
+	protected ModelAndView createEditModelAndView(final Float floaat, final String messageCode) {
+		final ModelAndView res;
+		res = new ModelAndView("float/edit");
+		res.addObject("floaat", floaat);
+
+		return res;
 	}
 
 }

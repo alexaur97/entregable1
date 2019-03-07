@@ -61,37 +61,73 @@
 <li><jstl:out value="${member.name}"/> <jstl:out value="${member.surname}"/></li>
 </jstl:forEach>
 </ul>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-<div style="width:25%;"><canvas id="myChart" width="400" height="400"></canvas></div>
+<body>
+	<div class="container" style="width: 75%;">
+		<div
+			style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"
+			class="chartjs-size-monitor">
+			<div class="chartjs-size-monitor-expand"
+				style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+				<div
+					style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
+			</div>
+			<div class="chartjs-size-monitor-shrink"
+				style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+				<div
+					style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
+			</div>
+		</div>
+		<canvas id="myChart"
+			style="display: block; width: 935px; height: 467px;" width="935"
+			height="467" class="chartjs-render-monitor"></canvas>
+	</div>
+
+</body>
+
 
 <script>
-window.onload = function(){
+var president = "${president}";
+var vicePresident = "$(vicePresident)";
+var secretary = "$(secretary)";
 
-var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["Positions"],
-        datasets: [${pos}]
-        },
-        options: {
-        scales: {
-            yAxes: [{
-            	stacked: false,
-                ticks: {
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-            	barPercentage:0.5,
-            	stacked: true,
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
-};
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type : 'bar',
+		data : {
+			labels : [
+					"Long", "Short", "All"
+			],
+			datasets : [
+				{
+					label : 'Shouts',
+					data : [president, vicePresident, secretary],
+					backgroundColor : [
+						'rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)','rgba(255, 99, 132, 0.2)'
+					],
+					borderColor : [
+						'rgba(255,99,132,1)','rgba(255, 99, 132, 1)','rgba(255, 99, 132, 1)','rgba(255, 99, 132, 1)'
+					],
+					borderWidth : 1
+				}
+			]
+		},
+		options : {
+			scales : {
+				yAxes : [
+					{
+						ticks : {
+							beginAtZero : true
+						}
+					}
+				]
+			}
+		}
+	});
+
+	Chart.scaleService.updateScaleDefaults('bar', {
+		ticks : {
+			min : 0
+		}
+	});
 </script>

@@ -10,7 +10,6 @@ import org.springframework.util.Assert;
 
 import repositories.PositionRepository;
 import domain.Position;
-import forms.PositionForm;
 
 @Service
 @Transactional
@@ -62,23 +61,23 @@ public class PositionService {
 		return this.positionRepository.checkIfNotAssigned(positionId);
 	}
 
-	public PositionForm toForm(final int positionId) {
-		final PositionForm res = new PositionForm();
+	public Position toForm(final int positionId) {
+		final Position res = new Position();
 		final Position position = this.findOne(positionId);
 		res.setName(position.getName());
 		res.setNameEs(position.getNameEs());
-		res.setPositionId(positionId);
 		return res;
 	}
 
-	public Position reconstruct(final PositionForm positionForm) {
+	public Position reconstruct(final Position position) {
 		final Position res;
-		if (positionForm.getPositionId() == 0)
+		if (position.getId() == 0)
 			res = this.create();
 		else
-			res = this.findOne(positionForm.getPositionId());
-		res.setName(positionForm.getName());
-		res.setNameEs(positionForm.getNameEs());
+			res = this.findOne(position.getId());
+		res.setName(position.getName());
+		res.setNameEs(position.getNameEs());
+		res.setId(position.getId());
 		return res;
 	}
 

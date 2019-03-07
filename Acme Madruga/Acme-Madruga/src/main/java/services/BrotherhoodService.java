@@ -54,7 +54,6 @@ public class BrotherhoodService {
 
 	public Brotherhood create() {
 
-		Assert.isTrue(!LoginService.getPrincipal().getAuthorities().containsAll(Authority.listAuthorities()), "You can't register if you are already registered");
 		final Brotherhood b = new Brotherhood();
 		final UserAccount ua = new UserAccount();
 		b.setUserAccount(ua);
