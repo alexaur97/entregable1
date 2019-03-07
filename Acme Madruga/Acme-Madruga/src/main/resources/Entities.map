@@ -1,5 +1,5 @@
 #./src/main/resources/Entities.map
-#Thu Mar 07 21:27:19 CET 2019
+#Thu Mar 07 22:09:08 CET 2019
 position7=19
 admin1=20
 position6=18
@@ -10,13 +10,3 @@ position2=14
 position1=13
 configurationParameters=12
 userAccount1=11
-#Thu Mar 07 21:12:33 CET 2019
-position7=18
-position6=17
-position5=16
-position4=15
-position3=14
-position2=13
-position1=12
-configurationParameters=11
-userAccount1=10
