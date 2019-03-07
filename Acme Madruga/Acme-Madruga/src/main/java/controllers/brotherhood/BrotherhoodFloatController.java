@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,13 +47,18 @@ public class BrotherhoodFloatController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		final Integer currentActorId = this.actorService.findByPrincipal().getId();
-		Collection<Float> floats;
-		floats = this.floatService.findFloatsByBrotherhood(currentActorId);
+		try {
+			final Integer currentActorId = this.actorService.findByPrincipal().getId();
+			Collection<Float> floats;
+			floats = this.floatService.findFloatsByBrotherhood(currentActorId);
 
-		result = new ModelAndView("float/list");
-		result.addObject("requestURI", "float/list.do");
-		result.addObject("floats", floats);
+			result = new ModelAndView("float/list");
+			result.addObject("requestURI", "float/list.do");
+			result.addObject("floats", floats);
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 
 		return result;
 	}
@@ -70,11 +76,11 @@ public class BrotherhoodFloatController extends AbstractController {
 			floaat.setId(0);
 			floaat.setBrotherhood(bh);
 
-			result = new ModelAndView("float/edit");
+			result = new ModelAndView("float/list");
 			result.addObject("floaat", floaat);
+			result = this.createEditModelAndView(floaat);
 		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			result = this.createEditModelAndView(floaat, msg);
+			result = new ModelAndView("redirect:/#");
 
 		}
 
@@ -91,35 +97,34 @@ public class BrotherhoodFloatController extends AbstractController {
 		try {
 
 			res.addObject("floaat", floaat);
+			res = this.createEditModelAndView(floaat);
 		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			res = this.createEditModelAndView(floaat, msg);
+			res = new ModelAndView("redirect:/#");
 
 		}
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Float floaat, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("floaat") Float floaat, final BindingResult binding) {
 		ModelAndView res;
 
-		floaat = this.floatService.reconstruct(floaat, binding);
-
 		if (binding.hasErrors())
-			res = this.createEditModelAndView(floaat);
+			res = new ModelAndView("float/list");
 		else
 			try {
+				floaat = this.floatService.reconstruct(floaat, binding);
 				this.floatService.save(floaat);
 				res = new ModelAndView("redirect:/brotherhood/float/list.do");
 			} catch (final Throwable oops) {
-				final String msg = oops.getMessage();
-				res = this.createEditModelAndView(floaat, msg);
+				res = this.createEditModelAndView(floaat);
+				res = new ModelAndView("brotherhood/list");
+				res.addObject("floaat", floaat);
 
 			}
 
 		return res;
 	}
-
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Float floaat, final BindingResult binding) {
 		ModelAndView result;

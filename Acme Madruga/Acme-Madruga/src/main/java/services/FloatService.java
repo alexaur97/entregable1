@@ -58,6 +58,9 @@ public class FloatService {
 		final Float result;
 
 		Assert.notNull(floatt);
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
 		result = this.floatRepository.save(floatt);
 		return result;
 	}
@@ -83,11 +86,8 @@ public class FloatService {
 			res = floaat;
 		else {
 			res = this.floatRepository.findOne(floaat.getId());
-
-			res.setTitle(floaat.getTitle());
-			res.setDescription(floaat.getDescription());
-			res.setPictures(floaat.getPictures());
-
+			floaat.setBrotherhood(res.getBrotherhood());
+			res = floaat;
 		}
 		this.validator.validate(res, binding);
 
