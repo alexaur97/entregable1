@@ -35,8 +35,10 @@ public class RequestService {
 
 
 	public Request findOne(int id) {
+
 		Request result;
 		result = this.requestRepository.findOne(id);
+		Assert.notNull(result);
 		return result;
 	}
 
@@ -82,7 +84,6 @@ public class RequestService {
 	}
 	public Request save(final Request r) {
 		Assert.notNull(r);
-		Assert.notNull(r.getMember());
 		Actor a = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.authEdit(a, "MEMBER") || this.actorService.authEdit(a, "BROTHERHOOD"));
 		final Member m = r.getMember();
@@ -137,6 +138,8 @@ public class RequestService {
 		Request res = request;
 		Request a = this.requestRepository.findOne(request.getId());
 		res.setStatus("REJECTED");
+		res.setMember(a.getMember());
+		res.setProcession(a.getProcession());
 		res.setExplanation(a.getExplanation());
 		return res;
 	}
@@ -161,11 +164,13 @@ public class RequestService {
 		return res;
 	}
 
-	public String findPos(int id, int column, int row) {
+	public String findPos(int id) {
 		Collection<Request> all = this.requestRepository.findRequestApprovedByProcession(id, "APPROVED");
 		int posR = 0;
 		int posC = 0;
 		for (Request request : all) {
+			int column = request.getColumn();
+			int row = request.getRow();
 			if ((column - 1) > 0 && (row - 1) > 0) {
 				if (this.posDisp(id, column - 1, row)) {
 					posC = column - 1;
