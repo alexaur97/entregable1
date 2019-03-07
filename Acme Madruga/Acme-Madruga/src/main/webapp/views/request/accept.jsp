@@ -24,14 +24,17 @@
 <div class="col-sm-12 col-md-12 col-lg-12">
 <fieldset class="col-md-6 col-md-offset-3">
 
-<form:form action="request/brotherhood/accept.do" modelAttribute="request"  class="form-horizontal" method="post">
+<form:form action="request/brotherhood/accept.do" modelAttribute="request" method="POST">
 	<div class="form-group ">
 	<form:hidden path="id"/>
+	<form:hidden path="version"/>
 	<acme:textbox type="number" min="0" code="accept.column" path="column" />
 	<acme:textbox type="number" min="0" code="accept.row" path="row" />
 	<acme:submit name="save" code="position.save"/>
 	<acme:cancel url="/request/brotherhood/list.do" code="position.cancel"/>
 
+	<br/><spring:message code="request.pos"/><jstl:out value="${pos}"/>
+	<br/>
 </div>	
 </form:form>
 </fieldset>
