@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,5 +93,21 @@ public class FloatService {
 		}
 		this.validator.validate(res, binding);
 		return res;
+	}
+
+	public Boolean validatePictures(final Collection<String> pictures) {
+		final String regex = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=_|!:,.;]*[-a-zA-Z0-9+&@#/%=_|]";
+		final Pattern patt = Pattern.compile(regex);
+		Boolean b = true;
+
+		if (!pictures.isEmpty())
+			for (final String s : pictures) {
+				final Matcher matcher = patt.matcher(s);
+				if (!matcher.matches()) {
+					b = false;
+					break;
+				}
+			}
+		return b;
 	}
 }

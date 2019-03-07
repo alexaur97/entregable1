@@ -25,5 +25,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <br/><spring:message code="float.title"/>: <jstl:out value="${floaat.title}"></jstl:out>
 <br/><spring:message code="float.description"/>: <jstl:out value="${floaat.description}"></jstl:out>
-	
+<display:table name="pictures" id="picture">
+	<display:column titleKey="float.pictures" > <img src="${picture}" alt="floatLogo" height="200" width="350"/></display:column>
+</display:table>
 

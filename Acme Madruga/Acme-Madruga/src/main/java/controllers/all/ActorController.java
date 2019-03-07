@@ -1,6 +1,8 @@
 
 package controllers.all;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -50,7 +52,7 @@ public class ActorController extends AbstractController {
 		return result;
 	}
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView save(ActorEditForm actorEditForm, final BindingResult binding) {
+	public ModelAndView save(@Valid ActorEditForm actorEditForm, final BindingResult binding) {
 		ModelAndView res;
 		if (binding.hasErrors()) {
 			res = new ModelAndView("actor/edit");

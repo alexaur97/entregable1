@@ -113,14 +113,18 @@ public class BrotherhoodFloatController extends AbstractController {
 			res = this.createEditModelAndView(floaat);
 		else
 			try {
-				this.floatService.save(floaat);
-				res = new ModelAndView("redirect:/brotherhood/float/list.do");
+				final Boolean b = this.floatService.validatePictures(floaat.getPictures());
+				if (!b)
+					res = this.createEditModelAndView(floaat, "float.picture.error");
+				else {
+					this.floatService.save(floaat);
+					res = new ModelAndView("redirect:/brotherhood/float/list.do");
+				}
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(floaat, "float.commit.error");
 			}
 		return res;
 	}
-
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Float floaat, final BindingResult binding) {
 		ModelAndView result;
@@ -146,17 +150,21 @@ public class BrotherhoodFloatController extends AbstractController {
 			Assert.notNull(floatId);
 
 			floaat = this.floatService.findOne(floatId);
-			result = new ModelAndView("float/show");
-			//	result.addObject("requestURI", "procession/show.do?=" + processionId);
-			result.addObject("floaat", floaat);
-
-		} catch (final Exception e) {
+			final Boolean b = this.floatService.validatePictures(floaat.getPictures());
+			if (!b)
+				result = new ModelAndView("redirect:/#");
+			else {
+				result = new ModelAndView("float/show");
+				//	result.addObject("requestURI", "procession/show.do?=" + processionId);
+				result.addObject("floaat", floaat);
+				result.addObject("pictures", floaat.getPictures());
+			}
+		} catch (final Throwable oops) {
 			result = new ModelAndView("redirect:/#");
 		}
 
 		return result;
 	}
-
 	protected ModelAndView createEditModelAndView(final Float floaat) {
 		return this.createEditModelAndView(floaat, null);
 	}
