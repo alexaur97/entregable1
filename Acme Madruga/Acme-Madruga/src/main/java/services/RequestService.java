@@ -133,11 +133,11 @@ public class RequestService {
 		return res;
 	}
 
-	public Request rejectRecostruction(Request request) {
-		Request res;
-		res = this.requestRepository.findOne(request.getId());
+	public Request rejectRecostruction(Request request, BindingResult binding) {
+		Request res = request;
+		Request a = this.requestRepository.findOne(request.getId());
 		res.setStatus("REJECTED");
-		res.setExplanation(request.getExplanation());
+		res.setExplanation(a.getExplanation());
 		return res;
 	}
 	public Request acceptRecostruction(Request request, BindingResult binding) {

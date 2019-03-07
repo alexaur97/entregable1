@@ -34,7 +34,7 @@
 	<acme:cancel url="/request/brotherhood/list.do" code="position.cancel"/>
 
 	<br/><spring:message code="request.pos"/><jstl:out value="${pos}"/>
-
+	<br/>
 </div>	
 </form:form>
 </fieldset>

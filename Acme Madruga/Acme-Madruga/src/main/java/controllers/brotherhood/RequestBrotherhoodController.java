@@ -70,21 +70,26 @@ public class RequestBrotherhoodController extends AbstractController {
 		return res;
 	}
 
-	//	@RequestMapping(value = "/reject", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView saveR(Request request, final BindingResult binding) {
-	//		ModelAndView res = new ModelAndView();
-	//		try {
-	//			Request requestFinal = this.requestService.rejectRecostruction(request);
-	//			this.requestService.save(requestFinal);
-	//			res = new ModelAndView("redirect:/request/brotherhood/list.do");
-	//		} catch (final Throwable oops) {
-	//			res = new ModelAndView("redirect:/request/brotherhood/list.do");
-	//			res.addObject("message", "request.commit.error");
-	//
-	//		}
-	//
-	//		return res;
-	//	}
+	@RequestMapping(value = "/reject", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveR(Request request, final BindingResult binding) {
+		ModelAndView res;
+		Request requestFinal = this.requestService.rejectRecostruction(request, binding);
+
+		if (binding.hasErrors()) {
+			res = new ModelAndView("request/reject");
+		}
+		try {
+			this.requestService.save(requestFinal);
+			res = new ModelAndView("redirect:/request/brotherhood/list.do");
+		} catch (final Throwable oops) {
+			res = new ModelAndView("request/reject");
+			res.addObject("message", "request.commit.error");
+			res.addObject("request", request);
+
+		}
+
+		return res;
+	}
 	@RequestMapping(value = "/accept", method = RequestMethod.GET)
 	public ModelAndView accept(@RequestParam final int requestId) {
 		final ModelAndView res = new ModelAndView("request/accept");
@@ -101,17 +106,21 @@ public class RequestBrotherhoodController extends AbstractController {
 	@RequestMapping(value = "/accept", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@ModelAttribute("request") Request request, final BindingResult binding) {
 
-		ModelAndView res = new ModelAndView("request/accept");
+		ModelAndView res;
+		Request requestFinal = this.requestService.acceptRecostruction(request, binding);
 
+		if (binding.hasErrors()) {
+			res = new ModelAndView("request/accept");
+		}
 		try {
 			Assert.isTrue(this.requestService.posDisp(request.getProcession().getId(), request.getColumn(), request.getRow()));
-			Request requestFinal = this.requestService.acceptRecostruction(request, binding);
 			this.requestService.save(requestFinal);
 			res = new ModelAndView("redirect:/request/brotherhood/list.do");
 
 		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/request/brotherhood/list.do");
+			res = new ModelAndView("request/accept");
 			res.addObject("message", "request.pos.error");
+			res.addObject("request", request);
 
 		}
 
