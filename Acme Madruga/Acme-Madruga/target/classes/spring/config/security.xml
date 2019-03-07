@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * security.xml * * Copyright (C) 2019 Universidad de Sevilla * * The
-	use of this project is hereby constrained to the conditions of the * TDG
+<!-- * security.xml * * Copyright (C) 2019 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
 	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -58,10 +58,10 @@
 		<security:intercept-url pattern="/brotherhood/procession/show.do" access="hasRole('BROTHERHOOD')" />
 
 
-		<security:intercept-url pattern="/brotherhood/float/list.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/brotherhood/float/create.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/brotherhood/float/edit.do" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/brotherhood/float/show.do" access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/brotherhood/float/list.do" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/brotherhood/float/create.do" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/brotherhood/float/edit.do" access="hasRole('BROTHERHOOD')" /> 
+		<security:intercept-url pattern="/brotherhood/float/show.do" access="hasRole('BROTHERHOOD')" /> 
 
 
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" />
@@ -78,8 +78,8 @@
 		<security:intercept-url pattern="/request/brotherhood/list.do" access="hasRole('BROTHERHOOD')" />
 
 		<security:intercept-url pattern="/request/brotherhood/*" access="hasRole('BROTHERHOOD')" />
-		<security:intercept-url pattern="/dropout/member/*" access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/dropout/member/create.do" access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/dropout/member/*" access="hasRole('MEMBER')" /> 
+		<security:intercept-url pattern="/dropout/member/create.do" access="hasRole('MEMBER')" /> 
 
 		<security:intercept-url pattern="/actor/edit.do" access="isAuthenticated()" />
 
