@@ -90,7 +90,7 @@
 					<li><a href="actor/edit.do"><spring:message code="master.page.editPersonalData" /></a></li>
 		                   </security:authorize>
 		                    <security:authorize access="hasRole('ADMINISTRATOR')">
-		            <li><a class="fNiv" href="administrator/administrator/create.do"><spring:message code="master.page.signup.admin" /></a></li>
+		            <li><a href="administrator/administrator/create.do"><spring:message code="master.page.signup.admin" /></a></li>
 		                    </security:authorize>
 		                   
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
