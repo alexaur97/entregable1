@@ -64,7 +64,7 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView save(@Valid final BrotherhoodRegisterForm brotherhoodRegisterForm, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors())
-			result = new ModelAndView("brotherhood/edit");
+			result = this.createEditModelAndView(brotherhoodRegisterForm);
 		else
 			try {
 				final Brotherhood brotherhood = this.brotherhoodService.reconstruct(brotherhoodRegisterForm);

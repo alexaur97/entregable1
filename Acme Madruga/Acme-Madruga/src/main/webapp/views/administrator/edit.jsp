@@ -20,8 +20,8 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="administrator/edit.do"
-	modelAttribute="memberAdminRegisterForm" method="POST">
+<form:form action="administrator/administrator/edit.do"
+	modelAttribute="administratorRegisterForm" method="POST">
 
 	<acme:textbox code="administrator.name" path="name" />
 	<acme:textbox code="administrator.middleName" path="middleName" />
