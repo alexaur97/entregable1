@@ -148,11 +148,12 @@ public class BrotherhoodProcessionController extends AbstractController {
 			this.processionService.delete(procession);
 			result = new ModelAndView("redirect:/brotherhood/procession/list.do");
 		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			result = this.createEditModelAndView(procession, msg);
+			result = this.createEditModelAndView(procession, "procession.commit.error");
 
 		}
 
+		
+		
 		return result;
 	}
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
