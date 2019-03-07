@@ -72,7 +72,6 @@ public class BrotherhoodFloatController extends AbstractController {
 
 		try {
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
-
 			floaat.setId(0);
 			floaat.setBrotherhood(bh);
 
@@ -92,14 +91,14 @@ public class BrotherhoodFloatController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int floatId) {
 		ModelAndView res = new ModelAndView("float/edit");
-		final Float floaat = this.floatService.findOne(floatId);
-
 		try {
+			final Float floaat = this.floatService.findOne(floatId);
+			final Integer idB = this.brotherhoodService.findByPrincipal().getId();
+			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(idB);
+			Assert.isTrue(floats.contains(floaat));
 			res.addObject("floaat", floaat);
 		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			res = this.createEditModelAndView(floaat, msg);
-
+			res = new ModelAndView("redirect:/#");
 		}
 		return res;
 	}
