@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.validation.Validator;
 import repositories.FloatRepository;
 import security.Authority;
 import security.LoginService;
+import domain.Brotherhood;
 import domain.Float;
 
 @Service
@@ -58,6 +61,11 @@ public class FloatService {
 		final Float result;
 
 		Assert.notNull(floatt);
+		final Brotherhood b = this.brotherhoodService.findByPrincipal();
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.BROTHERHOOD);
+		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(auth));
+		Assert.isTrue(floatt.getBrotherhood().equals(b));
 		result = this.floatRepository.save(floatt);
 		return result;
 	}
@@ -73,24 +81,33 @@ public class FloatService {
 		Assert.notNull(id);
 		System.out.println(this.floatRepository);
 		final Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
+
 		return res;
 	}
 
 	public Float reconstruct(final Float floaat, final BindingResult binding) {
-		Float res;
-
-		if (floaat.getId() == 0)
-			res = floaat;
-		else {
-			res = this.floatRepository.findOne(floaat.getId());
-
-			res.setTitle(floaat.getTitle());
-			res.setDescription(floaat.getDescription());
-			res.setPictures(floaat.getPictures());
-
+		final Float res = floaat;
+		if (floaat.getId() != 0) {
+			final Float f = this.floatRepository.findOne(res.getId());
+			res.setBrotherhood(f.getBrotherhood());
 		}
 		this.validator.validate(res, binding);
-
 		return res;
+	}
+
+	public Boolean validatePictures(final Collection<String> pictures) {
+		final String regex = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=_|!:,.;]*[-a-zA-Z0-9+&@#/%=_|]";
+		final Pattern patt = Pattern.compile(regex);
+		Boolean b = true;
+
+		if (!pictures.isEmpty())
+			for (final String s : pictures) {
+				final Matcher matcher = patt.matcher(s);
+				if (!matcher.matches()) {
+					b = false;
+					break;
+				}
+			}
+		return b;
 	}
 }

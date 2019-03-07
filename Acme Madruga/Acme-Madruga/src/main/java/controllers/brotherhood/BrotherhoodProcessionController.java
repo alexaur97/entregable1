@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,24 +97,30 @@ public class BrotherhoodProcessionController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int processionId) {
 		ModelAndView res = new ModelAndView("procession/edit");
-		final Procession procession = this.processionService.findOne(processionId);
+		
+		//Collection<Procession> processions = this.processionService.findAll();
 
 		try {
-
+			
+			final Procession procession = this.processionService.findOne(processionId);
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
+			
+			Assert.isTrue(procession.getBrotherhood().equals(bh)) ;
+					//&& processions.contains(procession) );
+			
 			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
 			res.addObject("procession", procession);
 			res.addObject("floats", floats);
-		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			res = this.createEditModelAndView(procession, msg);
-
+//		} catch (final Throwable oops) {
+//			res = this.createEditModelAndView(procession, "procession.commit.error");
+		}catch (final Exception e) {
+				res = new ModelAndView("redirect:/#");
 		}
 		return res;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(Procession procession, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("procession") Procession procession, final BindingResult binding) {
 		ModelAndView res;
 
 		procession = this.processionService.reconstruct(procession, binding);
@@ -125,8 +132,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 				this.processionService.save(procession);
 				res = new ModelAndView("redirect:/brotherhood/procession/list.do");
 			} catch (final Throwable oops) {
-				final String msg = oops.getMessage();
-				res = this.createEditModelAndView(procession, msg);
+				res = this.createEditModelAndView(procession, "procession.commit.error");
 
 			}
 
@@ -181,6 +187,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 		final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
 		res.addObject("procession", procession);
 		res.addObject("floats", floats);
+		res.addObject("message", messageCode);
 
 		return res;
 	}

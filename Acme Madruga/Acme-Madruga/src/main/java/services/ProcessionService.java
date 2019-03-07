@@ -121,6 +121,15 @@ public class ProcessionService {
 
 		return res;
 	}
+	public Collection<Procession> findFinalProcessionsByBrotherhood(final int idBrotherhood) {
+		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		Collection<Procession> res = new ArrayList<>();
+		for (Procession procession : all) {
+			if (procession.getMode().equals("FINAL"))
+				res.add(procession);
+		}
+		return res;
+	}
 
 	// FR 12.3.5
 
@@ -133,23 +142,12 @@ public class ProcessionService {
 
 	//Other Methods--------------------
 
-	//	public ProcessionForm toForm(final int processionId) {
-	//		final ProcessionForm res = new ProcessionForm();
-	//		final Procession procession = this.findOne(processionId);
-	//
-	//		res.setDescription(procession.getDescription());
-	//		res.setFloats(procession.getFloats());
-	//		res.setMode(procession.getMode());
-	//		res.setMoment(procession.getMoment());
-	//		res.setTitle(procession.getTitle());
-	//		res.setProcessionId(processionId);
-	//		res.setTicker(procession.getTicker());
-	//
-	//		return res;
-	//	}
+
 
 	public Procession reconstruct(Procession procession, BindingResult binding) {
-		final Procession res;
+		Procession res = procession;
+		if(procession.getMoment()!=null){
+		
 		String pattern = "YYMMdd";
 		DateFormat df = new SimpleDateFormat(pattern);
 		Date fecha = procession.getMoment(); 
@@ -158,25 +156,20 @@ public class ProcessionService {
 		
 		String cadena = this.creaString();
 		String ticker = fechaFormateada + "-" + cadena ;
-
-		if (procession.getId() == 0) {
-			res = procession;
-			
-			
-			res.setTicker(ticker);
-			
-		} else {
-			res = processionRepository.findOne(procession.getId());
-
-			res.setDescription(procession.getDescription());
-			res.setFloats(procession.getFloats());
-			res.setMode(procession.getMode());
-			res.setMoment(procession.getMoment());
-			res.setTitle(procession.getTitle());
-			res.setTicker(ticker);
+		res.setTicker(ticker);
 		}
-		validator.validate(res, binding);
+		
+		if (procession.getId() != 0) {
+		
+			
+			Procession p2 = processionRepository.findOne(res.getId());
+			res.setBrotherhood(p2.getBrotherhood());
 
+
+
+		}
+		this.validator.validate(res, binding);
+		
 		return res;
 	}
 	
@@ -199,14 +192,6 @@ public class ProcessionService {
 	
 	
 	
-	public Collection<Procession> findFinalProcessionsByBrotherhood(final int idBrotherhood) {
-		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-		Collection<Procession> res = new ArrayList<>();
-		for (Procession procession : all) {
-			if (procession.getMode() == "FINAL")
-				res.add(procession);
-		}
-		return res;
-	}
+
 
 }

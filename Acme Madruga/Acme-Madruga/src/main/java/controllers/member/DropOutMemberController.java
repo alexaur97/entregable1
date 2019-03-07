@@ -43,21 +43,27 @@ public class DropOutMemberController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(final int brotherhoodId) {
 		ModelAndView result;
-		final Member member = this.memberService.findByPrincipal();
-		final Integer id = member.getId();
-		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		try {
+			final Member member = this.memberService.findByPrincipal();
+			final Integer id = member.getId();
+			final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
-		final Date date = new Date();
-		final DropOut dropOut = this.dropOutService.create(member, brotherhood, date);
-		this.dropOutService.save(dropOut);
+			final Date date = new Date();
+			final DropOut dropOut = this.dropOutService.create(member, brotherhood, date);
+			this.dropOutService.save(dropOut);
 
-		final Collection<Brotherhood> brotherhoodsPast = this.brotherhoodService.findBrotherhoodByMemberHasBelonged(id);
-		final Collection<Brotherhood> brotherhoodsCurrent = this.brotherhoodService.findBrotherhoodByMemberBelong(id);
+			final Collection<Brotherhood> brotherhoodsPast = this.brotherhoodService.findBrotherhoodByMemberHasBelonged(id);
+			final Collection<Brotherhood> brotherhoodsCurrent = this.brotherhoodService.findBrotherhoodByMemberBelong(id);
 
-		result = new ModelAndView("brotherhood/myList");
-		result.addObject("requestURI", "brotherhood/list.do");
-		result.addObject("brotherhoodsPast", brotherhoodsPast);
-		result.addObject("brotherhoodsCurrent", brotherhoodsCurrent);
+			result = new ModelAndView("brotherhood/myList");
+			result.addObject("requestURI", "brotherhood/list.do");
+			result.addObject("brotherhoodsPast", brotherhoodsPast);
+			result.addObject("brotherhoodsCurrent", brotherhoodsCurrent);
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
+
 		return result;
 
 	}
