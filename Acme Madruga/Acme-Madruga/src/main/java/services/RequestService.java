@@ -84,6 +84,7 @@ public class RequestService {
 	}
 	public Request save(final Request r) {
 		Assert.notNull(r);
+		Assert.notNull(r.getMember());
 		Actor a = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.authEdit(a, "MEMBER") || this.actorService.authEdit(a, "BROTHERHOOD"));
 		final Member m = r.getMember();
@@ -122,21 +123,22 @@ public class RequestService {
 
 	//---Ale---
 
-	public Request reconstruct(final Request request) {
+	public Request reconstruct(final Request request, BindingResult binding) {
 		Request res = request;
-		
-		
-		if (request.getId() != 0){
-		Request	r = this.findOne(request.getId());
-		res.setColumn(r.getColumn());
-		res.setExplanation(r.getExplanation());
-		res.setMember(r.getMember());
-		res.setProcession(r.getProcession());
-		res.setRow(r.getRow());
-		res.setStatus(r.getStatus());
-		
-		
+
+		Member m = this.memberService.findByPrincipal();
+		res.setMember(m);
+		res.setStatus("PENDING");
+
+		if (request.getId() != 0) {
+			Request r = this.findOne(request.getId());
+			res.setColumn(r.getColumn());
+			res.setExplanation(r.getExplanation());
+			res.setMember(r.getMember());
+			res.setRow(r.getRow());
+
 		}
+		this.validator.validate(res, binding);
 		return res;
 	}
 

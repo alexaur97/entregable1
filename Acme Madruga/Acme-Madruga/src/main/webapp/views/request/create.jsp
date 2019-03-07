@@ -31,7 +31,7 @@
 	<acme:select items="${processions}" itemLabel="title" code="request.procession" path="procession"/>
 <%--	<acme:textbox type="number" min="0" code="request.row" path="row"/>
 	<acme:textbox type="number" min="0" code="request.column" path="column"/> --%>
-	<acme:submit name="save" code="position.save"/>
+	<acme:submit name="save" code="request.save"/>
 	<acme:cancel url="/request/member/list.do" code="position.cancel"/>
 
 </div>	

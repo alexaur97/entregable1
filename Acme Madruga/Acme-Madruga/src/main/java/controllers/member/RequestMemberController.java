@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AdministratorService;
+import services.MemberService;
 import services.ProcessionService;
 import services.RequestService;
 import controllers.AbstractController;
@@ -23,13 +23,13 @@ import domain.Request;
 public class RequestMemberController extends AbstractController {
 
 	@Autowired
-	AdministratorService	memberService;
+	MemberService		memberService;
 
 	@Autowired
-	RequestService			requestService;
+	RequestService		requestService;
 
 	@Autowired
-	ProcessionService		processionService;
+	ProcessionService	processionService;
 
 
 	// List -----------------------------------------------------------	
@@ -37,20 +37,23 @@ public class RequestMemberController extends AbstractController {
 	public ModelAndView list() {
 
 		ModelAndView result;
-		Collection<Request> pendingRequests;
-		Collection<Request> acceptedRequests;
-		Collection<Request> rejectedRequests;
+		try {
+			Collection<Request> pendingRequests;
+			Collection<Request> acceptedRequests;
+			Collection<Request> rejectedRequests;
 
-		pendingRequests = this.requestService.findRequestByStatusAndMember("PENDING");
-		acceptedRequests = this.requestService.findRequestByStatusAndMember("APPROVED");
-		rejectedRequests = this.requestService.findRequestByStatusAndMember("REJECTED");
+			pendingRequests = this.requestService.findRequestByStatusAndMember("PENDING");
+			acceptedRequests = this.requestService.findRequestByStatusAndMember("APPROVED");
+			rejectedRequests = this.requestService.findRequestByStatusAndMember("REJECTED");
 
-		result = new ModelAndView("request/list");
-		result.addObject("pendingRequests", pendingRequests);
-		result.addObject("acceptedRequests", acceptedRequests);
-		result.addObject("rejectedRequests", rejectedRequests);
-		result.addObject("resquestURI", "/request/member/list.do");
-
+			result = new ModelAndView("request/list");
+			result.addObject("pendingRequests", pendingRequests);
+			result.addObject("acceptedRequests", acceptedRequests);
+			result.addObject("rejectedRequests", rejectedRequests);
+			result.addObject("resquestURI", "/request/member/list.do");
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 		return result;
 	}
 
@@ -80,12 +83,13 @@ public class RequestMemberController extends AbstractController {
 			res.addObject("processions", processions);
 		} else
 			try {
-				request = this.requestService.reconstruct(request);
+				request = this.requestService.reconstruct(request, binding);
 				this.requestService.save(request);
 				res = new ModelAndView("redirect:/request/member/list.do");
 			} catch (final Throwable oops) {
 				res.addObject("message", "request.commit.error");
-
+				res.addObject("processions", processions);
+				res.addObject("request", request);
 			}
 
 		return res;
