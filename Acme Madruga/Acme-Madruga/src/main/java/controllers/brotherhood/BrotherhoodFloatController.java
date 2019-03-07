@@ -93,6 +93,7 @@ public class BrotherhoodFloatController extends AbstractController {
 		ModelAndView res = new ModelAndView("float/edit");
 		try {
 			final Float floaat = this.floatService.findOne(floatId);
+			Assert.notNull(floaat);
 			final Integer idB = this.brotherhoodService.findByPrincipal().getId();
 			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(idB);
 			Assert.isTrue(floats.contains(floaat));
@@ -149,6 +150,7 @@ public class BrotherhoodFloatController extends AbstractController {
 			Assert.notNull(floatId);
 
 			final Float floaat = this.floatService.findOne(floatId);
+			Assert.notNull(floaat);
 			final Integer idB = this.brotherhoodService.findByPrincipal().getId();
 			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(idB);
 			Assert.isTrue(floats.contains(floaat));
@@ -158,7 +160,6 @@ public class BrotherhoodFloatController extends AbstractController {
 				result = new ModelAndView("redirect:/#");
 			else {
 				result = new ModelAndView("float/show");
-				//	result.addObject("requestURI", "procession/show.do?=" + processionId);
 				result.addObject("floaat", floaat);
 				result.addObject("pictures", floaat.getPictures());
 			}
