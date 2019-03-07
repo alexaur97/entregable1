@@ -78,8 +78,6 @@ public class FloatService {
 	public Collection<Float> findFloatsByBrotherhood(final int id) {
 		Assert.notNull(id);
 		System.out.println(this.floatRepository);
-		final Brotherhood bh = this.brotherhoodService.findByPrincipal();
-		Assert.isTrue(bh.getId() == id);
 		final Collection<Float> res = this.floatRepository.findFloatsByBrotherhood(id);
 
 		return res;
