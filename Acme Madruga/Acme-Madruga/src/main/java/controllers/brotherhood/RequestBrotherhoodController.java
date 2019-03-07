@@ -93,9 +93,9 @@ public class RequestBrotherhoodController extends AbstractController {
 		if (binding.hasErrors())
 			res = new ModelAndView("request/reject");
 		try {
-			Assert.isTrue(this.brotherhoodService.findByPrincipal().getId() == request.getProcession().getBrotherhood().getId());
 			Assert.notNull(request.getExplanation());
 			Assert.isTrue(!request.getExplanation().isEmpty());
+			Assert.isTrue(this.brotherhoodService.findByPrincipal().getId() == request.getProcession().getBrotherhood().getId());
 			res = new ModelAndView("request/list");
 			Assert.isTrue(this.actorService.authEdit(this.actorService.findByPrincipal(), "BROTHERHOOD"));
 			this.requestService.save(requestFinal);

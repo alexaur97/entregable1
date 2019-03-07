@@ -85,7 +85,6 @@ public class RequestService {
 		Assert.notNull(r);
 		final Actor a = this.actorService.findByPrincipal();
 		Assert.notNull(r.getMember());
-		Actor a = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.authEdit(a, "MEMBER") || this.actorService.authEdit(a, "BROTHERHOOD"));
 		final Member m = r.getMember();
 		final Brotherhood b = r.getProcession().getBrotherhood();
@@ -134,15 +133,19 @@ public class RequestService {
 			res.setProcession(r.getProcession());
 			res.setRow(r.getRow());
 			res.setStatus(r.getStatus());
-	public Request reconstruct(final Request request, BindingResult binding) {
-		Request res = request;
+		}
+		return res;
+	}
 
-		Member m = this.memberService.findByPrincipal();
+	public Request reconstruct(final Request request, final BindingResult binding) {
+		final Request res = request;
+
+		final Member m = this.memberService.findByPrincipal();
 		res.setMember(m);
 		res.setStatus("PENDING");
 
 		if (request.getId() != 0) {
-			Request r = this.findOne(request.getId());
+			final Request r = this.findOne(request.getId());
 			res.setColumn(r.getColumn());
 			res.setExplanation(r.getExplanation());
 			res.setMember(r.getMember());
@@ -159,7 +162,6 @@ public class RequestService {
 		res.setStatus("REJECTED");
 		res.setMember(a.getMember());
 		res.setProcession(a.getProcession());
-		res.setExplanation(a.getExplanation());
 		return res;
 	}
 	public Request acceptRecostruction(final Request request, final BindingResult binding) {
