@@ -42,6 +42,7 @@ public class Brotherhood extends Actor {
 		this.title = title;
 	}
 
+	@NotNull
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")

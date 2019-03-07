@@ -34,7 +34,7 @@
 						<form:hidden path="version"/>
 						<acme:textbox code="procession.title" path="title" />
 						<acme:textarea code="procession.description" path="description" />
-						<acme:textbox code="procession.moment" path="moment" />
+						<acme:textbox placeholder="dd/MM/yyyy HH:mm" code="procession.moment" path="moment" />
 						
 						
 						<form:select code="procession.mode" path="mode" >
