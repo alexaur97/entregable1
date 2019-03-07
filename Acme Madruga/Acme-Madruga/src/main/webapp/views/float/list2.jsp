@@ -26,7 +26,6 @@
 
 <display:table name="floats" id="floaat"
 	requestURI="${requestURI }">
-	<display:column titleKey="float.picture" > <img src="${brotherhood.picture}" alt="floatLogo" height="200" width="350"/></display:column>
 	<display:column titleKey="float.title" property="title" />
 	<display:column titleKey="float.edit">
 		<a href="brotherhood/float/edit.do?floatId=${floaat.id}">

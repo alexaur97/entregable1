@@ -85,8 +85,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 			result.addObject("floats", floats);
 		} catch (final Throwable oops) {
 
-			final String msg = oops.getMessage();
-			result = this.createEditModelAndView(procession, msg);
+			result = this.createEditModelAndView(procession, "procession.commit.error");
 
 		}
 
@@ -101,7 +100,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 		//Collection<Procession> processions = this.processionService.findAll();
 
 		try {
-			
+			Assert.notNull(processionId);
 			final Procession procession = this.processionService.findOne(processionId);
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
 			
@@ -148,11 +147,12 @@ public class BrotherhoodProcessionController extends AbstractController {
 			this.processionService.delete(procession);
 			result = new ModelAndView("redirect:/brotherhood/procession/list.do");
 		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			result = this.createEditModelAndView(procession, msg);
+			result = this.createEditModelAndView(procession, "procession.commit.error");
 
 		}
 
+		
+		
 		return result;
 	}
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
@@ -164,6 +164,11 @@ public class BrotherhoodProcessionController extends AbstractController {
 			Assert.notNull(processionId);
 
 			procession = this.processionService.findOne(processionId);
+			
+			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
+			
+			Assert.isTrue(procession.getBrotherhood().equals(bh)) ;
+			
 			final Collection<Float> floats = procession.getFloats();
 			result = new ModelAndView("procession/show");
 			//	result.addObject("requestURI", "procession/show.do?=" + processionId);

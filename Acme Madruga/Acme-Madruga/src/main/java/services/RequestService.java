@@ -123,14 +123,20 @@ public class RequestService {
 	//---Ale---
 
 	public Request reconstruct(final Request request) {
-		final Request res;
-		if (request.getId() == 0)
-			res = this.create();
-		else
-			res = this.findOne(request.getId());
-		res.setProcession(request.getProcession());
-		res.setStatus("PENDING");
-		res.setMember(this.memberService.findByPrincipal());
+		Request res = request;
+		
+		
+		if (request.getId() != 0){
+		Request	r = this.findOne(request.getId());
+		res.setColumn(r.getColumn());
+		res.setExplanation(r.getExplanation());
+		res.setMember(r.getMember());
+		res.setProcession(r.getProcession());
+		res.setRow(r.getRow());
+		res.setStatus(r.getStatus());
+		
+		
+		}
 		return res;
 	}
 

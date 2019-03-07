@@ -10,8 +10,8 @@
 
 <tiles-definitions>
 
-	<definition name="member/listByBrotherhood" extends="master.page">
-		<put-attribute name="title" value="Miembros" />
+		<definition name="member/listByBrotherhood" extends="master.page">
+		<put-attribute name="title" value="Members" />
 		<put-attribute name="body" value="/views/member/list.jsp" />
 	</definition>
 
@@ -19,9 +19,20 @@
 		<put-attribute name="title" value="Crear miembro" />
 		<put-attribute name="body" value="/views/member/edit.jsp" />
 	</definition>
-  
   <definition name="member/list" extends="master.page">
 		<put-attribute name="title" value="Miembros" />
 		<put-attribute name="body" value="/views/member/list.jsp" />
+	</definition>
+	<definition name="member/listByBrotherhood" extends="master.page">
+		<put-attribute name="title" value="Miembros" />
+		<put-attribute name="body" value="/views/member/listByBrotherhood.jsp" />
+	</definition>
+	<definition name="member/profile" extends="master.page">
+		<put-attribute name="title" value="Perfil" />
+		<put-attribute name="body" value="/views/member/profile.jsp" />
+	</definition>
+	<definition name="member/histogram" extends="master.page">
+		<put-attribute name="title" value="Histograma" />
+		<put-attribute name="body" value="/views/member/histogram.jsp" />
 	</definition>
 </tiles-definitions>

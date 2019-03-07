@@ -24,10 +24,20 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="ADMINISTRATOR" />
 				</bean>
 			</list>
 		</property>
+	</bean>
+	
+	<bean id="configurationParameters" class="domain.ConfigurationParameters">
+		<property name="name" value="Acme Madrugá" />
+		<property name="banner" value="https://tinyurl.com/acme-madruga" />
+		<property name="sysMessage"
+			value="Welcome to Acme Madrugá, the site to organise your processions." />
+		<property name="sysMessageEs"
+			value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones." />
+		<property name="countryCode" value="+34" />
 	</bean>
 	
 	<!-- Other domain beans come here -->	
@@ -35,28 +45,39 @@
 		<property name="name" value="President" />
 		<property name="nameEs" value="Presidente" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position2" class="domain.Position">
 		<property name="name" value="Vice President" />
 		<property name="nameEs" value="Vice Presidente" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position3" class="domain.Position">
 		<property name="name" value="Secretary" />
 		<property name="nameEs" value="Secretario" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position4" class="domain.Position">
 		<property name="name" value="Treasure" />
 		<property name="nameEs" value="Tesorero" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position5" class="domain.Position">
 		<property name="name" value="Historian" />
 		<property name="nameEs" value="Historiador" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position6" class="domain.Position">
 		<property name="name" value="Fundraiser" />
 		<property name="nameEs" value="Promotor" />
 	</bean>
-	<bean id="position1" class="domain.Position">
+	<bean id="position7" class="domain.Position">
 		<property name="name" value="Officer" />
 		<property name="nameEs" value="Vocal" />
 	</bean>
+	
+	<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="Admin" />
+		<property name="surname" value="Number One" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="admin1@gmail.com" />
+		<property name="phoneNumber" value="698765432" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
 </beans>

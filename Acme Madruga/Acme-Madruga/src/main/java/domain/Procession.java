@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,7 +29,7 @@ public class Procession extends DomainEntity {
 	private String				ticker;
 	private String				mode;
 
-	// Atributos Públicos
+	// Atributos Pï¿½blicos
 
 	public Brotherhood			brotherhood;
 	public Collection<Float>	floats;
@@ -63,6 +64,7 @@ public class Procession extends DomainEntity {
 		this.description = description;
 	}
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -79,9 +81,9 @@ public class Procession extends DomainEntity {
 	}
 
 	public void setTicker(final String date) {
-		
+
 		this.ticker = date;
-		
+
 	}
 
 	@NotBlank

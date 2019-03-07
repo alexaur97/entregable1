@@ -37,7 +37,7 @@ public class ProcessionController extends AbstractController {
 			processions = this.processionService.findFinalProcessionsByBrotherhood(brotherhoodId);
 
 			result = new ModelAndView("procession/listByBrotherhood");
-		//	result.addObject("requestURI", "procession/listByBrotherhood.do?=" + brotherhoodId);
+			result.addObject("requestURI", "procession/listByBrotherhood.do?=" + brotherhoodId);
 			result.addObject("processions", processions);
 		} catch (Exception e) {
 			result = new ModelAndView("redirect:/#");

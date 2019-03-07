@@ -1,6 +1,7 @@
 
 package forms;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -55,7 +56,8 @@ public class ActorEditForm {
 		this.photo = photo;
 	}
 
-	@NotBlank
+	@Column(unique = true)
+	@Pattern(regexp = "([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+|[a-zA-Z0-9]+[ a-zA-Z0-9]*\\<([a-zA-Z0-9])+@([a-zA-Z0-9]+\\.[a-zA-Z0-9]+)+\\>")
 	public String getEmail() {
 		return this.email;
 	}
@@ -64,7 +66,7 @@ public class ActorEditForm {
 		this.email = email;
 	}
 
-	@Pattern(regexp = "\\+\\d{2} \\(\\d{1,3}\\)\\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
+	@Pattern(regexp = "\\+\\d{2}([ ]{1}[(]{1}\\d{1,3}[)]{1})? \\d{4,}|\\+\\d{2} \\d{4,}|\\d{4,}|Null")
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
