@@ -134,7 +134,7 @@
 		<property name="surname" value="Number One" />
 		<property name="photo"
 			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
-		<property name="email" value="brother hood1@gmail.com" />
+		<property name="email" value="brotherhood1@gmail.com" />
 		<property name="phoneNumber" value="698765432" />
 		<property name="members">
 			<list>

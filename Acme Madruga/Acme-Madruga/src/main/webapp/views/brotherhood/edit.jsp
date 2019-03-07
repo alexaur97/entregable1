@@ -18,7 +18,7 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%> 
 
-<form:form action="administrator/edit.do" modelAttribute="brotherhoodRegisterForm" method="POST">
+<form:form action="brotherhood/edit.do" modelAttribute="brotherhoodRegisterForm" method="POST">
 
 <acme:textbox code="brotherhood.name" path="name"/>
 <acme:textbox code="brotherhood.middleName" path="middleName"/>

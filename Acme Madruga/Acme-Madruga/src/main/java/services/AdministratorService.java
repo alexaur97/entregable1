@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +67,16 @@ public class AdministratorService {
 
 	// FR 12.1
 	public Administrator create() {
-		Assert.isTrue(LoginService.getPrincipal().getAuthorities().contains(Authority.ADMINISTRATOR));
+		this.findByPrincipal();
 		final Administrator result = new Administrator();
+		final UserAccount ua = new UserAccount();
+		result.setUserAccount(ua);
 		final Authority authority = new Authority();
 		authority.setAuthority(Authority.ADMINISTRATOR);
-		result.getUserAccount().addAuthority(authority);
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		result.getUserAccount().setAuthorities(authorities);
+
 		return result;
 
 	}
