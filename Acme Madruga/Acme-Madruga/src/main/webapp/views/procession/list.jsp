@@ -38,12 +38,13 @@
 		</a>
 		</display:column>
 		</security:authorize>
-		
+	<security:authorize access="hasRole('BROTHERHOOD')">		
 	<display:column titleKey="procession.show">
 		<a href="brotherhood/procession/show.do?processionId=${procession.id}">
 		<spring:message code="procession.show" />
 		</a>
 	</display:column>
+	</security:authorize>
 </display:table>
 		<security:authorize access="hasRole('BROTHERHOOD')">
 		<acme:cancel url="/brotherhood/procession/create.do" code="procession.create"/>

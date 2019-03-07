@@ -85,8 +85,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 			result.addObject("floats", floats);
 		} catch (final Throwable oops) {
 
-			final String msg = oops.getMessage();
-			result = this.createEditModelAndView(procession, msg);
+			result = this.createEditModelAndView(procession, "procession.commit.error");
 
 		}
 
