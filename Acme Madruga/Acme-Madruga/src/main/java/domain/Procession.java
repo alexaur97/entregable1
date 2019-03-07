@@ -63,6 +63,7 @@ public class Procession extends DomainEntity {
 		this.description = description;
 	}
 
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {

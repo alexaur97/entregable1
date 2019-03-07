@@ -35,13 +35,21 @@
 						<acme:textbox code="procession.title" path="title" />
 						<acme:textarea code="procession.description" path="description" />
 						<acme:textbox code="procession.moment" path="moment" />
-						<acme:textbox code="procession.mode" path="mode" />
-
+						
+						
+						<form:select code="procession.mode" path="mode" >
+							<form:option value="FINAL"></form:option>
+							<form:option value="DRAFT"></form:option>
+						</form:select>
+						
+						<br>
+						<br>
 						<form:select id="floats" code="procession.floats" path="floats">
 							<form:options items="${floats}" itemLabel="title" itemValue="id" />
 						</form:select>
 		
-						
+						<br>
+						<br>
 						<acme:submit name="save" code="procession.save" />
 						<jstl:if test="${procession.id!=0}">
 							<acme:submitConfirmation name="delete" code="procession.delete"
