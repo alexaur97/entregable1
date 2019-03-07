@@ -45,7 +45,6 @@ public class FloatService {
 
 	public Float findOne(final int FloatId) {
 		final Float res = this.floatRepository.findOne(FloatId);
-		Assert.notNull(res);
 		return res;
 	}
 

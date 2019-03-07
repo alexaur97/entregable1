@@ -93,6 +93,7 @@ public class BrotherhoodFloatController extends AbstractController {
 		ModelAndView res = new ModelAndView("float/edit");
 		try {
 			final Float floaat = this.floatService.findOne(floatId);
+			Assert.notNull(floaat);
 			final Integer idB = this.brotherhoodService.findByPrincipal().getId();
 			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(idB);
 			Assert.isTrue(floats.contains(floaat));
@@ -144,18 +145,21 @@ public class BrotherhoodFloatController extends AbstractController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int floatId) {
 		ModelAndView result;
-		Float floaat;
 
 		try {
 			Assert.notNull(floatId);
 
-			floaat = this.floatService.findOne(floatId);
+			final Float floaat = this.floatService.findOne(floatId);
+			Assert.notNull(floaat);
+			final Integer idB = this.brotherhoodService.findByPrincipal().getId();
+			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(idB);
+			Assert.isTrue(floats.contains(floaat));
+
 			final Boolean b = this.floatService.validatePictures(floaat.getPictures());
 			if (!b)
 				result = new ModelAndView("redirect:/#");
 			else {
 				result = new ModelAndView("float/show");
-				//	result.addObject("requestURI", "procession/show.do?=" + processionId);
 				result.addObject("floaat", floaat);
 				result.addObject("pictures", floaat.getPictures());
 			}
