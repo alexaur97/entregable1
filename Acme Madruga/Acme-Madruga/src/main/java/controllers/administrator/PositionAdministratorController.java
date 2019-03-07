@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.AdministratorService;
 import services.PositionService;
 import controllers.AbstractController;
-import domain.Administrator;
 import domain.Position;
 
 @Controller
@@ -26,23 +25,29 @@ public class PositionAdministratorController extends AbstractController {
 
 	@Autowired
 	AdministratorService	administratorService;
-	
+
 	@Autowired
-	PositionService	positionService;
+	PositionService			positionService;
+
 
 	// List -----------------------------------------------------------	
 	@RequestMapping(value = "/list")
 	public ModelAndView list() {
 
 		ModelAndView result;
-		Collection<Position> positions;
 
-		positions = this.positionService.findAll();
+		try {
+			Collection<Position> positions;
 
-		result = new ModelAndView("position/list");
-		result.addObject("positions", positions);
-		result.addObject("resquestURI", "/position/administrator/list.do");
+			positions = this.positionService.findAll();
 
+			result = new ModelAndView("position/list");
+			result.addObject("positions", positions);
+			result.addObject("resquestURI", "/position/administrator/list.do");
+
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:/#");
+		}
 		return result;
 	}
 
@@ -52,10 +57,18 @@ public class PositionAdministratorController extends AbstractController {
 		Position position;
 
 		position = new Position();
-		position.setId(0);
 
-		result = new ModelAndView("position/create");
-		result.addObject("position", position);
+		try {
+
+			position.setId(0);
+
+			result = new ModelAndView("position/create");
+			result.addObject("position", position);
+
+		} catch (final Throwable oops) {
+			result = new ModelAndView("redirect:/#");
+
+		}
 
 		return result;
 	}
@@ -64,12 +77,20 @@ public class PositionAdministratorController extends AbstractController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int positionId) {
-		final ModelAndView res = new ModelAndView("position/edit");
-		final Position position = this.positionService.findOne(positionId);
-		res.addObject("position", position);
+
+		ModelAndView res = new ModelAndView("position/edit");
+
+		try {
+
+			final Position position = this.positionService.findOne(positionId);
+			Assert.notNull(position);
+			res.addObject("position", position);
+
+		} catch (final Throwable oops) {
+			res = new ModelAndView("redirect:/#");
+		}
 		return res;
 	}
-
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Position position, final BindingResult binding) {
 		ModelAndView res;
@@ -102,9 +123,9 @@ public class PositionAdministratorController extends AbstractController {
 			result = new ModelAndView("position/edit");
 			result.addObject("position", position);
 			result.addObject("message", oops.getMessage());
-			String msg = oops.getMessage();
-			if(msg.equals("cannotDelete")){
-				Boolean cannotDelete = true;
+			final String msg = oops.getMessage();
+			if (msg.equals("cannotDelete")) {
+				final Boolean cannotDelete = true;
 				result.addObject("cannotDelete", cannotDelete);
 			}
 		}

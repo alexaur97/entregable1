@@ -63,7 +63,6 @@ public class Procession extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotBlank
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -80,9 +79,9 @@ public class Procession extends DomainEntity {
 	}
 
 	public void setTicker(final String date) {
-		
+
 		this.ticker = date;
-		
+
 	}
 
 	@NotBlank
