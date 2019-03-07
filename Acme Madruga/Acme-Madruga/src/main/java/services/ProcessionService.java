@@ -121,6 +121,15 @@ public class ProcessionService {
 
 		return res;
 	}
+	public Collection<Procession> findFinalProcessionsByBrotherhood(final int idBrotherhood) {
+		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
+		Collection<Procession> res = new ArrayList<>();
+		for (Procession procession : all) {
+			if (procession.getMode().equals("FINAL"))
+				res.add(procession);
+		}
+		return res;
+	}
 
 	// FR 12.3.5
 
@@ -133,20 +142,7 @@ public class ProcessionService {
 
 	//Other Methods--------------------
 
-	//	public ProcessionForm toForm(final int processionId) {
-	//		final ProcessionForm res = new ProcessionForm();
-	//		final Procession procession = this.findOne(processionId);
-	//
-	//		res.setDescription(procession.getDescription());
-	//		res.setFloats(procession.getFloats());
-	//		res.setMode(procession.getMode());
-	//		res.setMoment(procession.getMoment());
-	//		res.setTitle(procession.getTitle());
-	//		res.setProcessionId(processionId);
-	//		res.setTicker(procession.getTicker());
-	//
-	//		return res;
-	//	}
+
 
 	public Procession reconstruct(Procession procession, BindingResult binding) {
 		Procession res = procession;
@@ -170,12 +166,7 @@ public class ProcessionService {
 			res.setBrotherhood(p2.getBrotherhood());
 
 
-//			res.setDescription(procession.getDescription());
-//			res.setFloats(procession.getFloats());
-//			res.setMode(procession.getMode());
-//			res.setMoment(procession.getMoment());
-//			res.setTitle(procession.getTitle());
-//			res.setTicker(ticker);
+
 		}
 		this.validator.validate(res, binding);
 		
@@ -201,14 +192,6 @@ public class ProcessionService {
 	
 	
 	
-	public Collection<Procession> findFinalProcessionsByBrotherhood(final int idBrotherhood) {
-		final Collection<Procession> all = this.processionRepository.findProcessionsByBrotherhood(idBrotherhood);
-		Collection<Procession> res = new ArrayList<>();
-		for (Procession procession : all) {
-			if (procession.getMode() == "FINAL")
-				res.add(procession);
-		}
-		return res;
-	}
+
 
 }

@@ -97,18 +97,24 @@ public class BrotherhoodProcessionController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int processionId) {
 		ModelAndView res = new ModelAndView("procession/edit");
-		final Procession procession = this.processionService.findOne(processionId);
+		
+		//Collection<Procession> processions = this.processionService.findAll();
 
 		try {
-
+			
+			final Procession procession = this.processionService.findOne(processionId);
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
+			
+			Assert.isTrue(procession.getBrotherhood().equals(bh)) ;
+					//&& processions.contains(procession) );
+			
 			final Collection<Float> floats = this.floatService.findFloatsByBrotherhood(bh.getId());
 			res.addObject("procession", procession);
 			res.addObject("floats", floats);
-		} catch (final Throwable oops) {
-			final String msg = oops.getMessage();
-			res = this.createEditModelAndView(procession, msg);
-
+//		} catch (final Throwable oops) {
+//			res = this.createEditModelAndView(procession, "procession.commit.error");
+		}catch (final Exception e) {
+				res = new ModelAndView("redirect:/#");
 		}
 		return res;
 	}
