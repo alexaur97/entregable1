@@ -45,6 +45,7 @@
 		<property name="name" value="President" />
 		<property name="nameEs" value="Presidente" />
 	</bean>
+	
 	<bean id="position2" class="domain.Position">
 		<property name="name" value="Vice President" />
 		<property name="nameEs" value="Vice Presidente" />
@@ -69,4 +70,15 @@
 		<property name="name" value="Officer" />
 		<property name="nameEs" value="Vocal" />
 	</bean>
+	
+	<bean id="admin1" class="domain.Administrator">
+		<property name="name" value="Admin" />
+		<property name="surname" value="Number One" />
+		<property name="photo"
+			value="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" />
+		<property name="email" value="admin1@gmail.com" />
+		<property name="phoneNumber" value="698765432" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
 </beans>
