@@ -101,7 +101,7 @@ public class BrotherhoodProcessionController extends AbstractController {
 		//Collection<Procession> processions = this.processionService.findAll();
 
 		try {
-			
+			Assert.notNull(processionId);
 			final Procession procession = this.processionService.findOne(processionId);
 			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
 			
@@ -164,6 +164,11 @@ public class BrotherhoodProcessionController extends AbstractController {
 			Assert.notNull(processionId);
 
 			procession = this.processionService.findOne(processionId);
+			
+			final Brotherhood bh = this.brotherhoodService.findByPrincipal();
+			
+			Assert.isTrue(procession.getBrotherhood().equals(bh)) ;
+			
 			final Collection<Float> floats = procession.getFloats();
 			result = new ModelAndView("procession/show");
 			//	result.addObject("requestURI", "procession/show.do?=" + processionId);
