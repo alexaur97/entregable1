@@ -40,6 +40,7 @@
 		</security:authorize>
 		
 	<security:authorize access="hasRole('BROTHERHOOD')">
+	<security:authorize access="hasRole('BROTHERHOOD')">		
 	<display:column titleKey="procession.show">
 		<a href="brotherhood/procession/show.do?processionId=${procession.id}">
 		<spring:message code="procession.show" />
