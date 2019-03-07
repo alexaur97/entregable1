@@ -34,11 +34,10 @@ public class RequestService {
 	private Validator			validator;
 
 
-	public Request findOne(int id) {
+	public Request findOne(final int id) {
 
 		Request result;
 		result = this.requestRepository.findOne(id);
-		Assert.notNull(result);
 		return result;
 	}
 
@@ -84,7 +83,7 @@ public class RequestService {
 	}
 	public Request save(final Request r) {
 		Assert.notNull(r);
-		Actor a = this.actorService.findByPrincipal();
+		final Actor a = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.authEdit(a, "MEMBER") || this.actorService.authEdit(a, "BROTHERHOOD"));
 		final Member m = r.getMember();
 		final Brotherhood b = r.getProcession().getBrotherhood();
@@ -99,7 +98,7 @@ public class RequestService {
 		}
 		final Brotherhood brotherhood = r.procession.brotherhood;
 		Assert.isTrue(brotherhood.getMembers().contains(m));
-		Request res = r;
+		final Request res = r;
 		return this.requestRepository.save(res);
 
 	}
@@ -123,60 +122,56 @@ public class RequestService {
 	//---Ale---
 
 	public Request reconstruct(final Request request) {
-		Request res = request;
-		
-		
-		if (request.getId() != 0){
-		Request	r = this.findOne(request.getId());
-		res.setColumn(r.getColumn());
-		res.setExplanation(r.getExplanation());
-		res.setMember(r.getMember());
-		res.setProcession(r.getProcession());
-		res.setRow(r.getRow());
-		res.setStatus(r.getStatus());
-		
-		
+		final Request res = request;
+
+		if (request.getId() != 0) {
+			final Request r = this.findOne(request.getId());
+			res.setColumn(r.getColumn());
+			res.setExplanation(r.getExplanation());
+			res.setMember(r.getMember());
+			res.setProcession(r.getProcession());
+			res.setRow(r.getRow());
+			res.setStatus(r.getStatus());
+
 		}
 		return res;
 	}
 
-	public Request rejectRecostruction(Request request, BindingResult binding) {
-		Request res = request;
-		Request a = this.requestRepository.findOne(request.getId());
+	public Request rejectRecostruction(final Request request, final BindingResult binding) {
+		final Request res = request;
+		final Request a = this.requestRepository.findOne(request.getId());
 		res.setStatus("REJECTED");
 		res.setMember(a.getMember());
 		res.setProcession(a.getProcession());
 		res.setExplanation(a.getExplanation());
 		return res;
 	}
-	public Request acceptRecostruction(Request request, BindingResult binding) {
-		Request result = request;
-		int id = request.getId();
-		Request res = this.requestRepository.findOne(id);
+	public Request acceptRecostruction(final Request request, final BindingResult binding) {
+		final Request result = request;
+		final int id = request.getId();
+		final Request res = this.requestRepository.findOne(id);
 		result.setStatus("APPROVED");
 		result.setMember(res.member);
 		result.setProcession(res.procession);
-		validator.validate(result, binding);
+		this.validator.validate(result, binding);
 		return result;
 	}
-	public Boolean posDisp(int id, int column, int row) {
-		Collection<Request> all = this.requestRepository.findRequestApprovedByProcession(id, "APPROVED");
+	public Boolean posDisp(final int id, final int column, final int row) {
+		final Collection<Request> all = this.requestRepository.findRequestApprovedByProcession(id, "APPROVED");
 		Boolean res = true;
-		for (Request request : all) {
-			if (request.getColumn() == column && request.getRow() == row) {
+		for (final Request request : all)
+			if (request.getColumn() == column && request.getRow() == row)
 				res = false;
-			}
-		}
 		return res;
 	}
 
-	public String findPos(int id) {
-		Collection<Request> all = this.requestRepository.findRequestApprovedByProcession(id, "APPROVED");
+	public String findPos(final int id) {
+		final Collection<Request> all = this.requestRepository.findRequestApprovedByProcession(id, "APPROVED");
 		int posR = 0;
 		int posC = 0;
-		for (Request request : all) {
-			int column = request.getColumn();
-			int row = request.getRow();
+		for (final Request request : all) {
+			final int column = request.getColumn();
+			final int row = request.getRow();
 			if ((column - 1) > 0 && (row - 1) > 0) {
 				if (this.posDisp(id, column - 1, row)) {
 					posC = column - 1;
@@ -188,20 +183,18 @@ public class RequestService {
 					posC = column - 1;
 					posR = row - 1;
 				}
-			} else {
-				if (this.posDisp(id, column + 1, row)) {
-					posC = column + 1;
-					posR = row;
-				} else if (this.posDisp(id, column, row + 1)) {
-					posC = column;
-					posR = row + 1;
-				} else if (this.posDisp(id, column + 1, row + 1)) {
-					posC = column + 1;
-					posR = row + 1;
-				}
+			} else if (this.posDisp(id, column + 1, row)) {
+				posC = column + 1;
+				posR = row;
+			} else if (this.posDisp(id, column, row + 1)) {
+				posC = column;
+				posR = row + 1;
+			} else if (this.posDisp(id, column + 1, row + 1)) {
+				posC = column + 1;
+				posR = row + 1;
 			}
 		}
-		String result = "Columna: " + posC + "Fila: " + posR;
+		final String result = "Columna: " + posC + "Fila: " + posR;
 		return result;
 	}
 }

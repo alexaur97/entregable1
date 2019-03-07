@@ -64,11 +64,12 @@ public class RequestBrotherhoodController extends AbstractController {
 	}
 	@RequestMapping(value = "/reject", method = RequestMethod.GET)
 	public ModelAndView reject(@RequestParam final int requestId) {
-		ModelAndView res;
+		ModelAndView res = new ModelAndView("request/reject");
+
+		final Request request = this.requestService.findOne(requestId);
 
 		try {
 			Assert.notNull(requestId);
-			Request request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
 			Assert.isTrue(request.getProcession().getBrotherhood().getId() == this.brotherhoodService.findByPrincipal().getId());
 			res = new ModelAndView("request/reject");
@@ -76,22 +77,21 @@ public class RequestBrotherhoodController extends AbstractController {
 			Assert.isTrue(request.getProcession().getBrotherhood().getId() == this.brotherhoodService.findByPrincipal().getId());
 			res.addObject("request", request);
 		} catch (final Throwable oops) {
-			res = new ModelAndView("request/reject");
+			res = new ModelAndView("redirect:/#");
 
 			//			res.addObject("message", "request.commit.error");
 		}
 		return res;
 	}
 	@RequestMapping(value = "/reject", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveR(Request request, final BindingResult binding) {
+	public ModelAndView saveR(final Request request, final BindingResult binding) {
 		ModelAndView res;
-		Request requestFinal = this.requestService.rejectRecostruction(request, binding);
+		final Request requestFinal = this.requestService.rejectRecostruction(request, binding);
 		Collection<Request> pendingRequests;
 		Collection<Request> acceptedRequests;
 		Collection<Request> rejectedRequests;
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			res = new ModelAndView("request/reject");
-		}
 		try {
 			Assert.isTrue(this.brotherhoodService.findByPrincipal().getId() == request.getProcession().getBrotherhood().getId());
 			Assert.notNull(request.getExplanation());
@@ -111,9 +111,8 @@ public class RequestBrotherhoodController extends AbstractController {
 				res = new ModelAndView("request/reject");
 				res.addObject("request", request);
 				res.addObject("message", "request.explanation.error");
-			} else {
+			} else
 				res = new ModelAndView("redirect:/#");
-			}
 		}
 
 		return res;
@@ -125,10 +124,10 @@ public class RequestBrotherhoodController extends AbstractController {
 			Assert.notNull(requestId);
 			res = new ModelAndView("request/accept");
 			Assert.notNull(requestId);
-			Request request = this.requestService.findOne(requestId);
+			final Request request = this.requestService.findOne(requestId);
 			Assert.notNull(request);
 			Assert.isTrue(request.getProcession().getBrotherhood().getId() == this.brotherhoodService.findByPrincipal().getId());
-			String pos = this.requestService.findPos(request.getProcession().getId());
+			final String pos = this.requestService.findPos(request.getProcession().getId());
 			res.addObject("pos", pos);
 			res.addObject("request", request);
 		} catch (final Throwable oops) {
@@ -138,17 +137,15 @@ public class RequestBrotherhoodController extends AbstractController {
 		return res;
 	}
 	@RequestMapping(value = "/accept", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@ModelAttribute("request") Request request, final BindingResult binding) {
+	public ModelAndView save(@ModelAttribute("request") final Request request, final BindingResult binding) {
 
 		ModelAndView res;
-		Request requestFinal = this.requestService.acceptRecostruction(request, binding);
+		final Request requestFinal = this.requestService.acceptRecostruction(request, binding);
 		Collection<Request> pendingRequests;
 		Collection<Request> acceptedRequests;
 		Collection<Request> rejectedRequests;
-		if (binding.hasErrors()) {
+		if (binding.hasErrors())
 			res = new ModelAndView("request/accept");
-
-		}
 		try {
 			res = new ModelAndView("request/list");
 			Assert.isTrue(this.requestService.posDisp(request.getProcession().getId(), request.getColumn(), request.getRow()));
@@ -165,13 +162,12 @@ public class RequestBrotherhoodController extends AbstractController {
 		} catch (final Throwable oops) {
 			if (!this.requestService.posDisp(request.getProcession().getId(), request.getColumn(), request.getRow())) {
 				res = new ModelAndView("request/accept");
-				String pos = this.requestService.findPos(request.getProcession().getId());
+				final String pos = this.requestService.findPos(request.getProcession().getId());
 				res.addObject("pos", pos);
 				res.addObject("request", request);
 				res.addObject("message", "request.pos.error");
-			} else {
+			} else
 				res = new ModelAndView("redirect:/#");
-			}
 		}
 
 		return res;
