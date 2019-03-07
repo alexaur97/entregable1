@@ -176,9 +176,9 @@ public class ProcessionService {
 //			res.setMoment(procession.getMoment());
 //			res.setTitle(procession.getTitle());
 //			res.setTicker(ticker);
-	
-		this.validator.validate(res, binding);
 		}
+		this.validator.validate(res, binding);
+		
 		return res;
 	}
 	
